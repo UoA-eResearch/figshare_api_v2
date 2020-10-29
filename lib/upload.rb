@@ -24,9 +24,10 @@ module Figshare
     #
     # @param article_id [Integer] Figshare article id
     # @param file_name [String] path/file_name to upload
-    def upload(article_id:, file_name:)
+    def upload(article_id:, file_name:, trace: false)
       @article_id = article_id
       @file_name = file_name
+      @trace = trace
       
       @file_id = nil
       @file_info = nil
@@ -35,10 +36,21 @@ module Figshare
       @upload_parts_detail  = nil
       
       initiate_new_upload() 
+      puts "File_id: #{@file_id}\n\n" if @trace
+      
       get_file_info()
+      puts "{ @file_info: #{@file_info.to_j} }\n\n" if @trace
+      
       get_upload_parts_details ()
+      puts "{ @upload_parts_detail: #{@upload_parts_detail.to_j} }\n\n" if @trace
+      
       upload_the_parts()
+      
       complete_upload()
+      if @trace
+        status
+        puts "Final Status: #{@file_info.to_j}\n\n"
+      end
     end
     
     # Get status of the current upload. 
@@ -83,6 +95,7 @@ module Figshare
     #
     private def complete_upload()
       post( api_query: "account/articles/#{@article_id}/files/#{@file_id}")
+      puts "complete_upload" if @trace
     end
 
     # Get the upload settings
@@ -111,7 +124,8 @@ module Figshare
 
     # Upload just one part
     #
-    private def upload_part(buffer:, part:)  
+    private def upload_part(buffer:, part:)
+      puts "upload_part(#{part})" if @trace
       WIKK::WebBrowser.https_session( host: @upload_host, verify_cert: false ) do |ws|
         ws.put_req( query: "#{@upload_query}/#{part}",
                     authorization: "token #{@auth_token}",
