@@ -1,4 +1,6 @@
 module Figshare
+  # Figshare stats API (not implemented yet)
+  #
   class Stats
     def breakdown
     end
