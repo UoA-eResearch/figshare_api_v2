@@ -1,0 +1,17 @@
+History.txt
+Manifest.txt
+README.md
+Rakefile
+lib/authors.rb
+lib/figshare.rb
+lib/institutions.rb
+lib/other.rb
+lib/private_articles.rb
+lib/private_collections.rb
+lib/private_projects.rb
+lib/pubic_articles.rb
+lib/public_collections.rb
+lib/public_projects.rb
+lib/upload.rb
+lib/stats.rb
+lib/figshare_api_v2.rb
