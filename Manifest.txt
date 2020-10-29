@@ -3,13 +3,13 @@ Manifest.txt
 README.md
 Rakefile
 lib/authors.rb
-lib/figshare.rb
+lib/base.rb
 lib/institutions.rb
 lib/other.rb
 lib/private_articles.rb
 lib/private_collections.rb
 lib/private_projects.rb
-lib/pubic_articles.rb
+lib/public_articles.rb
 lib/public_collections.rb
 lib/public_projects.rb
 lib/upload.rb

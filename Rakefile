@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'hoe'
 Hoe.plugin :yard
-load version
+load "#{__dir__}/version"
 
 Hoe.spec PROJECT do 
   self.readme_file = "README.md"

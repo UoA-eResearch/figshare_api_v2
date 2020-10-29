@@ -1,4 +1,6 @@
 module Figshare
+  VERSION = '0.9.0'
+
   require_relative 'base.rb'
   require_relative 'authors.rb'
   require_relative 'institutions.rb'
@@ -11,4 +13,5 @@ module Figshare
   require_relative 'public_projects.rb'
   require_relative 'upload.rb'
   require_relative 'stats.rb'
+  
 end # module
