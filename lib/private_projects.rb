@@ -72,7 +72,7 @@ module Figshare
     #
     # @param project_id [Integer] Figshare project ID
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def delete(project_id:, impersonate: nil, &block)
+    def project_delete(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
       delete(api_query: 'account/projects/#{project_id}', args: args, &block)
