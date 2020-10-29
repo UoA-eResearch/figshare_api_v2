@@ -12,12 +12,31 @@ Figshare version 2 API.
 ## FEATURES/PROBLEMS:
 
 * Stats API not implemented.
+* oai pmh api not implemented.
 * Need to build a test suite
 * impersonate option, for PrivateArticles, PrivateCollections and PrivateProjects ignored for DELETE, and non-json POST and PUT.
 
 ## SYNOPSIS:
 
-* require 'figshare_api_v2'
+```
+require 'figshare_api_v2'
+
+# Either initialize once, and call @figshare.authors.x @figshare.institutions.x, ...
+@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+
+@figshare.authors.detail(author_id: 12345) { |a| puts a }
+@figshare.institutions.private_articles { |article| puts article }
+#...
+
+# Or initialize each class individually
+@authors = Figshare::Authors.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+@institutions = Figshare::Institutions.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+
+@authors.detail(author_id: 12345) { |a| puts a }
+@institutions.private_articles { |article| puts article }
+
+#...
+````
 
 ## REQUIREMENTS:
 
