@@ -48,16 +48,34 @@ module Figshare
       post(api_query: 'account/projects/search', args: args, &block)
     end
 
+    # Create a new project
+    #
+    # @param title [String]
+    # @param description [String]
+    # @param funding [String]
+    # @param funding_list [Array] [{id, title}, ... ]
+    # #param group_id [Integer] Figshare group the project falls under.
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def create(impersonate: nil, &block)
-      args = {}
+    # @yield [Hash] { location }
+    def create(title:, description:, funding: '', funding_list: [], group_id:, impersonate: nil, &block)
+      args = { "title" => title, 
+               "description" => description, 
+               "group_id" => group_id,
+               "funding" => funding,
+               "funding_list" => funding_list
+             }
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      post(api_query: 'account/projects', args: args, &block)
     end
     
+    # Delete an existing project
+    #
+    # @param project_id [Integer] Figshare project ID
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def delete(impersonate: nil, &block)
+    def delete(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      delete(api_query: 'account/projects/#{project_id}', args: args, &block)
     end
     
     # Return details of specific private project
@@ -71,46 +89,92 @@ module Figshare
       get(api_query: "account/projects/#{project_id}",  args: args, &block)
     end
 
+    # Update an existing project
+    #
+    # @param project_id [Integer] Figshare id of the project_id
+    # @param title [String]
+    # @param description [String]
+    # @param funding [String]
+    # @param funding_list [Array] [{id, title}, ... ]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def update(impersonate: nil, &block)
+    # @yield [Hash] { location }
+    def update(project_id:, title: nil, description: nil, funding: nil, funding_list: nil, impersonate: nil, &block)
       args = {}
+      args["title"] = title if ! title.nil? 
+      args["description"] = description if ! description.nil? 
+      args["funding"] = funding if ! funding.nil? 
+      args["funding_list"] = funding_list if ! funding_list.nil? 
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      put(api_query: "account/projects/#{project_id}", args: args, &block)
     end
     
+    # Publish a project
+    #
+    # @param project_id [Integer] Figshare id of the project
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def publish(impersonate: nil, &block)
+    # @yield [Hash] Message
+    def publish(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      post(api_query: "account/projects/#{project_id}/publish", args: args, &block)
     end
     
+    # List projects notes
+    #
+    # @param project_id [Integer] Figshare id of the project
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def notes(impersonate: nil, &block)
+    # @yield [Hash] {id, user_id, abstract, user_name, created_date, modified_date}
+    def notes(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      get_paginate(api_query: "account/projects/#{project_id}/notes", args: args, &block)
     end
     
+    # Create a project note
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param text [String] The note
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def note_create(impersonate: nil, &block)
+    # @yield [Hash] { location }
+    def note_create(project_id:, text:, impersonate: nil, &block)
+      args = { 'text' => text }
+      args["impersonate"] = impersonate  if ! impersonate.nil?
+      post(api_query: "account/projects/#{project_id}/notes", args: args, &block)
+    end
+    
+    # Delete a project note
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param note_id [Integer] Figshare id of the note
+    # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    def note_delete(project_id:, note_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      delete(api_query: "account/projects/#{project_id}/notes/#{note_id}", args: args, &block)
     end
     
+    # Get a note's text
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param note_id [Integer] Figshare id of the note
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def note_delete(impersonate: nil, &block)
-      args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-    end
-    
-    # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] { text }
     def note_detail(impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      get(api_query: "account/projects/#{project_id}/notes/#{note_id}", args: args, &block)
     end
     
+    # update a project note
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param note_id [Integer] Figshare id of the note
+    # @param text [String] The note
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def note_update(impersonate: nil, &block)
-      args = {}
+    def note_create(project_id:, note_id:, text:, impersonate: nil, &block)
+      args = { 'text' => text }
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      put(api_query: "account/projects/#{project_id}/notes/#{note_id}", args: args, &block)
     end
     
     # Leave a project (Please note: project's owner cannot leave the project.)
@@ -119,13 +183,14 @@ module Figshare
     def private_project_collaborators_leave(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
-      delete(api_query: "account/projects/#{project_id}/leave", args: args, &block)
+      post(api_query: "account/projects/#{project_id}/leave", args: args, &block)
     end
     
     # Get the project collaborators
     #
     # @param project_id [Integer] Figshare id of the project_id
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] { status, role_name, user_id, name }
     def collaborators(project_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
@@ -136,12 +201,22 @@ module Figshare
     #
     # @param project_id [Integer] Figshare id of the project_id
     # @param role_name [String]
-    # @param user_id [Integer]
-    # @param email [String]
+    # @param user_id [Integer] Need user_id or email
+    # @param email [String] Used, if user_id is nil
     # @param comment [String]
     # @yield [String] { message }
-    def collaborator_invite(project_id:, role_name:, user_id:, email:, comment:, impersonate: nil, &block)
-      args = {}
+    def collaborator_invite(project_id:, role_name:, user_id: nil, email: nil, comment:, impersonate: nil, &block)
+      args = {
+        'role_name' => role_name,
+        'comment' => comment
+      }
+      if ! user_id.nil?
+        args['user_id'] = user_id
+      elsif ! email.nil?
+        args['email'] = email
+      else
+        raise "collaborator_invite(): Need a user_id or an email address" 
+      end
       args["impersonate"] = impersonate  if ! impersonate.nil?
       collaborator = { "role_name" => role_name, "user_id" => user_id, "email" => email, "comment" => comment }
       post(api_query: "account/project/#{project_id}/collaborators", args: args, data: collaborator, &block)
@@ -169,34 +244,64 @@ module Figshare
       get_paginate(api_query: "account/projects/#{project_id}/articles", args: args, &block)
     end
     
+    # Create a new Article and associate it with this project
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param article [Hash] See figshare API docs
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def article_create(impersonate: nil, &block)
+    # @yield [Hash] { location }
+    def article_create(project_id:, article:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      # Figshare Docs say this should be post_paginate, but that makes no sense. Will have to test
+      post_paginate(api_query: "account/projects/#{project_id}/articles", args: args, &block)
     end
     
+    # delete an article from a project
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def article_delete(impersonate: nil, &block)
+    def article_delete(project_id:, article_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      delete(api_query: "account/projects/#{project_id}/articles/#{article_id}", args: args, &block)
     end
     
+    # Get the details of an artilcle in a project
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def article_detail(impersonate: nil, &block)
+    # @yield [Hash] See Fishare API docs for article hash
+    def article_detail(project_id:, article_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      get(api_query: "account/projects/#{project_id}/articles/#{article_id}", args: args, &block)
     end
     
+    # Get the files associated with an artilcle in a project
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def artilce_files(impersonate: nil, &block)
+    # @yield [Hash] See Fishare API docs for article hash
+    def artilce_files(project_id:, article_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      get(api_query: "account/projects/#{project_id}/articles/#{article_id}/files", args: args, &block)
     end
     
+    # Get the files associated with an artilcle in a project
+    #
+    # @param project_id [Integer] Figshare id of the project
+    # @param article_id [Integer] Figshare id of the article
+    # @param file_id [Integer] Figshare id of the file
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def projec_artilce_file_detail(impersonate: nil, &block)
+    def artilce_file_detail(project_id:, article_id:, file_id:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
+      delete(api_query: "account/projects/#{project_id}/articles/#{article_id}/files/#{file_id}", args: args, &block)
     end
     
   end # End of class
