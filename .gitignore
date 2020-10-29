@@ -4,7 +4,6 @@ doc/.DS_Store
 pkg/*
 pkg/.DS_Store
 Private/
-test_data/*.out
 .autotest
 .yardoc
 .yard
@@ -14,3 +13,4 @@ lib/.DS_Store
 test/.DS_Store
 test/conf/*
 test/conf/.DS_Store
+test/test_data/
