@@ -60,12 +60,18 @@ def test_private_project_list
   projects.list  { |a| p a; puts }
 end
 
-puts "######## test_private_project_list"
-test_private_project_list
+@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+@figshare.authors.detail(author_id: 1188933) { |a| p a }
+@figshare.authors.detail(author_id: 1188933) { |a| p a }
+
 exit(0)
 
 puts "######## test_author_search"
 test_author_search #search for "Dane"
+
+puts "######## test_private_project_list"
+test_private_project_list
+
 
 puts "######## test_private_collection_detail"
 test_author_detail(id: 1188933) #Dane's author id
