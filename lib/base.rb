@@ -16,8 +16,8 @@ module Figshare
     # Init reads the Json configuration files, setting @course_codes_to_faculty and @academic_department_code_to_faculty
     # Opens a connection to the LDAP server, setting @ldap for other methods to use.
     #
-    # @param figshare_user [String] User in conf file, we are connecting to figshare as
-    # @param conf_dir [String] Directory the configuration file is in.
+    # @param figshare_user [String] figshare user, in the figshare_keys.json
+    # @param conf_dir [String] directory for figshare_keys.json and figshare_site_params.json
     def initialize(figshare_user:, conf_dir:)
       figshare_token = load_json_file("#{conf_dir}/figshare_keys.json")
       @auth_token = figshare_token[figshare_user]
