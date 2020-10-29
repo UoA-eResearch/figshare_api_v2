@@ -61,8 +61,9 @@ def test_private_project_list
 end
 
 @figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+
 @figshare.authors.detail(author_id: 1188933) { |a| p a }
-@figshare.authors.detail(author_id: 1188933) { |a| p a }
+@figshare.authors.search(institute: true, search_for: 'Dane') { |a| p a }
 
 exit(0)
 
