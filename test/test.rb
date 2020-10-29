@@ -62,10 +62,26 @@ end
 
 @figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
 
-@figshare.authors.detail(author_id: 1188933) { |a| p a }
-@figshare.authors.search(institute: true, search_for: 'Dane') { |a| p a }
+puts "Dump the dummy project details"
+@figshare.private_articles.detail(article_id: 13087316) { |a| p a }
+puts
+puts "Dump the dummy project file list"
+@figshare.private_articles.files(article_id: 13087316) { |f| p f }
+puts
+puts "Delete the dummy projects files"
+@figshare.private_articles.files(article_id: 13087316) do |f|
+  "Deleting file #{f['name']}"
+  @figshare.private_articles.file_delete(article_id: 13087316, file_id: f['id'])
+end
+puts
+puts "List the files, after they have been deleted (shouldn't be any)"
+@figshare.private_articles.files(article_id: 13087316) { |f| p f }
+
 
 exit(0)
+
+@figshare.authors.detail(author_id: 1188933) { |a| p a }
+@figshare.authors.search(institute: true, search_for: 'Dane') { |a| p a }
 
 puts "######## test_author_search"
 test_author_search #search for "Dane"
