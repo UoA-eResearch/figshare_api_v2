@@ -1,4 +1,4 @@
-# figshare_utils
+# figshare_api_v2
 
 * Docs :: https://UoA-eResearch.github.io/figshare_api_v2/
 * Source :: https://github.com/UoA-eResearch/figshare_api_v2
@@ -7,17 +7,22 @@
 
 ## DESCRIPTION:
 
-Quick hack to add to_j methods to Array,Hash,Nil,String and Numeric to output nicely formatted json for my config files.
+Figshare version 2 API. 
 
 ## FEATURES/PROBLEMS:
 
+* Stats API not implemented.
+* Need to build a test suite
+* impersonate option, for PrivateArticles, PrivateCollections and PrivateProjects ignored for DELETE, and non-json POST and PUT.
 
 ## SYNOPSIS:
 
+* require 'figshare_api_v2'
 
 ## REQUIREMENTS:
 
-* require 'figshare_api_v2'
+* depends on 'wikk_webbrowser' gem
+* depends on 'wikk_json' gem (beware: adds to_j to the base classes)
 
 ## INSTALL:
 
