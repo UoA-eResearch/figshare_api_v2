@@ -47,14 +47,15 @@ module Figshare
     # @yield [String] if given a block, iterates through the result from figshare
     # @return [Integer] number of results.
     private def get(api_query:, args: {}, debug: false, &block)
-      response = nil
+      content_type = response = nil
       WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
         response = ws.get_page( query: "#{@api_url}#{api_query}",
                                 authorization: "token #{@auth_token}",
                                 form_values: args
                               )
+        content_type = ws.header_value(key: 'Content-Type')
       end
-      return iterate_json_response(response: response, debug: debug, &block)
+      return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
     end
 
     # get_paginate iterates through the API response, yielding each value to the passed block, fetching new pages ,as needed.
@@ -78,15 +79,16 @@ module Figshare
       limit = page_size = 100
       result_count = 0
       loop do
-        response = nil
+        content_type = response = nil
         form_args = by_offset ? {"limit"=>limit, "offset"=>offset} : {"page_size"=>page_size, "page"=>page}
         WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
           response = ws.get_page( query: "#{@api_url}#{api_query}",
                                   authorization: "token #{@auth_token}",
                                   form_values: form_args.merge(args)
                                 )
+          content_type = ws.header_value(key: 'Content-Type')
         end
-        page_count = iterate_json_response(response: response, debug: debug, &block)
+        page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
         break if page_count < page_size # Got less results than we asked for, so it was the last page
 
@@ -120,15 +122,16 @@ module Figshare
         body = data
       end
       
-      response = nil
+      content_type = response = nil
       WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
         response = ws.post_page(  query: "#{@api_url}#{api_query}",
                                   content_type: content_type,
                                   authorization: "token #{@auth_token}",
                                   data: body
                               )
+        content_type = ws.header_value(key: 'Content-Type')
       end
-      return iterate_json_response(response: response, debug: debug, &block)
+      return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
     end
 
     # post_paginate iterates through the API response, yielding each value to the passed block, fetching new pages ,as needed.
@@ -153,7 +156,7 @@ module Figshare
       end
       
       loop do
-        response = nil
+        content_type = response = nil
         form_args = by_offset ? {"limit"=>limit, "offset"=>offset} : {"page_size"=>page_size, "page"=>page}
         WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
           response = ws.post_page(  query: "#{@api_url}#{api_query}",
@@ -161,8 +164,9 @@ module Figshare
                                     authorization: "token #{@auth_token}",
                                     data: args.merge(form_args).to_j
                                   )
+          content_type = ws.header_value(key: 'Content-Type')
         end
-        page_count = iterate_json_response(response: response, debug: debug, &block)
+        page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
         break if page_count < page_size # Got less results than we asked for, so it was the last page
 
@@ -195,15 +199,16 @@ module Figshare
         body = data
       end
 
-      response = nil
+      content_type = response = nil
       WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
         response = ws.put_page( query: "#{@api_url}#{api_query}",
                                 content_type: content_type,
                                 authorization: "token #{@auth_token}",
                                 data: body
                               )
+        content_type = ws.header_value(key: 'Content-Type')
       end
-      return iterate_json_response(response: response, debug: debug, &block)
+      return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
     end
 
     # delete sends an HTML DELETE request.
@@ -215,37 +220,43 @@ module Figshare
     # @return [Integer] number of results (usually 0)
     private def delete(api_query:, args: {}, debug: false, &block)
       #ignoring args for the moment. Not sure what to do with them, if we do get them.
-      response = nil
+      content_type = response = nil
       WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
         response = ws.delete_req( query: "#{@api_url}#{api_query}",
                                 authorization: "token #{@auth_token}"
                               )
+        content_type = ws.header_value(key: 'Content-Type')
       end
-      return iterate_json_response(response: response, debug: debug, &block)
+      return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
     end
     
     # For iterate through the api response
     #
     # @param response [String] response from the API call
+    # @param content_type [String] From html response header
     # @param debug [Boolean] print result to stdout
     # @yield [Hash] each array member in the response (or the entire response, if not iteratable)
-    private def iterate_json_response(response:, debug: false )
+    private def iterate_json_response(response:, content_type:, debug: false )
       return 0 if response.nil? # got no responses
-
-      response_array = JSON.parse(response)
       
-      #If we don't have an iterator, turn the response into an array.
-      response_array = [ response_array ] if ! response_array.respond_to?('each')
-      return 0 if response_array.empty? # got empty array of responses
-
-      count = 0
-      response_array.each do |r|
-        yield r if block_given?
-        p r if debug
-        count += 1
-      end
+      if content_type =~ /application\/json/
+        response_array = JSON.parse(response)
+        #If we don't have an Array, turn the response into an Array so we can iterate over this one response.
+        response_array = [ response_array ] if ! (response_array.class == Array)
+        return 0 if response_array.empty? # got empty array of responses
+            
+        count = 0
+        response_array.each do |r|
+          yield r if block_given?
+          p r if debug
+          count += 1
+        end
     
-      return count
+        return count
+      else #just dump the entire response on the caller :)
+        yield response  if block_given?
+        return response.length
+      end
     end
   end
 end
