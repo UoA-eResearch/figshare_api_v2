@@ -3,7 +3,9 @@ module Figshare
 
   # Upload files to figshare
   # Nb. This can sometimes fail, so you need to check the md5 to ensure the file got there
-  #     It can take a short while for the md5 to be calculated, so upload, wait, then check.
+  #     It can take a short while for the md5 to be calculated, so upload, wait, then check for a computed_md5.
+  #     The status will show as "ic_checking",  "moving_to_final" then to "available", 
+  #     I have seen it stuck at "moving_to_final", but with the right computed_md5.
   #
   class Upload < Base
     CHUNK_SIZE = 1048576
@@ -41,7 +43,7 @@ module Figshare
       get_file_info()
       puts "{ @file_info: #{@file_info.to_j} }\n\n" if @trace
       
-      get_upload_parts_details ()
+      get_upload_parts_details()
       puts "{ @upload_parts_detail: #{@upload_parts_detail.to_j} }\n\n" if @trace
       
       upload_the_parts()
@@ -66,10 +68,11 @@ module Figshare
       raise "Upload::status(): Failed to get figshare file record" if @file_info.nil?
     end
    
-    #Creates a new Figshare file record, in the figshare article, and we get the file_id from the upload URL
+    # Creates a new Figshare file record, in the figshare article, and we get the file_id from the upload URL
+    # file status == 'created'
     #
     private def initiate_new_upload()
-      md5, size = Figshare_upload.get_file_check_data(@file_name)
+      md5, size = Upload.get_file_check_data(@file_name)
       args = {'name' => File.basename(@file_name),
               'md5' => md5,
               'size'=> size
@@ -100,7 +103,7 @@ module Figshare
 
     # Get the upload settings
     #
-    private def get_upload_parts_details ()  
+    private def get_upload_parts_details()  
       result = nil
       WIKK::WebBrowser.https_session( host: @upload_host, verify_cert: false ) do |ws|
         result = ws.get_page( query: @upload_query,
@@ -115,9 +118,9 @@ module Figshare
     private def upload_the_parts()
       parts = @upload_parts_detail ['parts']
       File.open(@file_name, 'rb') do |fin|
-        parts.each_with_index do |part, i|
+        parts.each do |part|
           data = fin.read(part['endOffset'] - part['startOffset'] + 1)
-          upload_part(buffer: data, part: i + 1)
+          upload_part(buffer: data, part: part['partNo'])
         end
       end
     end
