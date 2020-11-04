@@ -445,6 +445,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#collection_delete-instance_method" title="#collection_delete (instance method)">#<strong>collection_delete</strong>(collection_id:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Delete a private collection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#create-instance_method" title="#create (instance method)">#<strong>create</strong>(body:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
     
 
@@ -461,30 +485,6 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Create a new private Collection by sending collection information.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>(collection_id:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Delete a private collection.</p>
 </div></span>
   
 </li>
@@ -2056,6 +2056,89 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="collection_delete-instance_method">
+  
+    #<strong>collection_delete</strong>(collection_id:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Delete a private collection</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>collection_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Figshare id of the collection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>impersonate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Figshare account_id of the user we are making this call on behalf of</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/private_collections.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_collection_delete'>collection_delete</span><span class='lparen'>(</span><span class='label'>collection_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span> <span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/collections/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/files/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_id'>file_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="create-instance_method">
   
     #<strong>create</strong>(body:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
@@ -2132,89 +2215,6 @@
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/collections</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="delete-instance_method">
-  
-    #<strong>delete</strong>(collection_id:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Delete a private collection</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>collection_id</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Figshare id of the collection</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>impersonate</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>nil</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Figshare account_id of the user we are making this call on behalf of</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-69
-70
-71
-72
-73</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/private_collections.rb', line 69</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>collection_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span> <span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/collections/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_collection_id'>collection_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/files/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_id'>file_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3540,7 +3540,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Oct 29 19:24:31 2020 by
+  Generated on Thu Nov  5 11:11:16 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.7.1).
 </div>

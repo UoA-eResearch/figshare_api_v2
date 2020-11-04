@@ -77,15 +77,34 @@
 <ul><li>
 <p>Stats API not implemented.</p>
 </li><li>
+<p>oai pmh api not implemented.</p>
+</li><li>
 <p>Need to build a test suite</p>
 </li><li>
 <p>impersonate option, for PrivateArticles, PrivateCollections and PrivateProjects ignored for DELETE, and non-json POST and PUT.</p>
 </li></ul>
 
 <h2 id="label-SYNOPSIS-3A">SYNOPSIS:</h2>
-<ul><li>
-<p>require &#39;figshare_api_v2&#39;</p>
-</li></ul>
+
+<p>“` require &#39;figshare_api_v2&#39;</p>
+
+<h1 id="label-Either+initialize+once-2C+and+call+-40figshare.authors.x+-40figshare.institutions.x-2C+...">Either initialize once, and call @figshare.authors.x @figshare.institutions.x, …</h1>
+
+<p>@figshare = Figshare::Init.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir__/conf”)</p>
+
+<p>@figshare.authors.detail(author_id: 12345) { |a| puts a } @figshare.institutions.private_articles { |article| puts article }</p>
+
+<h1 id="label-...">…</h1>
+
+<h1 id="label-Or+initialize+each+class+individually">Or initialize each class individually</h1>
+
+<p>@authors = Figshare::Authors.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir&lt;strong&gt;/conf”) @institutions = Figshare::Institutions.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir&lt;/strong&gt;/conf”)</p>
+
+<p>@authors.detail(author_id: 12345) { |a| puts a } @institutions.private_articles { |article| puts article }</p>
+
+<h1 id="label-...">…</h1>
+
+<p>““</p>
 
 <h2 id="label-REQUIREMENTS-3A">REQUIREMENTS:</h2>
 <ul><li>
@@ -113,7 +132,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Thu Oct 29 19:24:30 2020 by
+  Generated on Thu Nov  5 11:11:14 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.25 (ruby-2.7.1).
 </div>
