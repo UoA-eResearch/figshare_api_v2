@@ -14,6 +14,7 @@ Hoe.spec PROJECT do
 
   self.dependency "wikk_json", "~> 0.1.2"
   self.dependency "wikk_webbrowser", "~> 0.9.0"
+  self.dependency "dir_r", "~> 1.0.0"
 end
 
 
