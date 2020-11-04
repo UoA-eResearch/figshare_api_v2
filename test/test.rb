@@ -77,11 +77,106 @@ def test_article_list_and_delete_files
   @figshare.private_articles.files(article_id: 13087316) { |f| p f }
 end
 
+def penguin_file_sequence_check(files:, delete: false)
+  first_fn  = ''
+  duplicates = []
+  missing = []
+  extra_files = []
+  delete_these = []
+  
+  file_name = []
+  files.each do |f| 
+    file_name << { 'name' => f['name'], 'id' => f['id']}
+  end
+  file_name.sort_by! { |obj| obj['name'] }
+
+  sequence = 0
+  base = ''
+  #Find the first sequence number (array has been sorted)
+  file_name.each do |fn|
+    if fn['name'] =~ /^.+[0-9]+.bmp/
+      base = fn['name'].gsub(/^(.+[^0-9])[0-9]+.bmp$/, '\1')
+      sequence = -1 # fn['name'].gsub(/#{base}([0-9]+).bmp/, '\1').to_i
+      first_fn = fn['name'] #So we can report neatly
+      break
+    end
+  end
+    
+  last_fn = ''
+  file_name[0..-1].each do |fn|
+    if fn['name'] =~ /#{base}[0-9]+.bmp/
+      next_seq = fn['name'].gsub(/#{base}([0-9]+).bmp/, '\1').to_i
+      if sequence != -1 && next_seq == sequence
+        duplicates << "Duplicate #{fn['name']} #{fn['id']}"
+        delete_these << fn['id']
+      elsif next_seq != sequence + 1 && sequence != -1
+        if sequence+1 == next_seq - 1
+          missing << "Gap between #{sequence} and #{fn['name']} ( i.e missing #{sequence + 1} )"
+        else
+          missing << "Gap between #{sequence} and #{fn['name']} ( i.e missing #{sequence + 1} to #{next_seq - 1} )"
+        end
+      else
+        last_fn = fn['name'] #So we can report neatly
+      end
+      sequence = next_seq
+    else
+      extra_files << { 'name' => fn['name'], 'id' => fn['id']}
+    end
+  end
+  puts "Files: #{first_fn} to #{last_fn}" if first_fn != ''
+  if missing.length > 0
+    missing.each { |s| puts "    #{s}"}
+  else
+    #puts "    No missing files between first and last file number"
+  end
+  if false
+    if duplicates.length > 0
+      duplicates.each { |s| puts "    #{s}"}
+      delete_these.each do |fid|
+        if delete
+          puts "Deleting #{fid}"
+          delete_article_files(article_id: article_id, file_id: fid)
+        end
+      end
+    else
+      puts "    No duplicate files"
+    end
+  end
+  if extra_files.length > 0
+    puts
+    puts "Additional files:"
+    extra_files.each { |s| puts "  #{s}" }
+  end
+  puts
+  puts "File Count: #{file_name.length}"
+end
+
+
 @figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
 
-test_article_list_and_delete_files
-#@figshare.private_articles.files(article_id: 13087316)  { |f| p f }
+#test_private_collection_detail(id: 1188933) #collection's detail using dane's userid
+#@figshare.private_collections.articles(collection_id: 5114849, impersonate: 1188933) { |a| puts "#{a['id']} #{a['title']} #{a['doi']}" }
+#look up Dane's articles id , title
+@figshare.private_articles.list(impersonate: 1188933) do |a| #puts "#{a['id']} #{a['title']} #{a['doi']}" }
+  @figshare.private_articles.detail(article_id: a['id'], impersonate: 1188933) do |ad|
+    puts "###########################################################"
+    puts "Title: #{ad['title']}"
+    puts "Description: #{ad['description']}"
+    puts "Pulbic: #{ad['is_public']}"
+    puts "DOI: #{ad['doi']}"
+    print "Authors: "
+    ad['authors'].each { |author| print "#{author['full_name']}, "}
+    print "\n"
+    penguin_file_sequence_check(files: ad['files'])
+  end
+  puts
+end
+#look up one of Dane's articles file list
+#@figshare.private_articles.files(article_id: 13180055) { |f| p f }
+
 exit(0)
+#test_article_list_and_delete_files
+#@figshare.private_articles.files(article_id: 13087316)  { |f| p f }
 
 @figshare.authors.detail(author_id: 1188933) { |a| p a }
 @figshare.authors.search(institute: true, search_for: 'Dane') { |a| p a }
