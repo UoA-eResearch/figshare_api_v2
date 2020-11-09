@@ -161,12 +161,14 @@ end
   @figshare.private_articles.detail(article_id: a['id'], impersonate: 1188933) do |ad|
     puts "###########################################################"
     puts "Title: #{ad['title']}"
+    puts "ID: #{ad['id']}"
     puts "Description: #{ad['description']}"
     puts "Pulbic: #{ad['is_public']}"
     puts "DOI: #{ad['doi']}"
     print "Authors: "
     ad['authors'].each { |author| print "#{author['full_name']}, "}
     print "\n"
+   # p ad 
     penguin_file_sequence_check(files: ad['files'])
   end
   puts
