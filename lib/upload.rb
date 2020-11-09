@@ -168,7 +168,7 @@ module Figshare
     #
     private def complete_upload
       post( api_query: "account/articles/#{@article_id}/files/#{@file_id}" )
-      puts "complete_upload" if trace > 1
+      puts "complete_upload" if @trace > 1
     end
 
     # Get the upload settings
