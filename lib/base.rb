@@ -1,8 +1,4 @@
-module Figshare
-  require "wikk_webbrowser"
-  require "wikk_json"
-  require 'Time'
-  
+module Figshare  
   # Supporting web calls to the API
   #
   class Base

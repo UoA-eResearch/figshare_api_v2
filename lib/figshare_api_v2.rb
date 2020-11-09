@@ -1,5 +1,9 @@
 module Figshare
-  VERSION = '0.9.1'
+  VERSION = '0.9.2'
+
+  require "wikk_webbrowser"
+  require "wikk_json"
+  require 'time'
 
   require_relative 'base.rb'
   require_relative 'authors.rb'
