@@ -250,7 +250,7 @@ module Figshare
     def articles_add(collection_id:, articles: , impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
-      post( api_query: "account/collections/#{collection_id}/articles/#{article_id}", args: args, data: { "articles": articles}, &block)
+      post( api_query: "account/collections/#{collection_id}/articles", args: args, data: { "articles": articles}, &block)
     end
     
     # Get a private article's details (Not a figshare API call. Duplicates PrivateArticles:article_detail)
