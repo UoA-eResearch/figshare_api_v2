@@ -151,28 +151,56 @@ def penguin_file_sequence_check(files:, delete: false)
   puts "File Count: #{file_name.length}"
 end
 
+def penguin_summary
+  #test_private_collection_detail(id: 1188933) #collection's detail using dane's userid
+  @figshare.private_collections.articles_add(collection_id: 5114849, articles: [12924734], impersonate: 1188933)
+  puts "Collections"
+  @figshare.private_collections.list(impersonate: 1188933) do |c|
+    puts "###########################################################"
+    puts "Title: #{c['title']}"
+    puts "ID: #{c['id']}"
+    puts "Pulbic: #{!c['published_date'].nil?}"
+    puts "DOI: #{c['doi']}"
+    puts "Data Sets:"
+    @figshare.private_collections.articles(collection_id: c['id'], impersonate: 1188933) do |a| 
+      puts "    #{a['id']} #{a['title']} #{a['doi']}"
+    end
+  end
+  puts 
+  return
+  puts "Data Sets"
+  #look up Dane's articles id , title
+  @figshare.private_articles.list(impersonate: 1188933) do |a| #puts "#{a['id']} #{a['title']} #{a['doi']}" }
+    @figshare.private_articles.detail(article_id: a['id'], impersonate: 1188933) do |ad|
+      puts "###########################################################"
+      puts "Title: #{ad['title']}"
+      puts "ID: #{ad['id']}"
+      puts "Description: #{ad['description']}"
+      puts "Pulbic: #{ad['is_public']}"
+      puts "DOI: #{ad['doi']}"
+      print "Authors: "
+      ad['authors'].each { |author| print "#{author['full_name']}, "}
+      print "\n"
+     # p ad 
+      penguin_file_sequence_check(files: ad['files'])
+    end
+    puts
+  end
+end
+
 
 @figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+penguin_summary
 
-#test_private_collection_detail(id: 1188933) #collection's detail using dane's userid
-#@figshare.private_collections.articles(collection_id: 5114849, impersonate: 1188933) { |a| puts "#{a['id']} #{a['title']} #{a['doi']}" }
-#look up Dane's articles id , title
-@figshare.private_articles.list(impersonate: 1188933) do |a| #puts "#{a['id']} #{a['title']} #{a['doi']}" }
-  @figshare.private_articles.detail(article_id: a['id'], impersonate: 1188933) do |ad|
-    puts "###########################################################"
-    puts "Title: #{ad['title']}"
-    puts "ID: #{ad['id']}"
-    puts "Description: #{ad['description']}"
-    puts "Pulbic: #{ad['is_public']}"
-    puts "DOI: #{ad['doi']}"
-    print "Authors: "
-    ad['authors'].each { |author| print "#{author['full_name']}, "}
-    print "\n"
-   # p ad 
-    penguin_file_sequence_check(files: ad['files'])
-  end
-  puts
-end
+exit(0)
+
+@figshare.private_articles.list(impersonate: 1188933) { |a| puts "#{a['id']} #{a['title']} #{a['doi']}" }
+exit(0)
+
+files = {}
+@figshare.private_articles.files(article_id: 13180055) { |f| files[f['name']] = "#{f['id']} #{f['name']} #{f['computed_md5']}"}
+files.sort.each { |fn,h| puts h }
+exit(0)
 #look up one of Dane's articles file list
 #@figshare.private_articles.files(article_id: 13180055) { |f| p f }
 
