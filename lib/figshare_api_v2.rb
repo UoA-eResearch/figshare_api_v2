@@ -1,5 +1,5 @@
 module Figshare
-  VERSION = '0.9.3'
+  VERSION = '0.9.4'
 
   require "wikk_webbrowser"
   require "wikk_json"
