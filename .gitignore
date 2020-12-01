@@ -14,3 +14,4 @@ test/.DS_Store
 test/conf/*
 test/conf/.DS_Store
 test/test_data/
+test/validate_upload.rb
