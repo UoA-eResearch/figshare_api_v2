@@ -153,7 +153,7 @@ end
 
 def penguin_summary
   #test_private_collection_detail(id: 1188933) #collection's detail using dane's userid
-  @figshare.private_collections.articles_add(collection_id: 5114849, articles: [12924734], impersonate: 1188933)
+  # @figshare.private_collections.articles_add(collection_id: 5114849, articles: [12924734], impersonate: 1188933)
   puts "Collections"
   @figshare.private_collections.list(impersonate: 1188933) do |c|
     puts "###########################################################"
