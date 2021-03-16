@@ -176,9 +176,9 @@ module Figshare
     # @param institution_user_id [String] As set in the HR upload
     # @param email [String] as set in the HR upload
     # @yield [Hash] {id, first_name, last_name, institution_id, email, active, institution_user_id}
-    def account_search(search_for:, is_active: nil, institution_user_id: nil, email: nil, &block)
+    def account_search(search_for: nil, is_active: nil, institution_user_id: nil, email: nil, &block)
       args = {}
-      args['search_for'] = search_for
+      args['search_for'] = search_for unless search_for.nil?
       args['is_active'] = is_active  if ! is_active.nil?
       args['institution_user_id'] = institution_user_id if ! institution_user_id.nil?
       args['email'] = email if ! email.nil?

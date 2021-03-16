@@ -51,14 +51,59 @@ module Figshare
       post(api_query: 'account/articles/search', args: args, &block)
     end
   
+    # Create a body for use with create and update methods
+    #
+    # @param title [String] Required
+    # @param description [String] The article description. In a publisher case, usually this is the remote article description
+    # @param keywords [Array] List of tags (strings) to be associated with the article. Tags can be used instead
+    # @param references [Array] List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
+    # @param categories [Array] List of category ids to be associated with the article(e.g [1, 23, 33, 66])
+    # @param authors [Array] List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint. e.g. { "name" => "Joe X"} and or { "id" => 123 }
+    # @param custom_fields [Hash] List of key, values pairs to be associated with the article. eg. { "key" => "value"}
+    # @param defined_type [String] one of "figshare","media","dataset","poster","journal contribution", "presentation", "thesis", "software", "online resource", "preprint", "book", "conference contribution", "chapter", "peer review", "educational resource", "report", "standard", "composition", "funding", "physical object", "data management plan", "workflow", "monograph", "performance", "event", "service", "model", "registration"
+    # @param funding [String] Grant number or funding authority
+    # @param funding_list [Array] Funding creation / update items. eg {"id" => 0, "title" => "string"}
+    # @param license [Integer] License id for this article.
+    # @param doi [String] Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+    # @param handle [String] Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+    # @param resource_doi [String] Not applicable to regular users. In a publisher case, this is the publisher article DOI.
+    # @param resource_title [String] Not applicable to regular users. In a publisher case, this is the publisher article title.
+    # @param timeline [Hash] Various timeline dates ie. { "firstOnline" => "date_string", "publisherPublication" => "date_string", "publisherAcceptance" => "date_string"},
+    # @param group_id [Integer] Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+    def body(title:, description: nil, keywords: nil, references: nil, categories: nil, authors: nil, custom_fields: nil, defined_type: nil, funding: nil, funding_list: nil, license: nil, doi: nil, handle: nil, resource_doi: nil, resource_title: nil, timeline: nil, group_id: nil, contact: nil)
+      _body = {
+        'title' => title
+      }
+      _body['description'] = description unless description.nil? 
+      _body['keywords'] = keywords unless keywords.nil? 
+      _body['references'] = references unless references.nil? 
+      _body['categories'] = categories unless categories.nil? 
+      _body['authors'] = authors unless authors.nil? 
+      _body['custom_fields'] = custom_fields unless custom_fields.nil? 
+      _body['defined_type'] = defined_type unless defined_type.nil? 
+      _body['funding'] = funding unless funding.nil? 
+      _body['funding_list'] = funding_list unless funding_list.nil? 
+      _body['license'] = license unless license.nil? 
+      _body['doi'] = doi unless doi.nil? 
+      _body['handle'] = handle unless handle.nil? 
+      _body['resource_doi'] = resource_doi unless resource_doi.nil? 
+      _body['resource_title'] = resource_title unless resource_title.nil? 
+      _body['timeline'] = timeline unless timeline.nil? 
+      _body['group_id'] = group_id unless group_id.nil?
+      
+      return _body
+    end
+  
     # Create a new Article by sending article information
+    # The user calling the API (or impersonated user) looks to be added as an author, even if they aren't. 
+    # A duplicate "Author" entry occurs when adding them explicitly
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] { location }
-    def create(impersonate: nil, &block)
+    def create(body:, impersonate: nil, &block)
       args = {}
       args["impersonate"] = impersonate  if ! impersonate.nil?
-      post(api_query: "account/articles/#{article_id}", args: args, &block)
+      post(api_query: "account/articles", args: args, data: body, &block)
     end
 
     # Delete an article (WARNING!!!!!)
