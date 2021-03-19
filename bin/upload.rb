@@ -8,12 +8,12 @@ def upload(article_list:)
 
   article_list.each do |a|
     begin
-      puts "Upload Dir #{a[:dir]}"
-      @figshare.upload.upload_dir(article_id: a[:article_id], directory: a[:dir], trace: 1)
+      puts "Upload Dir #{a['dir']}"
+      @figshare.upload.upload_dir(article_id: a['article_id'], directory: a['dir'], trace: 1)
     rescue WIKK::WebBrowser::Error => error
       puts "Web error (probably unrepeatable): %s"
-      puts "Retrying this directory once more (#{a[:dir]}). Will not catch the next Web error!"
-      @figshare.upload.upload_dir(article_id: a[:article_id], directory: a[:dir], trace: 1)
+      puts "Retrying this directory once more (#{a['dir']}). Will not catch the next Web error!"
+      @figshare.upload.upload_dir(article_id: a['article_id'], directory: a['dir'], trace: 1)
     end
   end
 
