@@ -15,8 +15,9 @@ global_file_names = {} #All files records inserted here, so we can spot duplicat
 duplicates = [] #Output messages.
 bad_checksum = [] #upload failed
 
-@figshare.private_articles.list(impersonate: AUTHOR_ID) do |a|
-  @figshare.private_articles.files(article_id: a['id']) do |f|
+#@figshare.private_articles.list(impersonate: article_conf['impersonate']) do |a|
+article_list.each do |a|
+  @figshare.private_articles.files(article_id: a['article_id']) do |f|
     if f['computed_md5'] == ''
       # Upload failed
         bad_checksum << "Upload Failed: #{a['id']} #{f['name']} #{f['id']}"
