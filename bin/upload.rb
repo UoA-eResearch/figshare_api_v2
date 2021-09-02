@@ -65,6 +65,15 @@ def create_new_articles
   end
 end
 
+def reserve_doi
+  @article_list.each_with_index do |a|
+    @figshare.private_articles.detail(article_id: a['article_id'], impersonate: @user['id']) do |article|
+      if article['doi'].length == 0
+        @figshare.private_articles.reserve_doi(article_id: a['article_id'], impersonate: @user['id'])
+      end
+    end
+  end
+end
 
 # Upload each article's files to Figshare.
 def upload_files(base_dir: )
@@ -95,7 +104,12 @@ article_conf = JSON.parse(File.read(ARGV[0]))
 @article_list = article_conf['article_list']
 puts "******************* Check for Existing Articles *******************************"
 set_article_id
+
+puts "******************* Reserving DOIs *******************************"
+reserve_doi
+
 puts "******************* Create Articles             *******************************"
 create_new_articles
+
 puts "******************* Upload Articles             *******************************"
 upload_files(base_dir: article_conf['base_dir'])
