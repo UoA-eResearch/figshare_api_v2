@@ -1,24 +1,86 @@
 #!/usr/local/bin/ruby
 require 'figshare_api_v2'
 
-def upload(article_list:)
-  # Upload each dir to the article specified. 
-  # Will not overwrite existing files in Figshare, if they have the same MD5 sum.
-  # It pays to run this script multiple times, as the uploads can silently fail.
-
-  article_list.each do |a|
-    begin
-      puts "Upload Dir #{a['dir']}"
-      @figshare.upload.upload_dir(article_id: a['article_id'], directory: a['dir'], trace: 1)
-    rescue WIKK::WebBrowser::Error => error
-      puts "Web error (probably unrepeatable): %s"
-      puts "Retrying this directory once more (#{a['dir']}). Will not catch the next Web error!"
-      @figshare.upload.upload_dir(article_id: a['article_id'], directory: a['dir'], trace: 1)
+# Find any existing articles, and set the article IDs
+# This is useful, if we run this script a second time, to ensure all files have been copied.
+def set_article_id
+  # Create hash index, so we can look up by title
+  articles_title_index = {}
+  @article_list.each_with_index do |a, i|
+    articles_title_index[a['title']] = i
+  end
+  
+  # List all the users articles, and see if the ones in the conf file already exist.
+  @figshare.private_articles.list(impersonate: @user['id']) do |l|
+    # search by title (and assume that the title is unique, for this user's articles)
+    if (a_id = articles_title_index[l['title']]) != nil && @article_list[a_id]['article_id'] == 0
+      @article_list[a_id]['article_id'] = l['id']
     end
   end
+  
+  puts "Existing articles IDs"
+  @article_list.each { |a| puts "Article #{a['article_id']} - #{a['title']}" }
+end
 
-  puts "Added   #{@figshare.upload.new_count}"
-  puts "Bad MD5 #{@figshare.upload.bad_count}"
+def create_new_articles
+  output = [] # Save the output, until we are finish.
+
+  @article_list.each_with_index do |a|
+    if a['article_id'] == 0 # Don't create, if it already has an article_id
+      authors = []
+      if a['authors'].class == Array
+        a['authors'].each do |author|
+          if author.class == Hash
+            authors << author
+          else
+            authors << { "name" => author }
+          end
+        end
+      end
+
+      body = @figshare.private_articles.body(
+              title: a['title'], 
+              description: a['description'], 
+              defined_type: "dataset",
+              authors: authors.length == 0 ? nil : authors,
+              keywords: a['keywords'],
+              categories: a['categories'],
+              custom_fields: a['custom_fields']
+            )
+          
+      @figshare.private_articles.create(body: body, impersonate: @user['id']) do |r|
+        # r is of the form {"location"=>"https://api.figshare.com/v2/account/articles/14219846"}
+        puts r
+        article_id = r['location'].gsub(/^.*account\/articles\//, '')
+        a['article_id'] = article_id
+        output << "\{ \"article_id\": => #{article_id}, \"dir\": \"#{File.basename(a['dir'])}\"},"
+      end
+    end
+  end
+  puts
+  puts "New Article IDs"
+  # Saved up output.
+  output.each do |o|
+    puts o
+  end
+end
+
+
+# Upload each article's files to Figshare.
+def upload_files(base_dir: )
+  Dir.chdir(base_dir) do 
+    @article_list.each do |a|
+      if a['article_id'] == 0 # Don't create, if it already has an article_id
+        stderr.puts "Skipping: Article has no ID - '#{a['title']}'"
+      else
+        puts "Upload Dir #{a['dir']}"
+        @figshare.upload.upload_dir(article_id: a['article_id'], directory: a['dir'], trace: 1)
+      end
+    end
+
+    puts "Added   #{@figshare.upload.new_count}"
+    puts "Bad MD5 #{@figshare.upload.bad_count}"
+  end
 end
 
 if ARGV.length != 1
@@ -26,12 +88,14 @@ if ARGV.length != 1
   exit -1
 end
 
-#First and only argument is the configuration file.
-upload_conf = JSON.parse(File.read(ARGV[0]))
-@figshare = Figshare::Init.new(figshare_user: upload_conf['figshare_user'], conf_dir: upload_conf['figshare_conf_dir'])
+article_conf = JSON.parse(File.read(ARGV[0]))
+@figshare = Figshare::Init.new(figshare_user: article_conf['figshare_user'], conf_dir: File.dirname(ARGV[0]) )
+@user = { 'id' => article_conf['impersonate'] }
 
-Dir.chdir(upload_conf['base_dir']) do 
-  # Now in the base_dir containing the article directories, as specified in the article_list
-  upload(article_list: upload_conf['article_list'])
-end
-
+@article_list = article_conf['article_list']
+puts "******************* Check for Existing Articles *******************************"
+set_article_id
+puts "******************* Create Articles             *******************************"
+create_new_articles
+puts "******************* Upload Articles             *******************************"
+upload_files(base_dir: article_conf['base_dir'])
