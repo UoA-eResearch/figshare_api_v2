@@ -499,7 +499,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#embargo_update-instance_method" title="#embargo_update (instance method)">#<strong>embargo_update</strong>(article_id:, is_embargoed: true, embargo_date:, embargo_type: &#39;file&#39;, embargo_reason:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
+      <a href="#embargo_update-instance_method" title="#embargo_update (instance method)">#<strong>embargo_update</strong>(article_id:, embargo_date:, embargo_reason:, is_embargoed: true, embargo_type: &#39;file&#39;, impersonate: nil, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -619,7 +619,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#link_delete-instance_method" title="#link_delete (instance method)">#<strong>link_delete</strong>(article_id:, link:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
+      <a href="#link_delete-instance_method" title="#link_delete (instance method)">#<strong>link_delete</strong>(article_id:, link_id:, impersonate: nil, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -787,7 +787,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#search-instance_method" title="#search (instance method)">#<strong>search</strong>(institute: false, group_id: nil, impersonate: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, doi: nil, handle: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;, search_for:) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#search-instance_method" title="#search (instance method)">#<strong>search</strong>(search_for:, institute: false, group_id: nil, impersonate: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, doi: nil, handle: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -922,19 +922,19 @@
       <pre class="lines">
 
 
-113
-114
-115
-116
-117</pre>
+137
+138
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_article_delete'>article_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1021,18 +1021,18 @@
       <pre class="lines">
 
 
-254
-255
-256
-257
-258</pre>
+278
+279
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 254</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 278</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_author_delete'>author_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>author_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_author_id'>author_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1122,18 +1122,18 @@
       <pre class="lines">
 
 
-221
-222
-223
-224
-225</pre>
+245
+246
+247
+248
+249</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 221</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_authors'>authors</span><span class='lparen'>(</span><span class='id identifier rubyid_article_id'>article_id</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1221,19 +1221,19 @@
       <pre class="lines">
 
 
-232
-233
-234
-235
-236</pre>
+256
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 232</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 256</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_authors_add'>authors_add</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>authors:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_authors'>authors</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_authors'>authors</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1320,19 +1320,19 @@
       <pre class="lines">
 
 
-243
-244
-245
-246
-247</pre>
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 243</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_authors_replace'>authors_replace</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>authors:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_authors'>authors</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/authors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_authors'>authors</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1673,11 +1673,6 @@
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
 78
 79
 80
@@ -1695,33 +1690,76 @@
 92
 93
 94
-95</pre>
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 78</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span><span class='lparen'>(</span><span class='label'>title:</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keywords:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>references:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>categories:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>authors:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>custom_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>defined_type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>funding:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>funding_list:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>license:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>doi:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>handle:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource_doi:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource_title:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeline:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>contact:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid__body'>_body</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span><span class='lparen'>(</span> <span class='label'>title:</span><span class='comma'>,</span>
+          <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>keywords:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>references:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>categories:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>authors:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>custom_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>defined_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>funding:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>funding_list:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>license:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>doi:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>handle:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>resource_doi:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>resource_title:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>timeline:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+          <span class='label'>contact:</span> <span class='kw'>nil</span>
+        <span class='rparen'>)</span>
+  <span class='id identifier rubyid_body_'>body_</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_title'>title</span>
   <span class='rbrace'>}</span>
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_description'>description</span> <span class='kw'>unless</span> <span class='id identifier rubyid_description'>description</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keywords</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_keywords'>keywords</span> <span class='kw'>unless</span> <span class='id identifier rubyid_keywords'>keywords</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>references</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_references'>references</span> <span class='kw'>unless</span> <span class='id identifier rubyid_references'>references</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>categories</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_categories'>categories</span> <span class='kw'>unless</span> <span class='id identifier rubyid_categories'>categories</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_authors'>authors</span> <span class='kw'>unless</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>custom_fields</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_custom_fields'>custom_fields</span> <span class='kw'>unless</span> <span class='id identifier rubyid_custom_fields'>custom_fields</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>defined_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_defined_type'>defined_type</span> <span class='kw'>unless</span> <span class='id identifier rubyid_defined_type'>defined_type</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>funding</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_funding'>funding</span> <span class='kw'>unless</span> <span class='id identifier rubyid_funding'>funding</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>funding_list</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_funding_list'>funding_list</span> <span class='kw'>unless</span> <span class='id identifier rubyid_funding_list'>funding_list</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>license</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_license'>license</span> <span class='kw'>unless</span> <span class='id identifier rubyid_license'>license</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_doi'>doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_doi'>doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>handle</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_handle'>handle</span> <span class='kw'>unless</span> <span class='id identifier rubyid_handle'>handle</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_title</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_title'>resource_title</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_title'>resource_title</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>timeline</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timeline'>timeline</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeline'>timeline</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-  <span class='id identifier rubyid__body'>_body</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  
-  <span class='kw'>return</span> <span class='id identifier rubyid__body'>_body</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_description'>description</span> <span class='kw'>unless</span> <span class='id identifier rubyid_description'>description</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keywords</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_keywords'>keywords</span> <span class='kw'>unless</span> <span class='id identifier rubyid_keywords'>keywords</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>references</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_references'>references</span> <span class='kw'>unless</span> <span class='id identifier rubyid_references'>references</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>categories</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_categories'>categories</span> <span class='kw'>unless</span> <span class='id identifier rubyid_categories'>categories</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>authors</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_authors'>authors</span> <span class='kw'>unless</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>custom_fields</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_custom_fields'>custom_fields</span> <span class='kw'>unless</span> <span class='id identifier rubyid_custom_fields'>custom_fields</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>defined_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_defined_type'>defined_type</span> <span class='kw'>unless</span> <span class='id identifier rubyid_defined_type'>defined_type</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>funding</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_funding'>funding</span> <span class='kw'>unless</span> <span class='id identifier rubyid_funding'>funding</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>funding_list</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_funding_list'>funding_list</span> <span class='kw'>unless</span> <span class='id identifier rubyid_funding_list'>funding_list</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>license</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_license'>license</span> <span class='kw'>unless</span> <span class='id identifier rubyid_license'>license</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_doi'>doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_doi'>doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>handle</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_handle'>handle</span> <span class='kw'>unless</span> <span class='id identifier rubyid_handle'>handle</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_title</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_title'>resource_title</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_title'>resource_title</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>timeline</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timeline'>timeline</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeline'>timeline</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_body_'>body_</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contact</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_contact'>contact</span> <span class='kw'>unless</span> <span class='id identifier rubyid_contact'>contact</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_body_'>body_</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1794,19 +1832,19 @@
       <pre class="lines">
 
 
-265
-266
-267
-268
-269</pre>
+289
+290
+291
+292
+293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_categories'>categories</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/categories</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/categories</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1893,18 +1931,18 @@
       <pre class="lines">
 
 
-277
-278
-279
-280
-281</pre>
+301
+302
+303
+304
+305</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 277</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 301</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_categories_add'>categories_add</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>categories:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/categories</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>categories</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_categories'>categories</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1992,18 +2030,18 @@
       <pre class="lines">
 
 
-299
-300
-301
-302
-303</pre>
+323
+324
+325
+326
+327</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 299</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_categories_delete'>categories_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>category_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/categories/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_category_id'>category_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2091,18 +2129,18 @@
       <pre class="lines">
 
 
-288
-289
-290
-291
-292</pre>
+312
+313
+314
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 288</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_categories_replace'>categories_replace</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>categories:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/categories</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>categories</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_categories'>categories</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2176,19 +2214,19 @@
       <pre class="lines">
 
 
-103
-104
-105
-106
-107</pre>
+127
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='label'>body:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/articles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2277,18 +2315,18 @@
       <pre class="lines">
 
 
-391
-392
-393
-394
-395
-396</pre>
+415
+416
+417
+418
+419
+420</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 415</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_all_files'>delete_all_files</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_article_files'>article_files</span><span class='lparen'>(</span><span class='label'>article_id:</span> <span class='id identifier rubyid_article_id'>article_id</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span> 
+  <span class='id identifier rubyid_article_files'>article_files</span><span class='lparen'>(</span><span class='label'>article_id:</span> <span class='id identifier rubyid_article_id'>article_id</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
     <span class='kw'>yield</span> <span class='id identifier rubyid_f'>f</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
     <span class='id identifier rubyid_article_file_delete'>article_file_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span> <span class='id identifier rubyid_article_id'>article_id</span><span class='comma'>,</span> <span class='label'>file_id:</span> <span class='id identifier rubyid_f'>f</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
@@ -2362,19 +2400,19 @@
       <pre class="lines">
 
 
-123
-124
-125
-126
-127</pre>
+147
+148
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_detail'>detail</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2445,18 +2483,18 @@
       <pre class="lines">
 
 
-144
-145
-146
-147
-148</pre>
+168
+169
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_embargo_delete'>embargo_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/embargo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2546,18 +2584,18 @@
       <pre class="lines">
 
 
-155
-156
-157
-158
-159</pre>
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 179</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_embargo_detail'>embargo_detail</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/embargo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2568,7 +2606,7 @@
       <div class="method_details ">
   <h3 class="signature " id="embargo_update-instance_method">
   
-    #<strong>embargo_update</strong>(article_id:, is_embargoed: true, embargo_date:, embargo_type: &#39;file&#39;, embargo_reason:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>embargo_update</strong>(article_id:, embargo_date:, embargo_reason:, is_embargoed: true, embargo_type: &#39;file&#39;, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2682,28 +2720,28 @@
       <pre class="lines">
 
 
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180</pre>
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 195</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_embargo_update'>embargo_update</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>is_embargoed:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>embargo_date:</span> <span class='comma'>,</span> <span class='label'>embargo_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>file</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>embargo_reason:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_embargo_update'>embargo_update</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>embargo_date:</span><span class='comma'>,</span> <span class='label'>embargo_reason:</span><span class='comma'>,</span> <span class='label'>is_embargoed:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>embargo_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>file</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_embargo_record'>embargo_record</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>is_embargoed</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_is_embargoed'>is_embargoed</span><span class='comma'>,</span>
-                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>embargo_date</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_date'>embargo_date</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%Y-%m-%dT%H:%M:%S</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
-                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>embargo_type</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_type'>embargo_type</span><span class='comma'>,</span>
-                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>embargo_reason</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_reason'>embargo_reason</span>
-                  <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_embargo_record'>embargo_record</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>is_embargoed</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_is_embargoed'>is_embargoed</span><span class='comma'>,</span>
+                     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>embargo_date</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_date'>embargo_date</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%Y-%m-%dT%H:%M:%S</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>embargo_type</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_type'>embargo_type</span><span class='comma'>,</span>
+                     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>embargo_reason</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_embargo_reason'>embargo_reason</span>
+                   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/embargo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_embargo_record'>embargo_record</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2791,18 +2829,18 @@
       <pre class="lines">
 
 
-380
-381
-382
-383
-384</pre>
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 404</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_file_delete'>file_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>file_id:</span> <span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_file_delete'>file_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>file_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span> <span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/files/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_id'>file_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2908,18 +2946,18 @@
       <pre class="lines">
 
 
-369
-370
-371
-372
-373</pre>
+393
+394
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 369</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 393</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_file_detail'>file_detail</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>file_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/files/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_id'>file_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3009,18 +3047,18 @@
       <pre class="lines">
 
 
-356
-357
-358
-359
-360</pre>
+380
+381
+382
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 356</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 380</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_files'>files</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/files</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3126,18 +3164,18 @@
       <pre class="lines">
 
 
-322
-323
-324
-325
-326</pre>
+346
+347
+348
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 322</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 346</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_create'>link_create</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>private_link:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/private_links</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_private_link'>private_link</span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3148,7 +3186,7 @@
       <div class="method_details ">
   <h3 class="signature " id="link_delete-instance_method">
   
-    #<strong>link_delete</strong>(article_id:, link:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>link_delete</strong>(article_id:, link_id:, impersonate: nil, &amp;block)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -3220,18 +3258,18 @@
       <pre class="lines">
 
 
-333
-334
-335
-336
-337</pre>
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 333</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 357</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_link_delete'>link_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>link:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_link_delete'>link_delete</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>link_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/private_links/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_link_id'>link_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3314,19 +3352,19 @@
       <pre class="lines">
 
 
-344
-345
-346
-347
-348</pre>
+368
+369
+370
+371
+372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_link_update'>link_update</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>link_id:</span><span class='comma'>,</span> <span class='label'>expires_date:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/private_links/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_link_id'>link_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>expires_date</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_expires_date'>expires_date</span><span class='period'>.</span><span class='id identifier rubyid_iso8601'>iso8601</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/private_links/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_link_id'>link_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>expires_date</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_expires_date'>expires_date</span><span class='period'>.</span><span class='id identifier rubyid_iso8601'>iso8601</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3415,18 +3453,18 @@
       <pre class="lines">
 
 
-310
-311
-312
-313
-314</pre>
+334
+335
+336
+337
+338</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 310</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_links'>links</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/private_links</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3500,18 +3538,18 @@
       <pre class="lines">
 
 
+9
+10
 11
 12
-13
-14
-15</pre>
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list'>list</span><span class='lparen'>(</span><span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/articles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3583,18 +3621,18 @@
       <pre class="lines">
 
 
-190
-191
-192
-193
-194</pre>
+214
+215
+216
+217
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/publish</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3666,18 +3704,18 @@
       <pre class="lines">
 
 
-200
-201
-202
-203
-204</pre>
+224
+225
+226
+227
+228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reserve_doi'>reserve_doi</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/reserve_doi</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3749,18 +3787,18 @@
       <pre class="lines">
 
 
-210
-211
-212
-213
-214</pre>
+234
+235
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reserve_handle'>reserve_handle</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/reserve_handle</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3771,7 +3809,7 @@
       <div class="method_details ">
   <h3 class="signature " id="search-instance_method">
   
-    #<strong>search</strong>(institute: false, group_id: nil, impersonate: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, doi: nil, handle: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;, search_for:) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>search</strong>(search_for:, institute: false, group_id: nil, impersonate: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, doi: nil, handle: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -4030,6 +4068,8 @@
       <pre class="lines">
 
 
+30
+31
 32
 33
 34
@@ -4050,30 +4090,42 @@
 49
 50
 51
-52</pre>
+52
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 30</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='label'>institute:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-                          <span class='label'>published_since:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>modified_since:</span> <span class='kw'>nil</span><span class='comma'>,</span> 
-                          <span class='label'>item_type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource_doi:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>doi:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>handle:</span> <span class='kw'>nil</span><span class='comma'>,</span>  
-                          <span class='label'>order:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>published_date</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>order_direction:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>desc</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-                          <span class='label'>search_for:</span><span class='comma'>,</span>
-                          <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-                         <span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span> <span class='label'>search_for:</span><span class='comma'>,</span>
+            <span class='label'>institute:</span> <span class='kw'>false</span><span class='comma'>,</span>
+            <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>published_since:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>modified_since:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>item_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>resource_doi:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>doi:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>handle:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>order:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>published_date</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+            <span class='label'>order_direction:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>desc</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+            <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+          <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>search_for</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_search_for'>search_for</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@institute_id</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_institute'>institute</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_item_type'>item_type</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_item_type'>item_type</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_doi'>doi</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_doi'>doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>handle</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_handle'>handle</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_handle'>handle</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>published_since</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_published_since'>published_since</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_published_since'>published_since</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>modified_since</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_modified_since'>modified_since</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_modified_since'>modified_since</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order'>order</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_order'>order</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order_direction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order_direction'>order_direction</span> <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_order_direction'>order_direction</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@institute_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_institute'>institute</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item_type</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_item_type'>item_type</span> <span class='kw'>unless</span> <span class='id identifier rubyid_item_type'>item_type</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_doi'>resource_doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_doi'>doi</span> <span class='kw'>unless</span> <span class='id identifier rubyid_doi'>doi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>handle</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_handle'>handle</span> <span class='kw'>unless</span> <span class='id identifier rubyid_handle'>handle</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>published_since</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_published_since'>published_since</span> <span class='kw'>unless</span> <span class='id identifier rubyid_published_since'>published_since</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>modified_since</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_modified_since'>modified_since</span> <span class='kw'>unless</span> <span class='id identifier rubyid_modified_since'>modified_since</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order'>order</span> <span class='kw'>unless</span> <span class='id identifier rubyid_order'>order</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order_direction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order_direction'>order_direction</span> <span class='kw'>unless</span> <span class='id identifier rubyid_order_direction'>order_direction</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/articles/search</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4161,18 +4213,18 @@
       <pre class="lines">
 
 
-134
-135
-136
-137
-138</pre>
+158
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/private_articles.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='label'>article_id:</span><span class='comma'>,</span> <span class='label'>body:</span><span class='comma'>,</span> <span class='label'>impersonate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span>  <span class='kw'>if</span> <span class='op'>!</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>impersonate</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_impersonate'>impersonate</span> <span class='kw'>unless</span> <span class='id identifier rubyid_impersonate'>impersonate</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_put'>put</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/articles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_article_id'>article_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4185,9 +4237,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Mar 16 14:08:51 2021 by
+  Generated on Mon Sep 20 13:03:33 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.7.1).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>

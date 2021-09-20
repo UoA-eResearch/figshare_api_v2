@@ -102,7 +102,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Hack :) to do a lazy initialization of the Figshare subclasses. i.e. only if they get called. Usage:  @figshare = Figshare::Init.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir__/conf”)</p>
+<p>HACK: to do a lazy initialization of the Figshare subclasses. i.e. only if they get called. Usage:  @figshare = Figshare::Init.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir__/conf”)</p>
 
 <p>@figshare.authors.detail(author_id: 12345) { |a| puts a }  @figshare.institutions.private_articles { |article| puts article }  …</p>
 
@@ -509,13 +509,13 @@
       <pre class="lines">
 
 
-35
-36
 37
-38</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>figshare_user:</span><span class='comma'>,</span> <span class='label'>conf_dir:</span><span class='rparen'>)</span>
   <span class='ivar'>@figshare_user</span> <span class='op'>=</span> <span class='id identifier rubyid_figshare_user'>figshare_user</span>
@@ -572,12 +572,12 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_authors'>authors</span>
   <span class='ivar'>@authors</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Authors.html" title="Figshare::Authors (class)">Authors</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -626,12 +626,12 @@
       <pre class="lines">
 
 
-50
-51
-52</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_institutions'>institutions</span>
   <span class='ivar'>@institutions</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Institutions.html" title="Figshare::Institutions (class)">Institutions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -680,12 +680,12 @@
       <pre class="lines">
 
 
-120
-121
-122</pre>
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_oai_pmh'>oai_pmh</span>
   <span class='ivar'>@oai_pmh</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="OAI_PMH.html" title="Figshare::OAI_PMH (class)">OAI_PMH</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -734,12 +734,12 @@
       <pre class="lines">
 
 
-57
-58
-59</pre>
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_other'>other</span>
   <span class='ivar'>@other</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Other.html" title="Figshare::Other (class)">Other</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -788,12 +788,12 @@
       <pre class="lines">
 
 
-64
-65
-66</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_articles'>private_articles</span>
   <span class='ivar'>@private_articles</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PrivateArticles.html" title="Figshare::PrivateArticles (class)">PrivateArticles</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -842,12 +842,12 @@
       <pre class="lines">
 
 
-71
-72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_collections'>private_collections</span>
   <span class='ivar'>@private_collections</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PrivateCollections.html" title="Figshare::PrivateCollections (class)">PrivateCollections</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -896,12 +896,12 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_projects'>private_projects</span>
   <span class='ivar'>@private_projects</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PrivateProjects.html" title="Figshare::PrivateProjects (class)">PrivateProjects</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -950,12 +950,12 @@
       <pre class="lines">
 
 
-85
-86
-87</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_articles'>public_articles</span>
   <span class='ivar'>@public_articles</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PublicArticles.html" title="Figshare::PublicArticles (class)">PublicArticles</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -1004,12 +1004,12 @@
       <pre class="lines">
 
 
-92
-93
-94</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_collections'>public_collections</span>
   <span class='ivar'>@public_collections</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PublicCollections.html" title="Figshare::PublicCollections (class)">PublicCollections</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -1058,12 +1058,12 @@
       <pre class="lines">
 
 
-99
-100
-101</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_projects'>public_projects</span>
   <span class='ivar'>@public_projects</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="PublicProjects.html" title="Figshare::PublicProjects (class)">PublicProjects</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -1112,12 +1112,12 @@
       <pre class="lines">
 
 
-113
-114
-115</pre>
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stats'>stats</span>
   <span class='ivar'>@stats</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Stats.html" title="Figshare::Stats (class)">Stats</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -1166,12 +1166,12 @@
       <pre class="lines">
 
 
-106
-107
-108</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/figshare_api_v2.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload'>upload</span>
   <span class='ivar'>@upload</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Upload.html" title="Figshare::Upload (class)">Upload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Base.html#initialize-instance_method" title="Figshare::Base#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>figshare_user:</span> <span class='ivar'>@figshare_user</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='ivar'>@conf_dir</span><span class='rparen'>)</span>
@@ -1186,9 +1186,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Mar 16 14:08:50 2021 by
+  Generated on Mon Sep 20 13:03:31 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.25 (ruby-2.7.1).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>
