@@ -1,16 +1,14 @@
 module Figshare
-
   # Figshare private articles API
   #
   class PrivateArticles < Base
-  
     # Get Own Articles (or private articles of others if institute is true)
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] {id, title, doi, handle, url, published_date}
     def list(impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get_paginate(api_query: 'account/articles', args: args, &block)
     end
 
@@ -29,28 +27,35 @@ module Figshare
     # @param order_direction [String] "desc" Default, "asc"
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] {id, title, doi, handle, url, published_date}
-    def search(institute: false, group_id: nil, impersonate: nil,
-                              published_since: nil, modified_since: nil, 
-                              item_type: nil, resource_doi: nil, doi: nil, handle: nil,  
-                              order: 'published_date', order_direction: 'desc',
-                              search_for:,
-                              &block
-                             )
+    def search( search_for:,
+                institute: false,
+                group_id: nil,
+                impersonate: nil,
+                published_since: nil,
+                modified_since: nil,
+                item_type: nil,
+                resource_doi: nil,
+                doi: nil,
+                handle: nil,
+                order: 'published_date',
+                order_direction: 'desc',
+                &block
+              )
       args = { 'search_for' => search_for }
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      args['institution'] = @institute_id if ! institute.nil?
-      args['group_id'] = group_id if ! group_id.nil?
-      args['item_type'] = item_type if ! item_type.nil?
-      args['resource_doi'] = resource_doi if ! resource_doi.nil?
-      args['doi'] = doi if ! doi.nil?
-      args['handle'] = handle if ! handle.nil?
-      args['published_since'] = published_since if ! published_since.nil?
-      args['modified_since'] = modified_since if ! modified_since.nil?
-      args['order'] = order if ! order.nil?
-      args['order_direction'] = order_direction if ! order_direction.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
+      args['institution'] = @institute_id unless institute.nil?
+      args['group_id'] = group_id unless group_id.nil?
+      args['item_type'] = item_type unless item_type.nil?
+      args['resource_doi'] = resource_doi unless resource_doi.nil?
+      args['doi'] = doi unless doi.nil?
+      args['handle'] = handle unless handle.nil?
+      args['published_since'] = published_since unless published_since.nil?
+      args['modified_since'] = modified_since unless modified_since.nil?
+      args['order'] = order unless order.nil?
+      args['order_direction'] = order_direction unless order_direction.nil?
       post(api_query: 'account/articles/search', args: args, &block)
     end
-  
+
     # Create a body for use with create and update methods
     #
     # @param title [String] Required
@@ -70,40 +75,59 @@ module Figshare
     # @param resource_title [String] Not applicable to regular users. In a publisher case, this is the publisher article title.
     # @param timeline [Hash] Various timeline dates ie. { "firstOnline" => "date_string", "publisherPublication" => "date_string", "publisherAcceptance" => "date_string"},
     # @param group_id [Integer] Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
-    def body(title:, description: nil, keywords: nil, references: nil, categories: nil, authors: nil, custom_fields: nil, defined_type: nil, funding: nil, funding_list: nil, license: nil, doi: nil, handle: nil, resource_doi: nil, resource_title: nil, timeline: nil, group_id: nil, contact: nil)
-      _body = {
+    def body( title:,
+              description: nil,
+              keywords: nil,
+              references: nil,
+              categories: nil,
+              authors: nil,
+              custom_fields: nil,
+              defined_type: nil,
+              funding: nil,
+              funding_list: nil,
+              license: nil,
+              doi: nil,
+              handle: nil,
+              resource_doi: nil,
+              resource_title: nil,
+              timeline: nil,
+              group_id: nil,
+              contact: nil
+            )
+      body_ = {
         'title' => title
       }
-      _body['description'] = description unless description.nil? 
-      _body['keywords'] = keywords unless keywords.nil? 
-      _body['references'] = references unless references.nil? 
-      _body['categories'] = categories unless categories.nil? 
-      _body['authors'] = authors unless authors.nil? 
-      _body['custom_fields'] = custom_fields unless custom_fields.nil? 
-      _body['defined_type'] = defined_type unless defined_type.nil? 
-      _body['funding'] = funding unless funding.nil? 
-      _body['funding_list'] = funding_list unless funding_list.nil? 
-      _body['license'] = license unless license.nil? 
-      _body['doi'] = doi unless doi.nil? 
-      _body['handle'] = handle unless handle.nil? 
-      _body['resource_doi'] = resource_doi unless resource_doi.nil? 
-      _body['resource_title'] = resource_title unless resource_title.nil? 
-      _body['timeline'] = timeline unless timeline.nil? 
-      _body['group_id'] = group_id unless group_id.nil?
-      
-      return _body
+      body_['description'] = description unless description.nil?
+      body_['keywords'] = keywords unless keywords.nil?
+      body_['references'] = references unless references.nil?
+      body_['categories'] = categories unless categories.nil?
+      body_['authors'] = authors unless authors.nil?
+      body_['custom_fields'] = custom_fields unless custom_fields.nil?
+      body_['defined_type'] = defined_type unless defined_type.nil?
+      body_['funding'] = funding unless funding.nil?
+      body_['funding_list'] = funding_list unless funding_list.nil?
+      body_['license'] = license unless license.nil?
+      body_['doi'] = doi unless doi.nil?
+      body_['handle'] = handle unless handle.nil?
+      body_['resource_doi'] = resource_doi unless resource_doi.nil?
+      body_['resource_title'] = resource_title unless resource_title.nil?
+      body_['timeline'] = timeline unless timeline.nil?
+      body_['group_id'] = group_id unless group_id.nil?
+      body_['contact'] = contact unless contact.nil?
+
+      return body_
     end
-  
+
     # Create a new Article by sending article information
-    # The user calling the API (or impersonated user) looks to be added as an author, even if they aren't. 
+    # The user calling the API (or impersonated user) looks to be added as an author, even if they aren't.
     # A duplicate "Author" entry occurs when adding them explicitly
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] { location }
     def create(body:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      post(api_query: "account/articles", args: args, data: body, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      post(api_query: 'account/articles', args: args, data: body, &block)
     end
 
     # Delete an article (WARNING!!!!!)
@@ -112,8 +136,8 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def article_delete(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      delete(api_query: "account/articles/#{article_id}",  args: args, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      delete(api_query: "account/articles/#{article_id}", args: args, &block)
     end
 
     # Get a private article's details
@@ -122,10 +146,10 @@ module Figshare
     # @param article_id [Integer] Figshare id of the article
     def detail(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      get(api_query: "account/articles/#{article_id}",  args: args, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      get(api_query: "account/articles/#{article_id}", args: args, &block)
     end
-  
+
     # Updating an article by passing body parameters
     #
     # @param article_id [Integer] Figshare id of the article
@@ -133,20 +157,20 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def update(article_id:, body:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       put(api_query: "account/articles/#{article_id}", args: args, data: body, &block)
     end
-  
+
     # Will lift the embargo for the specified article
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def embargo_delete(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       delete(api_query: "account/articles/#{article_id}/embargo", args: args, &block)
     end
-  
+
     # Get a private article embargo details
     #
     # @param article_id [Integer] Figshare id of the article
@@ -154,12 +178,12 @@ module Figshare
     # @yield [Hash] {is_embargoed, embargo_date, embargo_reason}
     def embargo_detail(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/embargo", args: args, &block)
     end
-  
+
     # Updates an article embargo status.
-    # Does not imply that the article will be published when the embargo will expire. 
+    # Does not imply that the article will be published when the embargo will expire.
     # You must explicitly call the publish endpoint to enable this functionality.
     #
     # @param article_id [Integer] Figshare id of the article
@@ -168,51 +192,51 @@ module Figshare
     # @param embargo_type [Integer]
     # @param embargo_reason [String]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def embargo_update(article_id:, is_embargoed: true, embargo_date: , embargo_type: 'file', embargo_reason:, impersonate: nil, &block)
+    def embargo_update(article_id:, embargo_date:, embargo_reason:, is_embargoed: true, embargo_type: 'file', impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      embargo_record = {"is_embargoed" => is_embargoed,
-                        "embargo_date" => embargo_date.strftime("%Y-%m-%dT%H:%M:%S"),
-                        "embargo_type" => embargo_type,
-                        "embargo_reason" => embargo_reason
-                      }
+      args['impersonate'] = impersonate unless impersonate.nil?
+      embargo_record = { 'is_embargoed' => is_embargoed,
+                         'embargo_date' => embargo_date.strftime('%Y-%m-%dT%H:%M:%S'),
+                         'embargo_type' => embargo_type,
+                         'embargo_reason' => embargo_reason
+                       }
       put(api_query: "account/articles/#{article_id}/embargo", args: args, data: embargo_record, &block)
     end
 
     # Publish an article
     # If the whole article is under embargo, it will not be published immediately, but when the embargo expires or is lifted.
-    # When an article is published, a new public version will be generated. 
-    # Any further updates to the article will affect the private article data. 
+    # When an article is published, a new public version will be generated.
+    # Any further updates to the article will affect the private article data.
     # In order to make these changes publicly visible, an explicit publish operation is needed.
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def publish(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/publish", args: args, &block)
     end
-    
+
     # Reserve DOI for article
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def reserve_doi(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/reserve_doi", args: args, &block)
     end
-  
+
     # Reserve Handle for article
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def reserve_handle(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/reserve_handle", args: args, &block)
     end
-  
+
     # Yield articles authors
     #
     # @param article_id [Integer] Figshare id of the article
@@ -220,7 +244,7 @@ module Figshare
     # @yield [Hash] {id, full_name, is_active, url_name, orcid_id}
     def authors(article_id, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/authors", args: args, &block)
     end
 
@@ -231,10 +255,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def authors_add(article_id:, authors:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      post(api_query: "account/articles/#{article_id}/authors", args: args, data: {"authors" => authors}, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      post(api_query: "account/articles/#{article_id}/authors", args: args, data: { 'authors' => authors }, &block)
     end
-    
+
     # Replace existing authors list with a new list
     #
     # @param article_id [Integer] Figshare id of the article
@@ -242,10 +266,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def authors_replace(article_id:, authors:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      put(api_query: "account/articles/#{article_id}/authors", args: args, data: {"authors" => authors}, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      put(api_query: "account/articles/#{article_id}/authors", args: args, data: { 'authors' => authors }, &block)
     end
-    
+
     # Remove author from the article
     #
     # @param article_id [Integer] Figshare id of the article
@@ -253,10 +277,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def author_delete(article_id:, author_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       delete(api_query: "account/articles/#{article_id}/authors/#{author_id}", args: args, &block)
     end
-    
+
     # List categories for a specific article
     #
     # @param article_id [Integer] Figshare id of the article
@@ -264,11 +288,11 @@ module Figshare
     # yield [Hash] { parent_id, id, title }
     def categories(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      get(api_query: "account/articles/#{article_id}/categories",  args: args, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      get(api_query: "account/articles/#{article_id}/categories", args: args, &block)
     end
-  
-    # Associate new categories with the article. 
+
+    # Associate new categories with the article.
     # This will add new categories to the list of already associated categories
     #
     # @param article_id [Integer] Figshare id of the article
@@ -276,10 +300,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def categories_add(article_id:, categories:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/categories", args: args, data: { 'categories' => categories }, &block)
     end
-  
+
     # Associate new categories with the article. This will remove all already associated categories and add these new ones
     #
     # @param article_id [Integer] Figshare id of the article
@@ -287,10 +311,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def categories_replace(article_id:, categories:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       put(api_query: "account/articles/#{article_id}/categories", args: args, data: { 'categories' => categories }, &block)
     end
-  
+
     #  Delete category from article's categories
     #
     # @param article_id [Integer] Figshare id of the article
@@ -298,10 +322,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def categories_delete(article_id:, category_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       delete(api_query: "account/articles/#{article_id}/categories/#{category_id}", args: args, &block)
     end
-  
+
     # List private links
     #
     # @param article_id [Integer] Figshare id of the article
@@ -309,10 +333,10 @@ module Figshare
     # @yield [Hash] {id, is_active, expires_date}
     def links(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/private_links", args: args, &block)
     end
-  
+
     # Create new private link for this article
     #
     # @param article_id [Integer] Figshare id of the article
@@ -321,54 +345,54 @@ module Figshare
     # @yield [Hash] { location }
     def link_create(article_id:, private_link:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/private_links", data: private_link, args: args, &block)
     end
 
     # Disable/delete private link for this article
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param link_id [Integer] 
+    # @param link_id [Integer]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def link_delete(article_id:, link:, impersonate: nil, &block)
+    def link_delete(article_id:, link_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       delete(api_query: "account/articles/#{article_id}/private_links/#{link_id}", args: args, &block)
     end
-  
+
     # Update private link for this article
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param expires_date [Time] 
+    # @param expires_date [Time]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def link_update(article_id:, link_id:, expires_date:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
-      put(api_query: "account/articles/#{article_id}/private_links/#{link_id}", args: args, data: { "expires_date" => expires_date.iso8601 }, &block)
+      args['impersonate'] = impersonate unless impersonate.nil?
+      put(api_query: "account/articles/#{article_id}/private_links/#{link_id}", args: args, data: { 'expires_date' => expires_date.iso8601 }, &block)
     end
 
     # List private files in an article
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {status, viewer_type, preview_state, upload_url, upload_token, id, name, size, is_link_only, 
+    # @yield [Hash] {status, viewer_type, preview_state, upload_url, upload_token, id, name, size, is_link_only,
     #                 download_url, supplied_md5, computed_md5}
     def files(article_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/files", args: args, &block)
     end
-  
+
     # Single file detail
     #
     # @param article_id [Integer] Figshare id of the article
     # @param file_id [Integer] Figshare id of the file
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {status, viewer_type, preview_state, upload_url, upload_token, id, name, size, is_link_only, 
+    # @yield [Hash] {status, viewer_type, preview_state, upload_url, upload_token, id, name, size, is_link_only,
     #                 download_url, supplied_md5, computed_md5}
     def file_detail(article_id:, file_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/files/#{file_id}", args: args, &block)
     end
 
@@ -377,9 +401,9 @@ module Figshare
     # @param article_id [Integer] Figshare id of the article
     # @param file_id [Integer] Figshare id of the file
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def file_delete(article_id:, file_id: , impersonate: nil, &block)
+    def file_delete(article_id:, file_id:, impersonate: nil, &block)
       args = {}
-      args["impersonate"] = impersonate  if ! impersonate.nil?
+      args['impersonate'] = impersonate unless impersonate.nil?
       delete( api_query: "account/articles/#{article_id}/files/#{file_id}", args: args, &block )
     end
 
@@ -389,11 +413,10 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] Figshare file record of each file being deleted (if block_given?)
     def delete_all_files(article_id:, impersonate: nil)
-      article_files(article_id: article_id, impersonate: impersonate) do |f| 
+      article_files(article_id: article_id, impersonate: impersonate) do |f|
         yield f if block_given?
         article_file_delete(article_id: article_id, file_id: f['id'], impersonate: impersonate)
       end
     end
-    
   end
 end

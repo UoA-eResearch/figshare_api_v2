@@ -1,8 +1,10 @@
-module Figshare
-  VERSION = '0.9.5'
+module Figshare # :nodoc:
+  # Figshare module initialization
+  #
+  VERSION = '0.9.6'
 
-  require "wikk_webbrowser"
-  require "wikk_json"
+  require 'wikk_webbrowser'
+  require 'wikk_json'
   require 'time'
 
   require_relative 'base.rb'
@@ -18,8 +20,8 @@ module Figshare
   require_relative 'upload.rb'
   require_relative 'stats.rb'
   require_relative 'oai_pmh.rb'
-  
-  # Hack :) to do a lazy initialization of the Figshare subclasses. i.e. only if they get called.
+
+  # HACK: to do a lazy initialization of the Figshare subclasses. i.e. only if they get called.
   # Usage:
   #  @figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
   #
@@ -36,7 +38,7 @@ module Figshare
       @figshare_user = figshare_user
       @conf_dir = conf_dir
     end
-    
+
     # Create Figshare::Authors, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::Authors]
@@ -50,49 +52,49 @@ module Figshare
     def institutions
       @institutions ||= Institutions.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::Other, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::Other]
     def other
       @other ||= Other.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PrivateArticles, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PrivateArticles]
     def private_articles
       @private_articles ||= PrivateArticles.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PrivateCollections, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PrivateCollections]
     def private_collections
       @private_collections ||= PrivateCollections.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PrivateProjects, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PrivateProjects]
     def private_projects
       @private_projects ||= PrivateProjects.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PublicArticles, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PublicArticles]
     def public_articles
       @public_articles ||= PublicArticles.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PublicCollections, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PublicCollections]
     def public_collections
       @public_collections ||= PublicCollections.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::PublicProjects, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::PublicProjects]
@@ -106,20 +108,19 @@ module Figshare
     def upload
       @upload ||= Upload.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::Stats, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::Stats]
     def stats
       @stats ||= Stats.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
+
     # Create Figshare::OAI_PMH, if it doesn't exist. Initialized with @figshare_user and @conf_dir
     #
     # @return [Figshare::OAI_PMH]
     def oai_pmh
       @oai_pmh ||= OAI_PMH.new(figshare_user: @figshare_user, conf_dir: @conf_dir)
     end
-    
   end
-end # module
+end

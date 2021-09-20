@@ -1,67 +1,67 @@
 #!/usr/local/bin/ruby
 
-#Uses systems md5sum to fetch the file's md5
+# Uses systems md5sum to fetch the file's md5
 # @param filename [String] Path to the file
 # @return md5 [String] MD5 checksum as a hexstring (Mac/FreeBSD equivalent is /sbin/md5. Linux equivalent is /usr/bin/md5sum)
 def file_md5(filename:)
+  # rubocop:disable Style/RedundantArgument Yes, I really want to quote the filename
+  # `/sbin/md5 #{filename}`.split(' ')[-1].strip # Mac OS
   md5 = `/usr/bin/md5sum '#{filename}'`.split(' ')[0].strip # Linux
-  return $? == 0 ? md5 : nil
-  #`/sbin/md5 #{filename}`.split(' ')[-1].strip # Mac OS
+  # rubocop:enable Style/RedundantArgument
+  return $CHILD_STATUS == 0 ? md5 : nil
 end
 
-#Recurse through directory and its sub-directories,
+# Recurse through directory and its sub-directories,
 # @param directory [String] directory we are recursing through
 # @param strip_leadin [String] Remove this string from the front of the directory name before yielding.
 # @yield directory, filename [String, String, String]
-def walk_dir(directory:, strip_leadin: nil)
+def walk_dir(directory:, strip_leadin: nil, &block)
   begin
-    strip_leadin.gsub!(/\/$/,'') if strip_leadin != nil
+    strip_leadin.gsub!(/\/$/, '') if strip_leadin != nil
     Dir.open(directory).each do |filename|
-      if filename != '.' && filename != '..' #ignore parent, and current directories.
-        qualified_filename =  "#{directory}/#{filename}"
+      next unless filename != '.' && filename != '..' # ignore parent, and current directories.
+
+      qualified_filename = "#{directory}/#{filename}"
+      begin
+        stat_record = File.stat(qualified_filename) # It is possible for this to cause an exception if symlink points no where.
         begin
-          stat_record = File.stat(qualified_filename) #It is possible for this to cause an exception if symlink points no where.
-          begin
-            if  stat_record.symlink? == false #Otherwise ignore
-              if stat_record.directory? 
-                #recurse through sub-directories.
-                walk_dir( directory: qualified_filename, strip_leadin: strip_leadin) { |full_name, dir, fn| yield full_name, dir, fn }
-              elsif stat_record.file? 
-                #Process files
-                begin
-                  if strip_leadin != nil
-                    if strip_leadin == directory
-                      yield qualified_filename, '.', filename
-                    else
-                      yield qualified_filename, directory.gsub(/^#{strip_leadin}\//,''), filename
-                    end
-                  else
-                    yield qualified_filename, directory, filename
-                  end
-                rescue StandardError => error
-                  $stderr.puts "yield block failed with error: #{error}"
+          if stat_record.symlink? == false # Otherwise ignore
+            if stat_record.directory?
+              # recurse through sub-directories.
+              walk_dir( directory: qualified_filename, strip_leadin: strip_leadin, &block)
+            elsif stat_record.file?
+              # Process files
+              begin
+                if strip_leadin.nil?
+                  yield qualified_filename, directory, filename
+                elsif strip_leadin == directory
+                  yield qualified_filename, '.', filename
+                else
+                  yield qualified_filename, directory.gsub(/^#{strip_leadin}\//, ''), filename
                 end
+              rescue StandardError => e
+                warn "yield block failed with error: #{e}"
               end
             end
           end
-        rescue StandardError => error
-          $stderr.puts "Stat of #{qualified_filename} failed with error: #{error}"
         end
+      rescue StandardError => e
+        warn "Stat of #{qualified_filename} failed with error: #{e}"
       end
     end
-  rescue StandardError => error
-      $stderr.puts "walk_dir(#{directory}) : #{error}"
-  end 
-  #puts "Completed Dir #{directory}"
+  rescue StandardError => e
+    warn "walk_dir(#{directory}) : #{e}"
+  end
+  # puts "Completed Dir #{directory}"
 end
 
 md5s = {}
 
-walk_dir(directory: ARGV[0], strip_leadin: nil) do |full_name, dir, fn|
+walk_dir(directory: ARGV[0], strip_leadin: nil) do |full_name, _dir, _fn|
   md5 = file_md5(filename: full_name)
-  if md5s[md5] != nil
-    puts "#{md5s[md5]} == #{full_name}"
-  else
+  if md5s[md5].nil?
     md5s[md5] = full_name
+  else
+    puts "#{md5s[md5]} == #{full_name}"
   end
 end
