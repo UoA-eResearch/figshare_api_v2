@@ -1,5 +1,6 @@
 #!/usr/local/bin/ruby
 require_relative '../lib/figshare_api_v2.rb'
+Dir.chdir(__dir__) # Needed with Atom, which stays in the project dir, not the script's dir.
 
 # Globle check, across the author's articles, for files that have the same MD5 checksum.
 # First and only argument is the configuration file.

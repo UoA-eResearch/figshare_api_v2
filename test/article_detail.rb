@@ -22,7 +22,9 @@ def set_article_id
   @article_list.each { |a| puts "Article #{a['article_id']} - #{a['title']}" }
 end
 
-ARGV = [ "#{__dir__}/conf/run_2021-08-30.json" ]
+Dir.chdir(__dir__) # Needed with Atom, which stays in the project dir, not the script's dir.
+ARGV = [ 'conf/run_2021-08-30.json' ]
+
 # First and only argument is the configuration file.
 article_conf = JSON.parse(File.read(ARGV[0]))
 

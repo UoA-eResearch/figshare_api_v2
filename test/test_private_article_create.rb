@@ -1,7 +1,8 @@
 #!/usr/local/bin/ruby
 require_relative '../lib/figshare_api_v2'
+Dir.chdir(__dir__) # Needed with Atom, which stays in the project dir, not the script's dir.
 
-@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: "#{__dir__}/conf")
+@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: 'conf')
 
 body = @figshare.private_articles.body(
   title: 'test',
