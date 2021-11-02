@@ -13,12 +13,19 @@ module Figshare
     # Opens a connection to the LDAP server, setting @ldap for other methods to use.
     #
     # @param figshare_user [String] figshare user, in the figshare_keys.json
-    # @param conf_dir [String] directory for figshare_keys.json and figshare_site_params.json
-    def initialize(figshare_user:, conf_dir:)
-      figshare_token = load_json_file("#{conf_dir}/figshare_keys.json")
+    # @param conf_dir [String|nil] directory for figshare_keys.json and figshare_site_params.json
+    # @param key_file [String|nil] conf_dir/figshare_keys.json if nil
+    # @param conf_file [String|nil] conf_dir/figshare_site_params.json if nil
+    def initialize(figshare_user:, conf_dir: nil, key_file: nil, conf_file: nil)
+      raise 'Figshare_api_v2.initialize: Need to specify the conf_dir if key_file or conf_file are nil' if conf_dir.nil? && (key_file.nil? || conf_file.nil?)
+
+      conf_file ||= "#{conf_dir}/figshare_site_params.json"
+      key_file ||= "#{conf_dir}/figshare_keys.json"
+
+      figshare_token = load_json_file(key_file)
       @auth_token = figshare_token[figshare_user]
 
-      figshare_site_params = load_json_file("#{conf_dir}/figshare_site_params.json")
+      figshare_site_params = load_json_file(conf_file)
 
       @hostname = figshare_site_params['host']
       @api_url = figshare_site_params['api_url']
