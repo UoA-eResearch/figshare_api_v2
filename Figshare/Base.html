@@ -299,7 +299,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(figshare_user:, conf_dir:)  &#x21d2; Base </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(figshare_user:, conf_dir: nil, key_file: nil, conf_file: nil)  &#x21d2; Base </a>
     
 
     
@@ -331,7 +331,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(figshare_user:, conf_dir:)  &#x21d2; <tt><span class='object_link'><a href="" title="Figshare::Base (class)">Base</a></span></tt> 
+    #<strong>initialize</strong>(figshare_user:, conf_dir: nil, key_file: nil, conf_file: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Figshare::Base (class)">Base</a></span></tt> 
   
 
   
@@ -370,13 +370,51 @@
         <span class='name'>conf_dir</span>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt>String|nil</tt>)</span>
       
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
 <p>directory for figshare_keys.json and figshare_site_params.json</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_file</span>
+      
+      
+        <span class='type'>(<tt>String|nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>conf_dir/figshare_keys.json if nil</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>conf_file</span>
+      
+      
+        <span class='type'>(<tt>String|nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>conf_dir/figshare_site_params.json if nil</p>
 </div>
       
     </li>
@@ -390,8 +428,6 @@
       <pre class="lines">
 
 
-17
-18
 19
 20
 21
@@ -399,16 +435,28 @@
 23
 24
 25
-26</pre>
+26
+27
+28
+29
+30
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/base.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/base.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>figshare_user:</span><span class='comma'>,</span> <span class='label'>conf_dir:</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_figshare_token'>figshare_token</span> <span class='op'>=</span> <span class='id identifier rubyid_load_json_file'>load_json_file</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_dir'>conf_dir</span><span class='embexpr_end'>}</span><span class='tstring_content'>/figshare_keys.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>figshare_user:</span><span class='comma'>,</span> <span class='label'>conf_dir:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>key_file:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>conf_file:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Figshare_api_v2.initialize: Need to specify the conf_dir if key_file or conf_file are nil</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_conf_dir'>conf_dir</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_key_file'>key_file</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_conf_file'>conf_file</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_conf_file'>conf_file</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_dir'>conf_dir</span><span class='embexpr_end'>}</span><span class='tstring_content'>/figshare_site_params.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_key_file'>key_file</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_dir'>conf_dir</span><span class='embexpr_end'>}</span><span class='tstring_content'>/figshare_keys.json</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_figshare_token'>figshare_token</span> <span class='op'>=</span> <span class='id identifier rubyid_load_json_file'>load_json_file</span><span class='lparen'>(</span><span class='id identifier rubyid_key_file'>key_file</span><span class='rparen'>)</span>
   <span class='ivar'>@auth_token</span> <span class='op'>=</span> <span class='id identifier rubyid_figshare_token'>figshare_token</span><span class='lbracket'>[</span><span class='id identifier rubyid_figshare_user'>figshare_user</span><span class='rbracket'>]</span>
 
-  <span class='id identifier rubyid_figshare_site_params'>figshare_site_params</span> <span class='op'>=</span> <span class='id identifier rubyid_load_json_file'>load_json_file</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_dir'>conf_dir</span><span class='embexpr_end'>}</span><span class='tstring_content'>/figshare_site_params.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_figshare_site_params'>figshare_site_params</span> <span class='op'>=</span> <span class='id identifier rubyid_load_json_file'>load_json_file</span><span class='lparen'>(</span><span class='id identifier rubyid_conf_file'>conf_file</span><span class='rparen'>)</span>
 
   <span class='ivar'>@hostname</span> <span class='op'>=</span> <span class='id identifier rubyid_figshare_site_params'>figshare_site_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>host</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@api_url</span> <span class='op'>=</span> <span class='id identifier rubyid_figshare_site_params'>figshare_site_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api_url</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -688,9 +736,9 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Sep 20 13:03:31 2021 by
+  Generated on Tue Nov  2 13:14:43 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  0.9.26 (ruby-3.0.2).
 </div>
 
     </div>
