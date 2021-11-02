@@ -7,7 +7,7 @@ module Figshare
     # @param hr_xml [String] See https://docs.figshare.com/#hr_feed_hr_feed_private_endpoint
     # @yield [Hash] { message:, data: null, errcode:}
     def hr_upload(hr_xml:, &block)
-      put(api_query: 'institution/hrfeed/upload', data: hr_xml, content_type: 'multipart/form-data', &block)
+      post(api_query: 'institution/hrfeed/upload', data: hr_xml, content_type: 'multipart/form-data', &block)
     end
 
     # Get the institional account details
