@@ -4,10 +4,14 @@ module Figshare
   class Institutions < Base
     # Upload hr file
     #
-    # @param hr_xml [String] See https://docs.figshare.com/#hr_feed_hr_feed_private_endpoint
+    # @param hr_xml_filename [String] Filename. See https://docs.figshare.com/#hr_feed_hr_feed_private_endpoint
     # @yield [Hash] { message:, data: null, errcode:}
-    def hr_upload(hr_xml:, &block)
-      post(api_query: 'institution/hrfeed/upload', data: hr_xml, content_type: 'multipart/form-data', &block)
+    def hr_upload(hr_xml_filename:, &block)
+      File.open(@file_name, 'rb') do |fin|
+        hr_xml = fin.read
+        args = { 'name' => 'hrfeed', 'filename' => hr_xml_filename }
+        post(api_query: 'institution/hrfeed/upload', args: args, data: hr_xml, content_type: 'multipart/form-data', &block)
+      end
     end
 
     # Get the institional account details
