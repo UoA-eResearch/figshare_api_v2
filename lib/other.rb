@@ -2,10 +2,18 @@ module Figshare
   # Misc Figshare API calls that they have classified as Other.
   #
   class Other < Base
+    # Fetch item types
+    #
+    # @param group_id [Integer]
+    # @yield [Array] [{id: 0, name:, string_id:, icon:, public_description:, is_selectable: , url_name: } ]
+    def item_types(group_id:, &block)
+      get(api_query: 'item_types', args: { 'group_id' => group_id }, &block)
+    end
+
     # Search from funding records
     #
     # @param search_for [String] string to search for
-    # @yield [Hash] {id, title, grant_code, funder_name, is_user_defined, url}
+    # @yield [Array] [{id, title, grant_code, funder_name, is_user_defined, url}]
     def search_funding(search_for:, &block)
       post(api_query: 'account/funding/search', args: { 'search_for' => search_for }, &block)
     end
@@ -21,21 +29,21 @@ module Figshare
 
     # Get public categories
     #
-    # @yield [Hash] {parent_id, id, title}
+    # @yield [Array] [{parent_id:, id:, title:, path:, source_id:, taxonomy_id:}]
     def public_categories
       get(api_query: 'categories', &block)
     end
 
     # Get public licenses
     #
-    # @yield [Hash] {value, name, url}
+    # @yield [Array] [{value:, name:, url:}]
     def public_licenses
       get(api_query: 'licenses', &block)
     end
 
     # Get private licenses
     #
-    # @yield [Hash] {value, name, url}
+    # @yield [Array] [{value:, name:, url:}]
     def private_account_licenses
       get(api_query: 'account/licenses', &block)
     end
