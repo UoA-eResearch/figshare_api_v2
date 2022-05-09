@@ -77,10 +77,17 @@ module Figshare
         raise 'get_paginate(): Expecting args to be a Hash'
       end
 
-      offset = 0
-      page = 1
-      limit = page_size = 100
+      # Loop variables, if we are using pages
+      page = args['page'].nil? ? 1 : args['page']
+      page_size = args['page_size'].nil? ? 100 : args['page_size']
+
+      # Loop variables, if we are using offsets
+      offset = args['offset'].nil? ? 0 : args['offset']
+      limit = args['limit'].nil? ? 100 : args['limit']
+
+      # How many results so far.
       result_count = 0
+
       loop do
         content_type = response = nil
         form_args = by_offset ? { 'limit' => limit, 'offset' => offset } : { 'page_size' => page_size, 'page' => page }
@@ -148,9 +155,15 @@ module Figshare
     # @yield [String] if given a block, iterates through the result from figshare
     # @return [Integer] number of results.
     private def post_paginate(api_query:, args: {}, debug: false, by_offset: false, &block)
-      page = 1
-      offset = 0
-      limit = page_size = 100
+      # Loop variables, if we are using pages
+      page = args['page'].nil? ? 1 : args['page']
+      page_size = args['page_size'].nil? ? 100 : args['page_size']
+
+      # Loop variables, if we are using offsets
+      offset = args['offset'].nil? ? 0 : args['offset']
+      limit = args['limit'].nil? ? 100 : args['limit']
+
+      # How many results so far.
       result_count = 0
 
       args = {} if args.nil?
