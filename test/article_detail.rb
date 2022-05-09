@@ -1,5 +1,6 @@
 #!/usr/local/bin/ruby
 require_relative '../lib/figshare_api_v2.rb'
+# Dump this uploads article titles and doi.
 
 # Find any existing articles, and set the article IDs
 # This is useful, if we run this script a second time, to ensure all files have been copied.
