@@ -5,10 +5,18 @@ module Figshare
     # Get Own Articles (or private articles of others if institute is true)
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, title, doi, handle, url, published_date}
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
+    # @yield [Array] [{id, title, doi, handle, url, published_date, ...}] See docs.figshare.com
     def list(impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
       get_paginate(api_query: 'account/articles', args: args, &block)
     end
 
@@ -19,14 +27,19 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @param published_since [Time] Return results if published after this time
     # @param modified_since [Time] Return results if modified after this time
+    # @param resource_id [String] Looks like a quoted Integer
     # @param resource_doi [String] Matches this resource doi
     # @param item_type [String] Matches this item_type. See Figshare API docs for list (https://docs.figshare.com/#articles_list)
     # @param doi [String] Matches this doi
     # @param handle [String] Matches this handle
     # @param order [String] "published_date" Default, "modified_date", "views", "cites", "shares"
     # @param order_direction [String] "desc" Default, "asc"
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, title, doi, handle, url, published_date}
+    # @yield [Array] [{id, title, doi, handle, url, published_date, ...}] See docs.figshare.com
     def search( search_for:,
                 institute: false,
                 group_id: nil,
@@ -34,6 +47,7 @@ module Figshare
                 published_since: nil,
                 modified_since: nil,
                 item_type: nil,
+                resource_id: nil,
                 resource_doi: nil,
                 doi: nil,
                 handle: nil,
@@ -43,9 +57,10 @@ module Figshare
               )
       args = { 'search_for' => search_for }
       args['impersonate'] = impersonate unless impersonate.nil?
-      args['institution'] = @institute_id unless institute.nil?
-      args['group_id'] = group_id unless group_id.nil?
+      args['institution'] = @institute_id unless institute.nil? # Inconsistent use. Other calls use institute_id
+      args['group'] = group_id unless group_id.nil? # Not sure if this changed from group_id to group
       args['item_type'] = item_type unless item_type.nil?
+      args['resource_id'] = resource_id unless resource_id.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?
       args['doi'] = doi unless doi.nil?
       args['handle'] = handle unless handle.nil?
@@ -53,18 +68,25 @@ module Figshare
       args['modified_since'] = modified_since unless modified_since.nil?
       args['order'] = order unless order.nil?
       args['order_direction'] = order_direction unless order_direction.nil?
-      post(api_query: 'account/articles/search', args: args, &block)
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
+      post_paginate(api_query: 'account/articles/search', args: args, &block)
     end
 
     # Create a body for use with create and update methods
     #
     # @param title [String] Required
     # @param description [String] The article description. In a publisher case, usually this is the remote article description
+    # @param tags [Array] List of tags (strings) to be associated with the article. Tags can be used instead
     # @param keywords [Array] List of tags (strings) to be associated with the article. Tags can be used instead
     # @param references [Array] List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
     # @param categories [Array] List of category ids to be associated with the article(e.g [1, 23, 33, 66])
+    # @param categories_by_source_id [Array] List of category ids to be associated with the article(e.g ["300204", "400207"])
     # @param authors [Array] List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint. e.g. { "name" => "Joe X"} and or { "id" => 123 }
     # @param custom_fields [Hash] List of key, values pairs to be associated with the article. eg. { "key" => "value"}
+    # @param custom_fields_list [Array] List of key, values pairs to be associated with the article. eg. [{ "key" => "value"}]
     # @param defined_type [String] one of "figshare","media","dataset","poster","journal contribution", "presentation", "thesis", "software", "online resource", "preprint", "book", "conference contribution", "chapter", "peer review", "educational resource", "report", "standard", "composition", "funding", "physical object", "data management plan", "workflow", "monograph", "performance", "event", "service", "model", "registration"
     # @param funding [String] Grant number or funding authority
     # @param funding_list [Array] Funding creation / update items. eg {"id" => 0, "title" => "string"}
@@ -77,11 +99,14 @@ module Figshare
     # @param group_id [Integer] Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
     def body( title:,
               description: nil,
+              tags: nil,
               keywords: nil,
               references: nil,
               categories: nil,
+              categories_by_source_id: nil,
               authors: nil,
               custom_fields: nil,
+              custom_fields_list: nil,
               defined_type: nil,
               funding: nil,
               funding_list: nil,
@@ -98,11 +123,14 @@ module Figshare
         'title' => title
       }
       body_['description'] = description unless description.nil?
+      body_['tags'] = tags unless tags.nil?
       body_['keywords'] = keywords unless keywords.nil?
       body_['references'] = references unless references.nil?
       body_['categories'] = categories unless categories.nil?
+      body_['categories_by_source_id'] = categories_by_source_id unless categories_by_source_id.nil?
       body_['authors'] = authors unless authors.nil?
       body_['custom_fields'] = custom_fields unless custom_fields.nil?
+      body_['custom_fields_list'] = custom_fields_list unless custom_fields_list.nil?
       body_['defined_type'] = defined_type unless defined_type.nil?
       body_['funding'] = funding unless funding.nil?
       body_['funding_list'] = funding_list unless funding_list.nil?
@@ -123,7 +151,7 @@ module Figshare
     # A duplicate "Author" entry occurs when adding them explicitly
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] { location }
+    # @yield [Hash] { entity_id:, location:, warnings: [ "string"] }
     def create(body:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -144,6 +172,7 @@ module Figshare
     #
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @param article_id [Integer] Figshare id of the article
+    # @yield [Hash] See docs.figshare.com
     def detail(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -175,7 +204,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {is_embargoed, embargo_date, embargo_reason}
+    # @yield [Hash] {is_embargoed, embargo_date, embargo_title, embargo_reason, embargo_options [{...}] }
     def embargo_detail(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -188,19 +217,59 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param is_embargoed [Boolean]
-    # @param embargo_data [Time] Still needs to be published, after this date
+    # @param embargo_date [Time] Still needs to be published, after this date
     # @param embargo_type [Integer]
+    # @param embargo_title [String]
     # @param embargo_reason [String]
+    # @param embargo_options [Array]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def embargo_update(article_id:, embargo_date:, embargo_reason:, is_embargoed: true, embargo_type: 'file', impersonate: nil, &block)
+    def embargo_update( article_id:,
+                        embargo_date:, embargo_title:, embargo_reason:,
+                        is_embargoed: true,
+                        embargo_type: 'file',
+                        embargo_options: [],
+                        impersonate: nil,
+                        &block
+    )
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       embargo_record = { 'is_embargoed' => is_embargoed,
                          'embargo_date' => embargo_date.strftime('%Y-%m-%dT%H:%M:%S'),
                          'embargo_type' => embargo_type,
-                         'embargo_reason' => embargo_reason
+                         'embargo_title' => embargo_title,
+                         'embargo_reason' => embargo_reason,
+                         'embargo_options' => embargo_options
                        }
       put(api_query: "account/articles/#{article_id}/embargo", args: args, data: embargo_record, &block)
+    end
+
+    # Article Resource
+    #
+    # @param article_id [Integer] Figshare id of the article
+    # @param resource [Hash]
+    # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] {location:, "string"}
+    def article_resource( article_id:,
+                          id:,
+                          title:,
+                          doi:,
+                          link:,
+                          status:,
+                          version:,
+                          impersonate: nil,
+                          &block
+                        )
+      args = {}
+      args['impersonate'] = impersonate unless impersonate.nil?
+      resource_record = {
+        'id' => id,
+        'title' => title,
+        'doi' => doi,
+        'link' => link,
+        'status' => status,
+        'version' => version
+      }
+      post(api_query: "account/articles/#{article_id}/resource", args: args, data: resource_record, &block)
     end
 
     # Publish an article
@@ -211,6 +280,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] {location:, "string"}
     def publish(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -221,6 +291,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] {doi:, "string"}
     def reserve_doi(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -231,18 +302,46 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
+    # @yield [Hash] {handle:, "string"}
     def reserve_handle(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/articles/#{article_id}/reserve_handle", args: args, &block)
     end
 
+    # Update Article Version
+    #
+    # @param article_id [Integer]
+    # @param version_id [Interger]
+    # @param body [Hash] Update fields, rather than overwrite article metadata. see docs.figshare.com
+    def article_version(article_id:, version_id:, body: nil, impersonate: nil, &block)
+      args = {}
+      args['impersonate'] = impersonate unless impersonate.nil?
+      if body.nil?
+        put(api_query: "account/articles/#{article_id}/versions/#{version_id}/", args: args, &block)
+      else
+        raise 'private article version body update needs patch, which I forgot to implement'
+      end
+    end
+
+    # Update Article Thumbnail of a specific version of the article
+    #
+    # @param article_id [Integer]
+    # @param version_id [Interger]
+    # @param file_id [integer] File id of one of the articles files, to use as a thumbnail. see docs.figshare.com
+    def article_version_update_thumbnail(article_id:, version_id:, file_id:, impersonate: nil, &block)
+      args = {}
+      args['impersonate'] = impersonate unless impersonate.nil?
+      args['file_id'] = file_id
+      put(api_query: "account/articles/#{article_id}/versions/#{version_id}/update_thumb", args: args, &block)
+    end
+
     # Yield articles authors
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, full_name, is_active, url_name, orcid_id}
-    def authors(article_id, impersonate: nil, &block)
+    # @yield [Hash] [{id, full_name, is_active, url_name, orcid_id}]
+    def authors(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/articles/#{article_id}/authors", args: args, &block)
@@ -251,7 +350,7 @@ module Figshare
     # Associate new authors with the article. This will add new authors to the list of already associated authors
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param authors [Array] Can be a mix of { id } and/or { name }
+    # @param authors [Array] Can be a mix of [{ id: 1234 } and/or { name: "x y" }]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def authors_add(article_id:, authors:, impersonate: nil, &block)
       args = {}
@@ -262,7 +361,7 @@ module Figshare
     # Replace existing authors list with a new list
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param authors [Array] Can be a mix of { id } and/or { name }
+    # @param authors [Array] Can be a mix of [{ id: 1234 } and/or { name: "x y" }]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     def authors_replace(article_id:, authors:, impersonate: nil, &block)
       args = {}
@@ -285,7 +384,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # yield [Hash] { parent_id, id, title }
+    # yield [Hash] { parent_id, id, title, path, source_id, taxonomy_id }
     def categories(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -330,7 +429,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, is_active, expires_date}
+    # @yield [Hash] {id, is_active, expires_date, html_location}
     def links(article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -340,13 +439,17 @@ module Figshare
     # Create new private link for this article
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param private_link [Hash] { expires_date }
+    # @param expires_date [Hash]
+    # @param read_only [Boolean]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] { location }
-    def link_create(article_id:, private_link:, impersonate: nil, &block)
+    # @yield [Hash] { location:, html_location:, token: }
+    def link_create(article_id:, expires_date: nil, read_only: true, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      post(api_query: "account/articles/#{article_id}/private_links", data: private_link, args: args, &block)
+      link_properties = {}
+      link_properties['expires_date'] = expires_date.iso8601 unless expires_date.nil?
+      link_properties['read_only'] = read_only unless read_only.nil?
+      post(api_query: "account/articles/#{article_id}/private_links", data: link_properties, args: args, &block)
     end
 
     # Disable/delete private link for this article
@@ -364,11 +467,15 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @param expires_date [Time]
+    # @param read_only [Boolean]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def link_update(article_id:, link_id:, expires_date:, impersonate: nil, &block)
+    def link_update(article_id:, link_id:, expires_date: nil, read_only: nil, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      put(api_query: "account/articles/#{article_id}/private_links/#{link_id}", args: args, data: { 'expires_date' => expires_date.iso8601 }, &block)
+      link_properties = {}
+      link_properties['expires_date'] = expires_date.iso8601 unless expires_date.nil?
+      link_properties['read_only'] = read_only unless read_only.nil?
+      put(api_query: "account/articles/#{article_id}/private_links/#{link_id}", args: args, data: link_properties, &block)
     end
 
     # List private files in an article
