@@ -13,6 +13,10 @@ module Figshare
     # @param handle [String] Matches this handle
     # @param order [String] "published_date" Default, "modified_date", "views", "cites", "shares"
     # @param order_direction [String] "desc" Default, "asc"
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
     # @yield [Hash] {id, title, doi, handle, url, published_date}
     def list( institution: false,
               group_id: nil,
@@ -23,6 +27,10 @@ module Figshare
               handle: nil,
               order: 'published_date',
               order_direction: 'desc',
+              page: nil,
+              page_size: nil,
+              offset: nil,
+              limit: nil,
               &block
             )
       args = {}
@@ -35,6 +43,10 @@ module Figshare
       args['modified_since'] = modified_since unless modified_since.nil?
       args['order'] = order unless order.nil?
       args['order_direction'] = order_direction unless order_direction.nil?
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
       get_paginate(api_query: 'collections', args: args, &block)
     end
 
@@ -97,6 +109,10 @@ module Figshare
     #
     # @param collection_id [Integer] Figshare id of the collection
     # @param version_id [Integer] Figshare id of the collection's version
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
     # @yield [Hash] See figshare api docs
     def version_detail(collection_id:, version_id:, &block)
       get(api_query: "collections/#{collection_id}/versions/#{version_id}", &block)
@@ -106,8 +122,19 @@ module Figshare
     #
     # @param collection_id [Integer] Figshare id of the collection
     # @yield [Hash] {id, title, doi, handle, url, published_date}
-    def articles(collection_id:, &block)
-      get_paginate(api_query: "collections/#{collection_id}/articles", &block)
+    def articles( collection_id:,
+                  page: nil,
+                  page_size: nil,
+                  offset: nil,
+                  limit: nil,
+                  &block
+                )
+      args = {}
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
+      get_paginate(api_query: "collections/#{collection_id}/articles", args: args, &block)
     end
   end
 end
