@@ -15,3 +15,4 @@ test/conf/*
 test/conf/.DS_Store
 test/test_data/
 test/penguin/
+test/figshare_id_by_upi.rb
