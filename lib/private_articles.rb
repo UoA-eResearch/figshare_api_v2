@@ -439,7 +439,7 @@ module Figshare
     # Create new private link for this article
     #
     # @param article_id [Integer] Figshare id of the article
-    # @param expires_date [Hash]
+    # @param expires_date [Time]
     # @param read_only [Boolean]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] { location:, html_location:, token: }
