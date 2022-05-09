@@ -14,7 +14,11 @@ module Figshare
     # @param handle [String] Matches this handle
     # @param order [String] "published_date" Default, "modified_date", "views", "cites", "shares"
     # @param order_direction [String] "desc" Default, "asc"
-    # @yield [Hash] {id, title, doi, handle, url, published_date}
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
+    # @yield [Array] [{id, title, doi, handle, url, published_date,...}] see docs.figshare.com
     def list( institute: false,
               group_id: nil,
               published_since: nil,
@@ -25,11 +29,15 @@ module Figshare
               handle: nil,
               order: 'published_date',
               order_direction: 'desc',
+              page: nil,
+              page_size: nil,
+              offset: nil,
+              limit: nil,
               &block
             )
       args = {}
       args['institution'] = @institute_id unless institute.nil?
-      args['group_id'] = group_id unless group_id.nil?
+      args['group_id'] = group_id unless group_id.nil?  # Not sure if this should be 'group' or 'group_id'. API has conflicting info
       args['item_type'] = item_type unless item_type.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?
       args['doi'] = doi unless doi.nil?
@@ -38,6 +46,10 @@ module Figshare
       args['modified_since'] = modified_since unless modified_since.nil?
       args['order'] = order unless order.nil?
       args['order_direction'] = order_direction unless order_direction.nil?
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
       get_paginate(api_query: 'articles', args: args, &block)
     end
 
@@ -127,7 +139,7 @@ module Figshare
     # @param article_id [Integer] Figshare id of the article
     # @param file_id [Integer] Figshare id of the file
     # @yield [Hash] See figshare api docs
-    def file_detail(article_id:, file_id:)
+    def file_detail(article_id:, file_id:, &block)
       get(api_query: "articles/#{article_id}/files/#{file_id}", &block)
     end
   end
