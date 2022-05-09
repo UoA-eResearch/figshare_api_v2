@@ -84,7 +84,7 @@ module Figshare
       args['page_size'] = page_size unless page_size.nil?
       args['offset'] = offset unless offset.nil?
       args['limit'] = limit unless limit.nil?
-      post(api_query: 'account/collections/search', args: args, &block)
+      post_paginate(api_query: 'account/collections/search', args: args, &block)
     end
 
     # Create a new private Collection by sending collection information
