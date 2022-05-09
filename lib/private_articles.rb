@@ -10,7 +10,13 @@ module Figshare
     # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
     # @param limit [Numeric]
     # @yield [Array] [{id, title, doi, handle, url, published_date, ...}] See docs.figshare.com
-    def list(impersonate: nil, &block)
+    def list( impersonate: nil,
+              page: nil,
+              page_size: nil,
+              offset: nil,
+              limit: nil,
+              &block
+            )
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       args['page'] = page unless page.nil?
@@ -53,6 +59,10 @@ module Figshare
                 handle: nil,
                 order: 'published_date',
                 order_direction: 'desc',
+                page: nil,
+                page_size: nil,
+                offset: nil,
+                limit: nil,
                 &block
               )
       args = { 'search_for' => search_for }
