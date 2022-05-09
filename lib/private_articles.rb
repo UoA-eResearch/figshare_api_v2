@@ -320,7 +320,7 @@ module Figshare
       if body.nil?
         put(api_query: "account/articles/#{article_id}/versions/#{version_id}/", args: args, &block)
       else
-        raise 'private article version body update needs patch, which I forgot to implement'
+        patch(api_query: "account/articles/#{article_id}/versions/#{version_id}/", args: args, data: body, &block)
       end
     end
 

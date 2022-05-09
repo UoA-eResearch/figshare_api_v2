@@ -227,6 +227,41 @@ module Figshare
       return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
     end
 
+    # Patch iterates through the API response, yielding each value to the passed block
+    # When Figshare API usually has no paging option.
+    # If there is no block, then the results are printed (useful for debugging)
+    #
+    # @param api_query [String] base figshare api call, to which we add parameters defined in args
+    # @param args [Hash] Key, value pairs which get converted to ?key=arg&key=arg...
+    # @param debug [Boolean] print result to stdout
+    # @param content_type [String] Assuming Json, but might need binary ('application/octet-stream')
+    # @yield [String] if given a block, iterates through the result from figshare
+    # @return [Integer] number of results
+    private def patch(api_query:, args: {}, data: nil, debug: false, content_type: 'application/json; charset=UTF-8', &block)
+      body = nil
+      body = if data.is_a?(Hash)
+               # Convert hash to json, and merge in additional args
+               data.merge(args).to_j
+             elsif data.nil? && ! args.empty?
+               # No data, but args, so just use the args
+               args.to_j
+             else
+               # Data isn't a Hash, so just pass it through (might be nil)
+               data
+             end
+
+      response = nil
+      WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
+        response = ws.patch_req( query: "#{@api_url}#{api_query}",
+                                 content_type: content_type,
+                                 authorization: "token #{@auth_token}",
+                                 data: body
+                               )
+        content_type = ws.header_value(key: 'Content-Type')
+      end
+      return iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
+    end
+
     # delete sends an HTML DELETE request.
     # We don't expect to get a response to this call.
     #
