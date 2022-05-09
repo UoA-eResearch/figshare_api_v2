@@ -6,13 +6,29 @@ module Figshare
     #
     # @param order [String] "published_date" Default, "modified_date", "views", "cites", "shares"
     # @param order_direction [String] "desc" Default, "asc"
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, title, doi, handle, url, published_date}
-    def list(order: 'published_date', order_direction: 'desc', impersonate: nil, &block)
+    # @yield [Hash] {id, title, doi, handle, url, timeline: {...}, published_date} see docs.figshare.com
+    def list( order: 'published_date',
+              order_direction: 'desc',
+              page: nil,
+              page_size: nil,
+              offset: nil,
+              limit: nil,
+              impersonate: nil,
+              &block
+            )
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       args['order'] = order unless order.nil?
       args['order_direction'] = order_direction unless order_direction.nil?
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
       get_paginate(api_query: 'account/collections', args: args, &block)
     end
 
@@ -22,11 +38,16 @@ module Figshare
     # @param group_id [Integer] Only return this group's collections
     # @param published_since [Time] Return results if published after this time
     # @param modified_since [Time] Return results if modified after this time
+    # @param resource_id [String] Matches this resource id
     # @param resource_doi [String] Matches this resource doi
     # @param doi [String] Matches this doi
     # @param handle [String] Matches this handle
     # @param order [String] "published_date" Default, "modified_date", "views", "cites", "shares"
     # @param order_direction [String] "desc" Default, "asc"
+    # @param page [Numeric] Pages start at 1. Page and Page size go together
+    # @param page_size [Numeric]
+    # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
+    # @param limit [Numeric]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] {id, title, doi, handle, url, published_date}
     def search( search_for:,
@@ -35,17 +56,23 @@ module Figshare
                 impersonate: nil,
                 published_since: nil,
                 modified_since: nil,
+                resource_id: nil,
                 resource_doi: nil,
                 doi: nil,
                 handle: nil,
                 order: 'published_date',
                 order_direction: 'desc',
+                page: nil,
+                page_size: nil,
+                offset: nil,
+                limit: nil,
                 &block
               )
       args = { 'search_for' => search_for }
       args['impersonate'] = impersonate unless impersonate.nil?
       args['institution'] = @institute_id unless institute.nil?
-      args['group_id'] = group_id unless group_id.nil?
+      args['group'] = group_id unless group_id.nil?
+      args['resource_id'] = resource_id unless resource_id.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?
       args['doi'] = doi unless doi.nil?
       args['handle'] = handle unless handle.nil?
@@ -53,6 +80,10 @@ module Figshare
       args['modified_since'] = modified_since unless modified_since.nil?
       args['order'] = order unless order.nil?
       args['order_direction'] = order_direction unless order_direction.nil?
+      args['page'] = page unless page.nil?
+      args['page_size'] = page_size unless page_size.nil?
+      args['offset'] = offset unless offset.nil?
+      args['limit'] = limit unless limit.nil?
       post(api_query: 'account/collections/search', args: args, &block)
     end
 
@@ -73,7 +104,7 @@ module Figshare
     def collection_delete(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      delete( api_query: "account/collections/#{collection_id}/files/#{file_id}", args: args, &block )
+      delete( api_query: "account/collections/#{collection_id}", args: args, &block )
     end
 
     # Return details of specific collection (default version)
@@ -120,6 +151,29 @@ module Figshare
       post(api_query: "account/collections/#{collection_id}/reserve_handle", args: args, &block)
     end
 
+    # Collection Resource
+    #
+    # @param collection_id [Integer]
+    # @param id [Integer]
+    # @param title [String]
+    # @param doi [String]
+    # @param link [String]
+    # @param status [String] 'frozen', ...
+    # @param version [Integer]
+    # @yield [Hash] { location: "string" }
+    def collection_resource(collection_id:, title:, id: nil, doi: nil, link: nil, status: nil, version: nil, impersonate: nil, &block)
+      args = {}
+      args['impersonate'] = impersonate unless impersonate.nil?
+      resource = {}
+      resource['title'] = title
+      resource['id'] = id unless id.nil?
+      resource['doi'] = doi unless doi.nil?
+      resource['link'] = link unless link.nil?
+      resource['status'] = status unless status.nil?
+      resource['version'] = version unless version.nil?
+      post(api_query: "account/collections/#{collection_id}/resource", args: args, data: resource, &block)
+    end
+
     # When a collection is published, a new public version will be generated.
     # Any further updates to the collection will affect the private collection data.
     # In order to make these changes publicly visible, an explicit publish operation is needed.
@@ -138,7 +192,7 @@ module Figshare
     # @param collection_id [Integer] Figshare id of the collection
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] {id, full_name, is_active, url_name, orcid_id}
-    def authors(_article_id, impersonate: nil, &block)
+    def authors(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       get(api_query: "account/collections/#{collection_id}/authors", args: args, &block)
@@ -150,7 +204,7 @@ module Figshare
     # @param authors [Array] Can be a mix of { id } and/or { name }
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] { location }
-    def authors_add(_article_id, authors:, impersonate: nil)
+    def authors_add(collection_id:, authors:, impersonate: nil)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       post(api_query: "account/collections/#{collection_id}/authors", args: args, data: { 'authors' => authors }, &block)
@@ -161,7 +215,7 @@ module Figshare
     # @param collection_id [Integer] Figshare id of the collection
     # @param authors [Array] Can be a mix of { id } and/or { name }
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def authors_replace(_article_id, authors:, impersonate: nil)
+    def authors_replace(collection_id:, authors:, impersonate: nil)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
       put(api_query: "account/collections/#{collection_id}/authors", args: args, data: { 'authors' => authors }, &block)
@@ -182,7 +236,7 @@ module Figshare
     #
     # @param collection_id [Integer] Figshare id of the collection
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {parent_id, id, title}
+    # @yield [Hash] {parent_id, id, title, path, source_id, taxonomy_id}
     def categories(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -265,7 +319,7 @@ module Figshare
     def articles_replace(collection_id:, articles:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      put( api_query: "account/collections/#{collection_id}/articles/#{article_id}", args: args, data: { articles: articles }, &block)
+      put( api_query: "account/collections/#{collection_id}/articles", args: args, data: { articles: articles }, &block)
     end
 
     # Get a private article's details (Not a figshare API call. Duplicates PrivateArticles:article_detail)
@@ -283,7 +337,7 @@ module Figshare
     #
     # @param collection_id [Integer] Figshare id of the collection
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] {id, is_active, expires_date}
+    # @yield [Hash] {id:, is_active:, expires_date:, html_location: }
     def links(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
@@ -293,13 +347,17 @@ module Figshare
     # Create new private link for this collection
     #
     # @param collection_id [Integer] Figshare id of the collection
-    # @param private_link [Hash] { expires_date, read_only }
+    # @param expires_date [Time]
+    # @param read_only [Boolean]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] { location }
-    def link_create(collection_id:, private_link:, impersonate: nil, &block)
+    # @yield [Hash] { location:, html_location:, token: }
+    def link_create(collection_id:, expires_date: nil, read_only: true, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      post(api_query: "account/collections/#{collection_id}/private_links", args: args, data: private_link, &block)
+      link_properties = {}
+      link_properties['expires_date'] = expires_date.iso8601 unless expires_date.nil?
+      link_properties['read_only'] = read_only unless read_only.nil?
+      post(api_query: "account/collections/#{collection_id}/private_links", args: args, data: link_properties, &block)
     end
 
     # Disable/delete private link for this collection
@@ -316,12 +374,16 @@ module Figshare
     # Update private link for this collection
     #
     # @param collection_id [Integer] Figshare id of the collection
-    # @param private_link [Hash] { expires_date, read_only }
+    # @param expires_date [Time]
+    # @param read_only [Boolean]
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    def link_update(collection_id:, link_id:, private_link:, impersonate: nil, &block)
+    def link_update(collection_id:, link_id:, expires_date: nil, read_only: true, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      put(api_query: "account/collections/#{collection_id}/private_links/#{link_id}", args: args, data: private_link, &block)
+      link_properties = {}
+      link_properties['expires_date'] = expires_date.iso8601 unless expires_date.nil?
+      link_properties['read_only'] = read_only unless read_only.nil?
+      put(api_query: "account/collections/#{collection_id}/private_links/#{link_id}", args: args, data: link_properties, &block)
     end
   end
 end
