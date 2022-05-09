@@ -7,7 +7,9 @@
 
 ## DESCRIPTION:
 
-Figshare version 2 API. 
+Figshare version 2 API.
+
+Actually the second version of the version 2 APIs. Lots of changes have been made by Figshare, mostly expanding what is returned from the API calls, but they also added some fields. Looks mostly backwards compatible.
 
 ## FEATURES/PROBLEMS:
 
@@ -71,4 +73,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
