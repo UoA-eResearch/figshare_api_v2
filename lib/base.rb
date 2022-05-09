@@ -85,6 +85,8 @@ module Figshare
       offset = args['offset'].nil? ? 0 : args['offset']
       limit = args['limit'].nil? ? 100 : args['limit']
 
+      by_offset = true if args['page'].nil? && ! args['offset'].nil?
+
       # How many results so far.
       result_count = 0
 
@@ -165,6 +167,8 @@ module Figshare
 
       # How many results so far.
       result_count = 0
+
+      by_offset = true if args['page'].nil? && ! args['offset'].nil?
 
       args = {} if args.nil?
       if ! args.is_a?(Hash)
