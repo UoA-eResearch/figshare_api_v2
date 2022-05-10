@@ -103,8 +103,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Figshare Institutions API</p>
+    <p>Figshare Institutions API</p>
 
 
   </div>
@@ -149,8 +148,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the institional account details.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the institional account details.</p>
 </div></span>
   
 </li>
@@ -173,8 +171,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create new Institution Account.</p>
+    <span class="summary_desc"><div class='inline'><p>Create new Institution Account.</p>
 </div></span>
   
 </li>
@@ -183,7 +180,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#account_search-instance_method" title="#account_search (instance method)">#<strong>account_search</strong>(search_for: nil, is_active: nil, institution_user_id: nil, email: nil) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#account_embargo_options-instance_method" title="#account_embargo_options (instance method)">#<strong>account_embargo_options</strong> {|Array| ... } &#x21d2; Object </a>
     
 
     
@@ -197,8 +194,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
+    <span class="summary_desc"><div class='inline'><p>Get the institional account embargo options (IP Ranges).</p>
 </div></span>
   
 </li>
@@ -207,7 +203,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#account_update-instance_method" title="#account_update (instance method)">#<strong>account_update</strong>(email:, first_name:, last_name:, group_id:, institution_user_id: nil, symplectic_user_id: nil, quota: nil, is_active: true, &amp;block)  &#x21d2; Object </a>
+      <a href="#account_search-instance_method" title="#account_search (instance method)">#<strong>account_search</strong>(search_for: nil, is_active: nil, institution_user_id: nil, email: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -221,8 +217,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Update Institution Account.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
 </div></span>
   
 </li>
@@ -231,7 +226,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#accounts-instance_method" title="#accounts (instance method)">#<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#account_update-instance_method" title="#account_update (instance method)">#<strong>account_update</strong>(account_id:, email: nil, first_name: nil, last_name: nil, group_id: nil, institution_user_id: nil, symplectic_user_id: nil, quota: nil, is_active: true, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -245,8 +240,30 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
+    <span class="summary_desc"><div class='inline'><p>Update Institution Account.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accounts-instance_method" title="#accounts (instance method)">#<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Array| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
 </div></span>
   
 </li>
@@ -269,8 +286,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Requests an institute file.</p>
+    <span class="summary_desc"><div class='inline'><p>Requests an institute file.</p>
 </div></span>
   
 </li>
@@ -279,7 +295,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#categories-instance_method" title="#categories (instance method)">#<strong>categories</strong> {|Hash| ... } &#x21d2; Object </a>
+      <a href="#categories-instance_method" title="#categories (instance method)">#<strong>categories</strong> {|Array| ... } &#x21d2; Object </a>
     
 
     
@@ -293,8 +309,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get institution categories (including parent Categories).</p>
+    <span class="summary_desc"><div class='inline'><p>Get institution categories (including parent Categories).</p>
 </div></span>
   
 </li>
@@ -303,7 +318,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#curation_review-instance_method" title="#curation_review (instance method)">#<strong>curation_review</strong>(group_id: nil, article_id: nil, status: nil) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#curation_review-instance_method" title="#curation_review (instance method)">#<strong>curation_review</strong>(group_id: nil, article_id: nil, status: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -317,8 +332,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get a list of curation reviews for this institution.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a list of curation reviews for this institution.</p>
 </div></span>
   
 </li>
@@ -327,7 +341,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#curation_review_comments-instance_method" title="#curation_review_comments (instance method)">#<strong>curation_review_comments</strong>(curation_id:) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#curation_review_comments-instance_method" title="#curation_review_comments (instance method)">#<strong>curation_review_comments</strong>(curation_id:, offset: nil, limit: nil) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -341,8 +355,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get a certain curation review&#39;s comments.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a certain curation review’s comments.</p>
 </div></span>
   
 </li>
@@ -365,8 +378,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Add a new comment to the review.</p>
+    <span class="summary_desc"><div class='inline'><p>Add a new comment to the review.</p>
 </div></span>
   
 </li>
@@ -389,8 +401,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get a curation review record.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a curation review record.</p>
 </div></span>
   
 </li>
@@ -399,7 +410,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#group_role_delete-instance_method" title="#group_role_delete (instance method)">#<strong>group_role_delete</strong>(role_id, group_id, account_id:, &amp;block)  &#x21d2; Object </a>
+      <a href="#group_custom_fields-instance_method" title="#group_custom_fields (instance method)">#<strong>group_custom_fields</strong>(group_id: nil) {|Array| ... } &#x21d2; Object </a>
     
 
     
@@ -413,8 +424,53 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Delete Institution Account Group Role.</p>
+    <span class="summary_desc"><div class='inline'><p>Get an institute group’s custom fields.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group_embargo_options-instance_method" title="#group_embargo_options (instance method)">#<strong>group_embargo_options</strong>(group_id:) {|Array| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the institional account group’s embargo options (IP Ranges).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group_role_delete-instance_method" title="#group_role_delete (instance method)">#<strong>group_role_delete</strong>(account_id:, role_id:, group_id:, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Delete Institution Account Group Role.</p>
 </div></span>
   
 </li>
@@ -437,8 +493,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get institution Account Group Roles.</p>
+    <span class="summary_desc"><div class='inline'><p>Get institution Account Group Roles for an account.</p>
 </div></span>
   
 </li>
@@ -461,8 +516,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Add Institution Account Group Roles.</p>
+    <span class="summary_desc"><div class='inline'><p>Add Institution Account Group Roles.</p>
 </div></span>
   
 </li>
@@ -471,7 +525,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#groups-instance_method" title="#groups (instance method)">#<strong>groups</strong> {|Hash| ... } &#x21d2; Object </a>
+      <a href="#group_set_custom_fields-instance_method" title="#group_set_custom_fields (instance method)">#<strong>group_set_custom_fields</strong>(custom_field_id:, filename:) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -485,8 +539,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the groups for which the account has administrative privileges (assigned and inherited).</p>
+    <span class="summary_desc"><div class='inline'><p>Set institute group’s custom fields, from a CSV file.</p>
 </div></span>
   
 </li>
@@ -495,7 +548,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#hr_upload-instance_method" title="#hr_upload (instance method)">#<strong>hr_upload</strong>(hr_xml:) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#groups-instance_method" title="#groups (instance method)">#<strong>groups</strong> {|Array| ... } &#x21d2; Object </a>
     
 
     
@@ -509,8 +562,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Upload hr file.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the groups for which the account has administrative privileges (assigned and inherited).</p>
 </div></span>
   
 </li>
@@ -519,7 +571,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#private_articles-instance_method" title="#private_articles (instance method)">#<strong>private_articles</strong>(status: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;) {|Hash| ... } &#x21d2; Object </a>
+      <a href="#hr_upload-instance_method" title="#hr_upload (instance method)">#<strong>hr_upload</strong>(hr_xml_filename:) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -533,8 +585,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Requests a list of private institute articles.</p>
+    <span class="summary_desc"><div class='inline'><p>Upload hr file.</p>
 </div></span>
   
 </li>
@@ -543,7 +594,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#roles-instance_method" title="#roles (instance method)">#<strong>roles</strong> {|Hash| ... } &#x21d2; Object </a>
+      <a href="#private_articles-instance_method" title="#private_articles (instance method)">#<strong>private_articles</strong>(status: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;, page: nil, page_size: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; Object </a>
     
 
     
@@ -557,8 +608,30 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get the roles available for groups and the institution group.</p>
+    <span class="summary_desc"><div class='inline'><p>Requests a list of private institute articles.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#roles-instance_method" title="#roles (instance method)">#<strong>roles</strong> {|Array| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the roles available for groups and the institution group.</p>
 </div></span>
   
 </li>
@@ -581,8 +654,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Get institution user information using the account_id.</p>
+    <span class="summary_desc"><div class='inline'><p>Get institution user information using the account_id.</p>
 </div></span>
   
 </li>
@@ -625,8 +697,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the institional account details</p>
+    <p>Get the institional account details</p>
 
 
   </div>
@@ -653,12 +724,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_account'>account</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -679,8 +750,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create new Institution Account</p>
+    <p>Create new Institution Account</p>
 
 
   </div>
@@ -732,8 +802,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare group ID</p>
+        <div class='inline'><p>Figshare group ID</p>
 </div>
       
     </li>
@@ -776,8 +845,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user quota</p>
+        <div class='inline'><p>Figshare user quota</p>
 </div>
       
     </li>
@@ -804,23 +872,41 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120</pre>
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 185</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_account_create'>account_create</span><span class='lparen'>(</span><span class='label'>email:</span><span class='comma'>,</span> <span class='label'>first_name:</span><span class='comma'>,</span> <span class='label'>last_name:</span><span class='comma'>,</span> <span class='label'>group_id:</span><span class='comma'>,</span> <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>symplectic_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>quota:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>is_active:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_account_create'>account_create</span><span class='lparen'>(</span> <span class='label'>email:</span><span class='comma'>,</span>
+                    <span class='label'>first_name:</span><span class='comma'>,</span>
+                    <span class='label'>last_name:</span><span class='comma'>,</span>
+                    <span class='label'>group_id:</span><span class='comma'>,</span>
+                    <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>symplectic_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>quota:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>is_active:</span> <span class='kw'>true</span><span class='comma'>,</span>
+                    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+                  <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>email</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_email'>email</span> <span class='kw'>unless</span> <span class='id identifier rubyid_email'>email</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_first_name'>first_name</span> <span class='kw'>unless</span> <span class='id identifier rubyid_first_name'>first_name</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -830,7 +916,64 @@
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>symplectic_user_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_symplectic_user_id'>symplectic_user_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_symplectic_user_id'>symplectic_user_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>quota</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_quota'>quota</span> <span class='kw'>unless</span> <span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>is_active</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_is_active'>is_active</span> <span class='kw'>unless</span> <span class='id identifier rubyid_is_active'>is_active</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/accounts/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="account_embargo_options-instance_method">
+  
+    #<strong>account_embargo_options</strong> {|Array| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the institional account embargo options (IP Ranges)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>list of embargo ip ranges [ type: ip_range, ip_name: Figshare_IP_Range ]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_account_embargo_options'>account_embargo_options</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/embargo_options</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -840,7 +983,7 @@
       <div class="method_details ">
   <h3 class="signature " id="account_search-instance_method">
   
-    #<strong>account_search</strong>(search_for: nil, is_active: nil, institution_user_id: nil, email: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>account_search</strong>(search_for: nil, is_active: nil, institution_user_id: nil, email: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -848,8 +991,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
+    <p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
 
 
   </div>
@@ -870,8 +1012,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>user account is active</p>
+        <div class='inline'><p>user account is active</p>
 </div>
       
     </li>
@@ -888,8 +1029,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>As set in the HR upload</p>
+        <div class='inline'><p>As set in the HR upload</p>
 </div>
       
     </li>
@@ -906,9 +1046,68 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>as set in the HR upload</p>
+        <div class='inline'><p>as set in the HR upload</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Pages start at 1. Page and Page size go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>offset is 0 based.  Offset and Limit go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -925,8 +1124,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>first_name, last_name, institution_id, email, active, institution_user_id</p>
+        <div class='inline'><p>first_name, last_name, institution_id, email, active, institution_user_id, quota, used_quota, user_id, orcid_id</p>
 </div>
       
     </li>
@@ -939,25 +1137,51 @@
       <pre class="lines">
 
 
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 180</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 277</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_account_search'>account_search</span><span class='lparen'>(</span><span class='label'>search_for:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_account_search'>account_search</span><span class='lparen'>(</span> <span class='label'>search_for:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>page:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+                  <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>search_for</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_search_for'>search_for</span> <span class='kw'>unless</span> <span class='id identifier rubyid_search_for'>search_for</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>is_active</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_is_active'>is_active</span> <span class='kw'>unless</span> <span class='id identifier rubyid_is_active'>is_active</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution_user_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_institution_user_id'>institution_user_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_institution_user_id'>institution_user_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>email</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_email'>email</span> <span class='kw'>unless</span> <span class='id identifier rubyid_email'>email</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts/search</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page_size'>page_size</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_post_paginate'>post_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts/search</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -967,7 +1191,7 @@
       <div class="method_details ">
   <h3 class="signature " id="account_update-instance_method">
   
-    #<strong>account_update</strong>(email:, first_name:, last_name:, group_id:, institution_user_id: nil, symplectic_user_id: nil, quota: nil, is_active: true, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>account_update</strong>(account_id:, email: nil, first_name: nil, last_name: nil, group_id: nil, institution_user_id: nil, symplectic_user_id: nil, quota: nil, is_active: true, &amp;block)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -975,8 +1199,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Update Institution Account</p>
+    <p>Update Institution Account</p>
 
 
   </div>
@@ -987,11 +1210,28 @@
   
     <li>
       
+        <span class='name'>account_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whose account</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>email</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
       
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
       
       
     </li>
@@ -1004,6 +1244,8 @@
         <span class='type'>(<tt>String</tt>)</span>
       
       
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -1014,6 +1256,8 @@
       
         <span class='type'>(<tt>String</tt>)</span>
       
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
       
       
     </li>
@@ -1026,10 +1270,11 @@
         <span class='type'>(<tt>Integer</tt>)</span>
       
       
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
         &mdash;
-        <div class='inline'>
-<p>Figshare group ID</p>
+        <div class='inline'><p>Figshare group ID</p>
 </div>
       
     </li>
@@ -1072,8 +1317,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user quota</p>
+        <div class='inline'><p>Figshare user quota</p>
 </div>
       
     </li>
@@ -1100,23 +1344,43 @@
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143</pre>
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 218</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_account_update'>account_update</span><span class='lparen'>(</span><span class='label'>email:</span><span class='comma'>,</span> <span class='label'>first_name:</span><span class='comma'>,</span> <span class='label'>last_name:</span><span class='comma'>,</span> <span class='label'>group_id:</span><span class='comma'>,</span> <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>symplectic_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>quota:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>is_active:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_account_update'>account_update</span><span class='lparen'>(</span> <span class='label'>account_id:</span><span class='comma'>,</span>
+                    <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>first_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>last_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>symplectic_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>quota:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>is_active:</span> <span class='kw'>true</span><span class='comma'>,</span>
+                    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+                  <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>email</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_email'>email</span> <span class='kw'>unless</span> <span class='id identifier rubyid_email'>email</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_first_name'>first_name</span> <span class='kw'>unless</span> <span class='id identifier rubyid_first_name'>first_name</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1136,7 +1400,7 @@
       <div class="method_details ">
   <h3 class="signature " id="accounts-instance_method">
   
-    #<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Array| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1144,8 +1408,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
+    <p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
 
 
   </div>
@@ -1166,8 +1429,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>user account is active</p>
+        <div class='inline'><p>user account is active</p>
 </div>
       
     </li>
@@ -1184,8 +1446,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>As set in the HR upload</p>
+        <div class='inline'><p>As set in the HR upload</p>
 </div>
       
     </li>
@@ -1202,9 +1463,102 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>as set in the HR upload</p>
+        <div class='inline'><p>as set in the HR upload</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id_lte</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>ID is &lt;=</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>id_gte</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>ID is &gt;=</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Pages start at 1. Page and Page size go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>offset is 0 based.  Offset and Limit go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -1216,13 +1570,12 @@
     <li>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'>
-<p>{ id, first_name, last_name, institution_id, email, active, institution_user_id }</p>
+        <div class='inline'><p>[{ id:, first_name:, last_name:, institution_id:, email:, active:, institution_user_id:, quota:, used_quota:, user_id:, orcid_id: }]</p>
 </div>
       
     </li>
@@ -1235,22 +1588,54 @@
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97</pre>
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 151</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_accounts'>accounts</span><span class='lparen'>(</span><span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_accounts'>accounts</span><span class='lparen'>(</span> <span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>id_lte:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>id_gte:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>page:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+            <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>is_active</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_is_active'>is_active</span> <span class='kw'>unless</span> <span class='id identifier rubyid_is_active'>is_active</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution_user_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_institution_user_id'>institution_user_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_institution_user_id'>institution_user_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>email</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_email'>email</span> <span class='kw'>unless</span> <span class='id identifier rubyid_email'>email</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id_lte</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_id_lte'>id_lte</span> <span class='kw'>unless</span> <span class='id identifier rubyid_id_lte'>id_lte</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id_gte</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_id_gte'>id_gte</span> <span class='kw'>unless</span> <span class='id identifier rubyid_id_gte'>id_gte</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page_size'>page_size</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1269,8 +1654,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Requests an institute file</p>
+    <p>Requests an institute file</p>
 
 
   </div>
@@ -1291,8 +1675,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare resource_id (publisher ID?)</p>
+        <div class='inline'><p>Figshare resource_id (publisher ID?)</p>
 </div>
       
     </li>
@@ -1309,8 +1692,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare file name</p>
+        <div class='inline'><p>Figshare file name</p>
 </div>
       
     </li>
@@ -1328,8 +1710,8 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>title, doi, handle, group_id, url, url_public_html, url_public_api, url_private_htm, url_private_api, published_date, timeline {…, thumb, defined_type, defined_name }</p>
+        <div class='inline'><p>title, doi, handle, group_id, url, url_public_html, url_public_api, url_private_htm,
+url_private_api, published_date, timeline {…, thumb, defined_type, defined_name }</p>
 </div>
       
     </li>
@@ -1342,21 +1724,21 @@
       <pre class="lines">
 
 
-57
-58
-59
-60
-61
-62</pre>
+80
+81
+82
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_articles_filter_by'>articles_filter_by</span><span class='lparen'>(</span><span class='label'>resource_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filename:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resource_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_id'>resource_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_id'>resource_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>filename</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_filename'>filename</span> <span class='kw'>unless</span> <span class='id identifier rubyid_filename'>filename</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institutions/{@institute_id}/articles/filter-by</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>institutions/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@institute_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/articles/filter-by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1366,7 +1748,7 @@
       <div class="method_details ">
   <h3 class="signature " id="categories-instance_method">
   
-    #<strong>categories</strong> {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>categories</strong> {|Array| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1374,8 +1756,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get institution categories (including parent Categories)</p>
+    <p>Get institution categories (including parent Categories)</p>
 
 
   </div>
@@ -1388,13 +1769,12 @@
     <li>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'>
-<p>{ parent_id, id, title }</p>
+        <div class='inline'><p>[ { parent_id: 1, id: 11, title: “Anatomy”, path:”/450/1024/6532”, source_id: “300204”, taxonomy_id: 4 } ]</p>
 </div>
       
     </li>
@@ -1407,12 +1787,12 @@
       <pre class="lines">
 
 
-67
-68
-69</pre>
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_categories'>categories</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/categories</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1425,7 +1805,7 @@
       <div class="method_details ">
   <h3 class="signature " id="curation_review-instance_method">
   
-    #<strong>curation_review</strong>(group_id: nil, article_id: nil, status: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>curation_review</strong>(group_id: nil, article_id: nil, status: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1433,8 +1813,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get a list of curation reviews for this institution</p>
+    <p>Get a list of curation reviews for this institution</p>
 
 
   </div>
@@ -1455,8 +1834,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare group ID</p>
+        <div class='inline'><p>Figshare group ID</p>
 </div>
       
     </li>
@@ -1473,8 +1851,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare article ID</p>
+        <div class='inline'><p>Figshare article ID</p>
 </div>
       
     </li>
@@ -1491,9 +1868,38 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>pending, approved, rejected, closed</p>
+        <div class='inline'><p>One of: pending, approved, rejected, closed</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>offset is 0 based.  Offset and Limit go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -1510,8 +1916,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>{id, group_id, account_id, assigned_to, article_id, version, comment_count, status, created_date. modified_date }</p>
+        <div class='inline'><p>{id, group_id, account_id, assigned_to, article_id, version, comment_count, status, created_date. modified_date }</p>
 </div>
       
     </li>
@@ -1524,23 +1929,39 @@
       <pre class="lines">
 
 
-203
-204
-205
-206
-207
-208
-209
-210</pre>
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 315</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_curation_review'>curation_review</span><span class='lparen'>(</span><span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>article_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_curation_review'>curation_review</span><span class='lparen'>(</span>  <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>article_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>status:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+                   <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>article_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_article_id'>article_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_article_id'>article_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_status'>status</span> <span class='kw'>unless</span> <span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='comment'># Odd one, as has offset,limit not page,page_size
 </span>  <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/reviews</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>by_offset:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -1552,7 +1973,7 @@
       <div class="method_details ">
   <h3 class="signature " id="curation_review_comments-instance_method">
   
-    #<strong>curation_review_comments</strong>(curation_id:) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>curation_review_comments</strong>(curation_id:, offset: nil, limit: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1560,8 +1981,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get a certain curation review&#39;s comments.</p>
+    <p>Get a certain curation review’s comments.</p>
 
 
   </div>
@@ -1580,9 +2000,38 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare curation ID</p>
+        <div class='inline'><p>Figshare curation ID</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>offset is 0 based.  Offset and Limit go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -1599,8 +2048,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>{ id, account_id, type, text}</p>
+        <div class='inline'><p>{ id, account_id, type, text}</p>
 </div>
       
     </li>
@@ -1613,17 +2061,23 @@
       <pre class="lines">
 
 
-224
-225
-226
-227</pre>
+346
+347
+348
+349
+350
+351
+352</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 224</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 346</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_curation_review_comments'>curation_review_comments</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_curation_review_comments'>curation_review_comments</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='comment'># Odd one, as has offset,limit not page,page_size.
-</span>  <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/reviews/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>by_offset:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/review/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>by_offset:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1641,8 +2095,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Add a new comment to the review.</p>
+    <p>Add a new comment to the review.</p>
 
 
   </div>
@@ -1661,8 +2114,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare curation ID</p>
+        <div class='inline'><p>Figshare curation ID</p>
 </div>
       
     </li>
@@ -1677,8 +2129,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Comment text</p>
+        <div class='inline'><p>Comment text</p>
 </div>
       
     </li>
@@ -1692,17 +2143,15 @@
       <pre class="lines">
 
 
-233
-234
-235
-236</pre>
+358
+359
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review_comments_update'>curation_review_comments_update</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='label'>comment:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='comment'># Odd one, as has offset,limit not page,page_size.
-</span>  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/reviews/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>text</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_comment'>comment</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/review/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>text</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_comment'>comment</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1720,8 +2169,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get a curation review record</p>
+    <p>Get a curation review record</p>
 
 
   </div>
@@ -1740,8 +2188,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare curation ID</p>
+        <div class='inline'><p>Figshare curation ID</p>
 </div>
       
     </li>
@@ -1759,8 +2206,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>see Figshare API docs for response sample</p>
+        <div class='inline'><p>see Figshare API docs for response sample</p>
 </div>
       
     </li>
@@ -1773,12 +2219,12 @@
       <pre class="lines">
 
 
-216
-217
-218</pre>
+336
+337
+338</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 216</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 336</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review_detail'>curation_review_detail</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/review/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1789,9 +2235,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="group_role_delete-instance_method">
+  <h3 class="signature " id="group_custom_fields-instance_method">
   
-    #<strong>group_role_delete</strong>(role_id, group_id, account_id:, &amp;block)  &#x21d2; <tt>Object</tt> 
+    #<strong>group_custom_fields</strong>(group_id: nil) {|Array| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1799,8 +2245,161 @@
   
 </h3><div class="docstring">
   <div class="discussion">
+    <p>Get an institute group’s custom fields</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Figshare group_id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[ {id:, name: field_name, field_type: text } ]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_group_custom_fields'>group_custom_fields</span><span class='lparen'>(</span><span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/custom_fields</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
     
-<p>Delete Institution Account Group Role</p>
+      <div class="method_details ">
+  <h3 class="signature " id="group_embargo_options-instance_method">
+  
+    #<strong>group_embargo_options</strong>(group_id:) {|Array| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the institional account group’s embargo options (IP Ranges)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>group_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>list of embargo ip ranges [ type: ip_range, ip_name: Figshare_IP_Range ]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_group_embargo_options'>group_embargo_options</span><span class='lparen'>(</span><span class='label'>group_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/groups/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_group_id'>group_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/embargo_options</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="group_role_delete-instance_method">
+  
+    #<strong>group_role_delete</strong>(account_id:, role_id:, group_id:, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Delete Institution Account Group Role</p>
 
 
   </div>
@@ -1819,8 +2418,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user account id</p>
+        <div class='inline'><p>Figshare user account id</p>
 </div>
       
     </li>
@@ -1835,8 +2433,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare role id</p>
+        <div class='inline'><p>Figshare role id</p>
 </div>
       
     </li>
@@ -1851,8 +2448,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare group id</p>
+        <div class='inline'><p>Figshare group id</p>
 </div>
       
     </li>
@@ -1866,23 +2462,17 @@
       <pre class="lines">
 
 
-166
-167
-168
-169
-170
-171
-172</pre>
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 262</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_group_role_delete'>group_role_delete</span><span class='lparen'>(</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='comma'>,</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span> <span class='label'>account_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_group_role_delete'>group_role_delete</span><span class='lparen'>(</span> <span class='label'>account_id:</span><span class='comma'>,</span> <span class='label'>role_id:</span><span class='comma'>,</span> <span class='label'>group_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_account_id'>account_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_account_id'>account_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>role_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_role_id'>role_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>group_id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_group_id'>group_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/roles/{account_id}</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_group_id'>group_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_role_id'>role_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1900,8 +2490,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get institution Account Group Roles</p>
+    <p>Get institution Account Group Roles for an account</p>
 
 
   </div>
@@ -1920,8 +2509,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user account id</p>
+        <div class='inline'><p>Figshare user account id</p>
 </div>
       
     </li>
@@ -1939,8 +2527,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>{ role_id [ { category, id, name }, … ], … }</p>
+        <div class='inline'><p>{ role_id [ { category, id, name }, … ], … }</p>
 </div>
       
     </li>
@@ -1953,12 +2540,12 @@
       <pre class="lines">
 
 
-149
-150
-151</pre>
+245
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_roles'>group_roles</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1979,8 +2566,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Add Institution Account Group Roles</p>
+    <p>Add Institution Account Group Roles</p>
 
 
   </div>
@@ -1999,8 +2585,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user account id</p>
+        <div class='inline'><p>Figshare user account id</p>
 </div>
       
     </li>
@@ -2015,8 +2600,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>see figshare api docs</p>
+        <div class='inline'><p>see figshare api cryptic docs  { “2”: [ 2, 7], “3”: [7,9] }. Array of roles, per group</p>
 </div>
       
     </li>
@@ -2030,12 +2614,12 @@
       <pre class="lines">
 
 
-157
-158
-159</pre>
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_roles_add'>group_roles_add</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='label'>body:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2046,9 +2630,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="groups-instance_method">
+  <h3 class="signature " id="group_set_custom_fields-instance_method">
   
-    #<strong>groups</strong> {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>group_set_custom_fields</strong>(custom_field_id:, filename:) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2056,8 +2640,106 @@
   
 </h3><div class="docstring">
   <div class="discussion">
+    <p>Set institute group’s custom fields, from a CSV file</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>custom_field_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Figshare group_id</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Figshare group_id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>{code: 200, message: ok } ]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_group_set_custom_fields'>group_set_custom_fields</span><span class='lparen'>(</span><span class='label'>custom_field_id:</span><span class='comma'>,</span> <span class='label'>filename:</span> <span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rb</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fin'>fin</span><span class='op'>|</span>
+    <span class='id identifier rubyid_custom_fields_csv'>custom_fields_csv</span> <span class='op'>=</span> <span class='id identifier rubyid_fin'>fin</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span>
+    <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>external_file</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>filename</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_filename'>filename</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/custom_fields/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_custom_field_id'>custom_field_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/items/upload</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_custom_fields_csv'>custom_fields_csv</span><span class='comma'>,</span> <span class='label'>content_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>multipart/form-data</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
     
-<p>Get the groups for which the account has administrative privileges (assigned and inherited).</p>
+      <div class="method_details ">
+  <h3 class="signature " id="groups-instance_method">
+  
+    #<strong>groups</strong> {|Array| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the groups for which the account has administrative privileges (assigned and inherited).</p>
 
 
   </div>
@@ -2070,13 +2752,12 @@
     <li>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'>
-<p>{ id, name, resource_id, parent_id, association_criteria }</p>
+        <div class='inline'><p>[ { id: 1, name: “Materials”, resource_id: “string”, parent_id: 0, association_criteria: “IT” } ]</p>
 </div>
       
     </li>
@@ -2089,12 +2770,12 @@
       <pre class="lines">
 
 
-74
-75
-76</pre>
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_groups'>groups</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/groups</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2107,7 +2788,7 @@
       <div class="method_details ">
   <h3 class="signature " id="hr_upload-instance_method">
   
-    #<strong>hr_upload</strong>(hr_xml:) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>hr_upload</strong>(hr_xml_filename:) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2115,8 +2796,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Upload hr file</p>
+    <p>Upload hr file</p>
 
 
   </div>
@@ -2127,7 +2807,7 @@
   
     <li>
       
-        <span class='name'>hr_xml</span>
+        <span class='name'>hr_xml_filename</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -2135,8 +2815,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>See <a href="https://docs.figshare.com/#hr_feed_hr_feed_private_endpoint">docs.figshare.com/#hr_feed_hr_feed_private_endpoint</a></p>
+        <div class='inline'><p>Filename. See https://docs.figshare.com/#hr_feed_hr_feed_private_endpoint</p>
 </div>
       
     </li>
@@ -2154,8 +2833,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>{ message:, data: null, errcode:}</p>
+        <div class='inline'><p>{ message:, data: null, errcode:}</p>
 </div>
       
     </li>
@@ -2170,13 +2848,21 @@
 
 9
 10
-11</pre>
+11
+12
+13
+14
+15</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_hr_upload'>hr_upload</span><span class='lparen'>(</span><span class='label'>hr_xml:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution/hrfeed/upload</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_hr_xml'>hr_xml</span><span class='comma'>,</span> <span class='label'>content_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>multipart/form-data</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_hr_upload'>hr_upload</span><span class='lparen'>(</span><span class='label'>hr_xml_filename:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='ivar'>@file_name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rb</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fin'>fin</span><span class='op'>|</span>
+    <span class='id identifier rubyid_hr_xml'>hr_xml</span> <span class='op'>=</span> <span class='id identifier rubyid_fin'>fin</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span>
+    <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hrfeed</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>filename</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_hr_xml_filename'>hr_xml_filename</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>institution/hrfeed/upload</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>data:</span> <span class='id identifier rubyid_hr_xml'>hr_xml</span><span class='comma'>,</span> <span class='label'>content_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>multipart/form-data</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2186,7 +2872,7 @@
       <div class="method_details ">
   <h3 class="signature " id="private_articles-instance_method">
   
-    #<strong>private_articles</strong>(status: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;) {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>private_articles</strong>(status: nil, published_since: nil, modified_since: nil, item_type: nil, resource_doi: nil, order: &#39;published_date&#39;, order_direction: &#39;desc&#39;, page: nil, page_size: nil, offset: nil, limit: nil) {|Hash| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2194,8 +2880,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Requests a list of private institute articles</p>
+    <p>Requests a list of private institute articles</p>
 
 
   </div>
@@ -2216,8 +2901,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Only return items with this status</p>
+        <div class='inline'><p>Only return items with this status</p>
 </div>
       
     </li>
@@ -2234,8 +2918,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Return results if published after this time</p>
+        <div class='inline'><p>Return results if published after this time</p>
 </div>
       
     </li>
@@ -2252,8 +2935,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Return results if modified after this time</p>
+        <div class='inline'><p>Return results if modified after this time</p>
 </div>
       
     </li>
@@ -2270,8 +2952,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Matches this resource doi</p>
+        <div class='inline'><p>Matches this resource doi</p>
 </div>
       
     </li>
@@ -2288,8 +2969,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Matches this item_type. See Figshare API docs for list (<a href="https://docs.figshare.com/#articles_list">docs.figshare.com/#articles_list</a>)</p>
+        <div class='inline'><p>Matches this item_type. See Figshare API docs for list (https://docs.figshare.com/#articles_list)</p>
 </div>
       
     </li>
@@ -2306,8 +2986,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>“published_date” Default, “modified_date”, “views”, “cites”, “shares”</p>
+        <div class='inline'><p>“published_date” Default, “modified_date”, “views”, “cites”, “shares”</p>
 </div>
       
     </li>
@@ -2324,9 +3003,68 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>“desc” Default, “asc”</p>
+        <div class='inline'><p>“desc” Default, “asc”</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Pages start at 1. Page and Page size go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>offset is 0 based.  Offset and Limit go together</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
       
     </li>
   
@@ -2343,8 +3081,8 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>title, doi, handle, group_id, url, url_public_html, url_public_api, url_private_htm, url_private_api, published_date, timeline {…, thumb, defined_type, defined_name }</p>
+        <div class='inline'><p>title, doi, handle, group_id, url, url_public_html, url_public_api, url_private_htm,
+url_private_api, published_date, timeline {…, thumb, defined_type, defined_name }</p>
 </div>
       
     </li>
@@ -2357,28 +3095,36 @@
       <pre class="lines">
 
 
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
 46
 47
 48
-49</pre>
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_private_articles'>private_articles</span><span class='lparen'>(</span> <span class='label'>status:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                       <span class='label'>published_since:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2387,6 +3133,10 @@
                       <span class='label'>resource_doi:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                       <span class='label'>order:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>published_date</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
                       <span class='label'>order_direction:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>desc</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                      <span class='label'>page:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                      <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                       <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
                     <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -2397,6 +3147,10 @@
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>modified_since</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_modified_since'>modified_since</span> <span class='kw'>unless</span> <span class='id identifier rubyid_modified_since'>modified_since</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order'>order</span> <span class='kw'>unless</span> <span class='id identifier rubyid_order'>order</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>order_direction</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_order_direction'>order_direction</span> <span class='kw'>unless</span> <span class='id identifier rubyid_order_direction'>order_direction</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page'>page</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page_size'>page_size</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/articles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2407,7 +3161,7 @@
       <div class="method_details ">
   <h3 class="signature " id="roles-instance_method">
   
-    #<strong>roles</strong> {|Hash| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>roles</strong> {|Array| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2415,8 +3169,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get the roles available for groups and the institution group.</p>
+    <p>Get the roles available for groups and the institution group.</p>
 
 
   </div>
@@ -2429,13 +3182,12 @@
     <li>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'>
-<p>{ id, name, category, description }</p>
+        <div class='inline'><p>[ { id:, name:, category:, description: } ]</p>
 </div>
       
     </li>
@@ -2448,12 +3200,12 @@
       <pre class="lines">
 
 
-81
-82
-83</pre>
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_roles'>roles</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/roles</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2474,8 +3226,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Get institution user information using the account_id</p>
+    <p>Get institution user information using the account_id</p>
 
 
   </div>
@@ -2494,8 +3245,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>Figshare user account id</p>
+        <div class='inline'><p>Figshare user account id</p>
 </div>
       
     </li>
@@ -2513,8 +3263,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>{ id, first_name, last_name, name, is_active, url_name, is_public, job_title, orcid_id }</p>
+        <div class='inline'><p>{ id, first_name, last_name, name, is_active, url_name, is_public, job_title, orcid_id }</p>
 </div>
       
     </li>
@@ -2527,12 +3276,12 @@
       <pre class="lines">
 
 
-193
-194
-195</pre>
+303
+304
+305</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 303</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user'>user</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2547,9 +3296,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Nov  2 14:50:18 2021 by
+  Generated on Tue May 10 14:10:15 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-3.0.2).
+  0.9.27 (ruby-3.0.2).
 </div>
 
     </div>

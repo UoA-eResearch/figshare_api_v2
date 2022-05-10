@@ -101,10 +101,13 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>HACK: to do a lazy initialization of the Figshare subclasses. i.e. only if they get called. Usage:  @figshare = Figshare::Init.new(figshare_user: &#39;figshare_admin&#39;, conf_dir: “#__dir__/conf”)</p>
+    <p>HACK: to do a lazy initialization of the Figshare subclasses. i.e. only if they get called.
+Usage:
+ @figshare = Figshare::Init.new(figshare_user: ‘figshare_admin’, conf_dir: “#&lt;strong&gt;dir&lt;/strong&gt;/conf”)</p>
 
-<p>@figshare.authors.detail(author_id: 12345) { |a| puts a }  @figshare.institutions.private_articles { |article| puts article }  …</p>
+<p>@figshare.authors.detail(author_id: 12345) { |a| puts a }
+ @figshare.institutions.private_articles { |article| puts article }
+ …</p>
 
 
   </div>
@@ -144,8 +147,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::Authors, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::Authors, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -170,8 +172,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Intitialize the Init class, so it can dynamically initialize the Figshare subclasses.</p>
+    <span class="summary_desc"><div class='inline'><p>Intitialize the Init class, so it can dynamically initialize the Figshare subclasses.</p>
 </div></span>
   
 </li>
@@ -194,8 +195,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::Institutions, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::Institutions, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -218,8 +218,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::OAI_PMH, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::OAI_PMH, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -242,8 +241,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::Other, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::Other, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -266,8 +264,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PrivateArticles, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PrivateArticles, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -290,8 +287,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PrivateCollections, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PrivateCollections, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -314,8 +310,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PrivateProjects, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PrivateProjects, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -338,8 +333,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PublicArticles, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PublicArticles, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -362,8 +356,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PublicCollections, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PublicCollections, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -386,8 +379,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::PublicProjects, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::PublicProjects, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -410,8 +402,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::Stats, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::Stats, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -434,8 +425,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Create Figshare::Upload, if it doesn&#39;t exist.</p>
+    <span class="summary_desc"><div class='inline'><p>Create Figshare::Upload, if it doesn’t exist.</p>
 </div></span>
   
 </li>
@@ -458,8 +448,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Intitialize the Init class, so it can dynamically initialize the Figshare subclasses</p>
+    <p>Intitialize the Init class, so it can dynamically initialize the Figshare subclasses</p>
 
 
   </div>
@@ -478,8 +467,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>figshare user, in the figshare_keys.json</p>
+        <div class='inline'><p>figshare user, in the figshare_keys.json</p>
 </div>
       
     </li>
@@ -496,8 +484,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>directory for figshare_keys.json and figshare_site_params.json</p>
+        <div class='inline'><p>directory for figshare_keys.json and figshare_site_params.json</p>
 </div>
       
     </li>
@@ -514,8 +501,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>conf_dir/figshare_keys.json if nil</p>
+        <div class='inline'><p>conf_dir/figshare_keys.json if nil</p>
 </div>
       
     </li>
@@ -532,8 +518,7 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>conf_dir/figshare_site_params.json if nil</p>
+        <div class='inline'><p>conf_dir/figshare_site_params.json if nil</p>
 </div>
       
     </li>
@@ -586,8 +571,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::Authors, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::Authors, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -640,8 +624,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::Institutions, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::Institutions, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -694,8 +677,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::OAI_PMH, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::OAI_PMH, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -748,8 +730,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::Other, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::Other, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -802,8 +783,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PrivateArticles, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PrivateArticles, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -856,8 +836,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PrivateCollections, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PrivateCollections, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -910,8 +889,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PrivateProjects, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PrivateProjects, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -964,8 +942,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PublicArticles, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PublicArticles, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -1018,8 +995,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PublicCollections, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PublicCollections, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -1072,8 +1048,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::PublicProjects, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::PublicProjects, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -1126,8 +1101,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::Stats, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::Stats, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -1180,8 +1154,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Create Figshare::Upload, if it doesn&#39;t exist. Initialized with @figshare_user and @conf_dir</p>
+    <p>Create Figshare::Upload, if it doesn’t exist. Initialized with @figshare_user and @conf_dir</p>
 
 
   </div>
@@ -1228,9 +1201,9 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Nov  2 14:50:18 2021 by
+  Generated on Tue May 10 14:10:14 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-3.0.2).
+  0.9.27 (ruby-3.0.2).
 </div>
 
     </div>
