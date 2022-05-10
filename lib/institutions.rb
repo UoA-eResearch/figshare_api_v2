@@ -14,9 +14,9 @@ module Figshare
       end
     end
 
-    # Get the institional account details
+    # Get the institional account's details (not a person's account details)
     #
-    # @yield [Hash]
+    # @yield [Hash] {id:, name: "institute"}
     def account(&block)
       get(api_query: 'account/institution', &block)
     end
@@ -137,12 +137,13 @@ module Figshare
     end
 
     # Get the accounts for which the account has administrative privileges (assigned and inherited).
+    # Accounts are returned in account id order, and there is a 9000 user upper limit. See id_gte.
     #
     # @param is_active [Boolean] user account is active
     # @param institution_user_id [String] As set in the HR upload
     # @param email [String] as set in the HR upload
-    # @param id_lte [Integer] ID is <=
-    # @param id_gte [Integer] ID is >=
+    # @param id_lte [Integer] ID is <= Introduced to get around the buffer limit of 9000 users
+    # @param id_gte [Integer] ID is >= Introduced to get around the buffer limit of 9000 users
     # @param page [Numeric] Pages start at 1. Page and Page size go together
     # @param page_size [Numeric]
     # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
