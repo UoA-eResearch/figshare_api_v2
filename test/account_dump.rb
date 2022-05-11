@@ -12,88 +12,46 @@ def by_upi(upi:)
   end
 end
 
-# Everyone
-def active
-  active_users = {}
-  email = {}
-  institute_id = {}
+def accounts_wrapper(id_gte: 0, active: 1, &block)
+  puts "id_gte: #{id_gte}"
+  highest_id_gte = 0
   count = 0
-  inactive = 0
-
-  begin_time = Time.now
-  @figshare.institutions.accounts(is_active: 1) do |a|
+  @figshare.institutions.accounts(is_active: active, id_gte: id_gte, page_size: 50) do |a|
     next if a.nil? || a['id'].nil?
 
-    active_users[a['id']] = a
-    email[a['email']] = a
-    institute_id[a['institution_user_id']] = a
-    if a['active'] == 1
-      count += 1
-    else
-      inactive += 1
-      puts 'Found inactive user in active'
-      p a
-    end
+    puts 'Out of order ' if highest_id_gte > a['id'].to_i
+    puts "Same as the previous one #{a['id']} " if highest_id_gte == a['id'].to_i
+    count += 1
+    highest_id_gte = a['id'].to_i
+    yield a
   end
-  end_time = Time.now
-  puts "Active: active #{count} inactive #{inactive} users #{active_users.length} #{email.length} #{institute_id.length} Time #{end_time - begin_time}."
+
+  puts "Count: #{count}"
+  # We might have reached the upper limit of Figshare's buffer, and need to recurse.
+  accounts_wrapper(id_gte: highest_id_gte + 1, active: active, &block) unless highest_id_gte == 0
 end
 
-def not_active
-  email = {}
-  institute_id = {}
-  inactive_users = {}
-  count = 0
-  inactive = 0
+def institute_accounts(active: 1)
+  # Globals.
+  @all_users = {}
+  @active_users = {}
+  @inactive_users = {}
+  @email = {}
+  @institute_id = {}
 
-  begin_time = Time.now
-  @figshare.institutions.accounts(is_active: 0) do |a|
-    next if a.nil? || a['id'].nil?
+  accounts_wrapper(active: active) do |a|
+    puts "Duplicate #{a['id']}" unless @all_users[a['id']].nil?
 
-    inactive_users[a['id']] = a
-    email[a['email']] = a
-    institute_id[a['institution_user_id']] = a
+    @all_users[a['id']] = a
+    @email[a['email']] = a
+    @institute_id[a['institution_user_id']] = a
     if a['active'] == 1
-      count += 1
-      puts 'Found active user in inactive list'
-      p a
+      @active_users[a['id']] = a
+    elsif a['active'] == 0
+      @inactive_users[a['id']] = a
     else
-      inactive += 1
+      puts "User #{a['id']} active = '#{a['active']}'"
     end
-  end
-  end_time = Time.now
-  puts "Not Active: active #{count} inactive #{inactive} users #{inactive_users.length} #{email.length} #{institute_id.length} Time #{end_time - begin_time}."
-end
-
-def everyone
-  everyone = {}
-  email = {}
-  institute_id = {}
-  count = 0
-  inactive = 0
-
-  begin_time = Time.now
-  @figshare.institutions.accounts do |a|
-    next if a.nil? || a['id'].nil?
-
-    everyone[a['id']] = a
-    email[a['email']] = a
-    institute_id[a['institution_user_id']] = a
-    if a['active'] == 1
-      count += 1
-    else
-      inactive += 1
-    end
-    # p a
-    # return if count == 10
-  end
-  end_time = Time.now
-  puts "Everyone: active #{count} inactive #{inactive} users #{everyone.length}  #{email.length} #{institute_id.length} Time #{end_time - begin_time}."
-end
-
-def user_info(account_id: )
-  @figshare.institutions.user( account_id: account_id) do |a|
-    p a
   end
 end
 
@@ -103,10 +61,15 @@ def account_info(impersonate: nil)
   end
 end
 
+def fetch_all_accounts
+  begin_time = Time.now
+  institute_accounts(active: 1) # active 1, 0 or nil
+  end_time = Time.now
+  puts "Runtime: #{end_time - begin_time}"
+  puts "Active: #{@active_users.length} Inactive: #{@inactive_users.length} Total #{@all_users.length}"
+end
+
 # by_upi(upi: 'rbur004') # Just me
 # user_info(account_id: 1171794)
-# Everyone. There looks to be a 9000 total responses limit?
-everyone
-active
-not_active
 # account_info(impersonate: 1171794 )
+fetch_all_accounts
