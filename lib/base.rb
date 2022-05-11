@@ -73,39 +73,49 @@ module Figshare
     # @return [Integer] number of results.
     private def get_paginate(api_query:, args: {}, debug: false, by_offset: false, &block)
       args = {} if args.nil?
-      if ! args.is_a?(Hash)
-        raise 'get_paginate(): Expecting args to be a Hash'
-      end
-
-      # Loop variables, if we are using pages
-      page = args['page'].nil? ? 1 : args['page']
-      page_size = args['page_size'].nil? ? 100 : args['page_size']
-
-      # Loop variables, if we are using offsets
-      offset = args['offset'].nil? ? 0 : args['offset']
-      limit = args['limit'].nil? ? 100 : args['limit']
+      raise 'get_paginate(): Expecting args to be a Hash' unless args.is_a?(Hash)
 
       by_offset = true if args['page'].nil? && ! args['offset'].nil?
+      if by_offset
+        # Loop variables, if we are using offsets
+        offset = args['offset'].nil? ? 0 : args['offset']
+        limit = args['limit'].nil? ? 100 : args['limit']
+        args['offset'] = offset
+        args['limit'] = limit
+      else
+        page = args['page'].nil? ? 1 : args['page']
+        page_size = args['page_size'].nil? ? 100 : args['page_size']
+        args['page'] = page
+        args['page_size'] = page_size
+      end
 
       # How many results so far.
       result_count = 0
 
       loop do
         content_type = response = nil
-        form_args = by_offset ? { 'limit' => limit, 'offset' => offset } : { 'page_size' => page_size, 'page' => page }
         WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
           response = ws.get_page( query: "#{@api_url}#{api_query}",
                                   authorization: "token #{@auth_token}",
-                                  form_values: form_args.merge(args)
+                                  form_values: args
                                 )
           content_type = ws.header_value(key: 'Content-Type')
         end
+        # File.write("/tmp/debug_#{args['id_gte']}_#{page}.json", response)
         page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
-        break if page_count < page_size # Got less results than we asked for, so it was the last page
 
-        page += 1 # Ready to fetch next page
-        offset += limit # if we use offset, then mor
+        if by_offset
+          break if page_count < limit # Got less results than we asked for, so it was the last page
+
+          offset += limit # if we use offset
+          args['offset'] = offset
+        else
+          break if page_count < page_size # Got less results than we asked for, so it was the last page
+
+          page += 1 # Ready to fetch next page
+          args['page'] = page
+        end
       end
 
       return result_count
@@ -158,40 +168,50 @@ module Figshare
     # @return [Integer] number of results.
     private def post_paginate(api_query:, args: {}, debug: false, by_offset: false, &block)
       # Loop variables, if we are using pages
-      page = args['page'].nil? ? 1 : args['page']
-      page_size = args['page_size'].nil? ? 100 : args['page_size']
+      args = {} if args.nil?
+      raise 'post_paginate(): Expecting args to be a Hash' unless args.is_a?(Hash)
 
-      # Loop variables, if we are using offsets
-      offset = args['offset'].nil? ? 0 : args['offset']
-      limit = args['limit'].nil? ? 100 : args['limit']
+      by_offset = true if args['page'].nil? && ! args['offset'].nil?
+      if by_offset
+        # Loop variables, if we are using offsets
+        offset = args['offset'].nil? ? 0 : args['offset']
+        limit = args['limit'].nil? ? 100 : args['limit']
+        args['offset'] = offset
+        args['limit'] = limit
+      else
+        page = args['page'].nil? ? 1 : args['page']
+        page_size = args['page_size'].nil? ? 100 : args['page_size']
+        args['page'] = page
+        args['page_size'] = page_size
+      end
 
       # How many results so far.
       result_count = 0
 
-      by_offset = true if args['page'].nil? && ! args['offset'].nil?
-
-      args = {} if args.nil?
-      if ! args.is_a?(Hash)
-        raise 'post_paginate(): Expecting args to be a Hash'
-      end
-
       loop do
         content_type = response = nil
-        form_args = by_offset ? { 'limit' => limit, 'offset' => offset } : { 'page_size' => page_size, 'page' => page }
         WIKK::WebBrowser.https_session( host: @hostname, verify_cert: false ) do |ws|
           response = ws.post_page(  query: "#{@api_url}#{api_query}",
                                     content_type: 'application/json; charset=UTF-8',
                                     authorization: "token #{@auth_token}",
-                                    data: args.merge(form_args).to_j
+                                    data: args.to_j
                                  )
           content_type = ws.header_value(key: 'Content-Type')
         end
         page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
-        break if page_count < page_size # Got less results than we asked for, so it was the last page
 
-        page += 1 # Ready to fetch next page
-        offset += limit # if we use offset
+        if by_offset
+          break if page_count < limit # Got less results than we asked for, so it was the last page
+
+          offset += limit # if we use offset
+          args['offset'] = offset
+        else
+          break if page_count < page_size # Got less results than we asked for, so it was the last page
+
+          page += 1 # Ready to fetch next page
+          args['page'] = page
+        end
       end
       return result_count
     end
