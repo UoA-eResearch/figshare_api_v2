@@ -363,7 +363,7 @@ module Figshare
     # @param project_id [Integer] Figshare id of the project
     # @param article_id [Integer] Figshare id of the article
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Array] See docs.figshare.com for article hash
+    # @yield [Array] See docs.figshare.com
     def artilce_files(project_id:, article_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
