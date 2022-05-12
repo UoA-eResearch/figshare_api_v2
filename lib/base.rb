@@ -71,7 +71,7 @@ module Figshare
     # @param by_offset [Boolean] use offset/limit rather than page/page_size in API calls
     # @yield [String] if given a block, iterates through the result from figshare
     # @return [Integer] number of results.
-    private def get_paginate(api_query:, args: {}, debug: false, by_offset: false, &block)
+    private def get_paginate(api_query:, args: {}, debug: false, by_offset: false, once_only: false, &block)
       args = {} if args.nil?
       raise 'get_paginate(): Expecting args to be a Hash' unless args.is_a?(Hash)
 
@@ -116,6 +116,8 @@ module Figshare
           page += 1 # Ready to fetch next page
           args['page'] = page
         end
+
+        return result_count if once_only
       end
 
       return result_count
@@ -166,7 +168,7 @@ module Figshare
     # @param by_offset [Boolean] use offset/limit rather than page/page_size in API calls
     # @yield [String] if given a block, iterates through the result from figshare
     # @return [Integer] number of results.
-    private def post_paginate(api_query:, args: {}, debug: false, by_offset: false, &block)
+    private def post_paginate(api_query:, args: {}, debug: false, by_offset: false, once_only: false, &block)
       # Loop variables, if we are using pages
       args = {} if args.nil?
       raise 'post_paginate(): Expecting args to be a Hash' unless args.is_a?(Hash)
@@ -212,6 +214,8 @@ module Figshare
           page += 1 # Ready to fetch next page
           args['page'] = page
         end
+
+        return result_count if once_only
       end
       return result_count
     end
