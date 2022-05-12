@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby
-# require_relative '../lib/figshare_api_v2'
-require 'figshare_api_v2'
+require_relative '../lib/figshare_api_v2'
+# require 'figshare_api_v2'
 
 Dir.chdir(__dir__) # Needed with Atom, which stays in the project dir, not the script's dir.
 
@@ -12,25 +12,6 @@ def by_upi(upi:)
   end
 end
 
-def accounts_wrapper(id_gte: 0, active: 1, &block)
-  puts "id_gte: #{id_gte}"
-  highest_id_gte = 0
-  count = 0
-  @figshare.institutions.accounts(is_active: active, id_gte: id_gte, page_size: 50) do |a|
-    next if a.nil? || a['id'].nil?
-
-    puts 'Out of order ' if highest_id_gte > a['id'].to_i
-    puts "Same as the previous one #{a['id']} " if highest_id_gte == a['id'].to_i
-    count += 1
-    highest_id_gte = a['id'].to_i
-    yield a
-  end
-
-  puts "Count: #{count}"
-  # We might have reached the upper limit of Figshare's buffer, and need to recurse.
-  accounts_wrapper(id_gte: highest_id_gte + 1, active: active, &block) unless highest_id_gte == 0
-end
-
 def institute_accounts(active: 1)
   # Globals.
   @all_users = {}
@@ -39,7 +20,7 @@ def institute_accounts(active: 1)
   @email = {}
   @institute_id = {}
 
-  accounts_wrapper(active: active) do |a|
+  @figshare.institutions.accounts(is_active: active) do |a|
     puts "Duplicate #{a['id']}" unless @all_users[a['id']].nil?
 
     @all_users[a['id']] = a
@@ -71,5 +52,5 @@ end
 
 # by_upi(upi: 'rbur004') # Just me
 # user_info(account_id: 1171794)
-# account_info(impersonate: 1171794 )
-fetch_all_accounts
+# account_info(impersonate: 1813331 )
+# fetch_all_accounts
