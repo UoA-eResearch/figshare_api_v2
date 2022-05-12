@@ -105,6 +105,8 @@ module Figshare
         page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
 
+        return result_count if once_only
+
         if by_offset
           break if page_count < limit # Got less results than we asked for, so it was the last page
 
@@ -116,8 +118,6 @@ module Figshare
           page += 1 # Ready to fetch next page
           args['page'] = page
         end
-
-        return result_count if once_only
       end
 
       return result_count
@@ -203,6 +203,8 @@ module Figshare
         page_count = iterate_json_response(response: response, content_type: content_type, debug: debug, &block)
         result_count += page_count
 
+        return result_count if once_only
+
         if by_offset
           break if page_count < limit # Got less results than we asked for, so it was the last page
 
@@ -214,8 +216,6 @@ module Figshare
           page += 1 # Ready to fetch next page
           args['page'] = page
         end
-
-        return result_count if once_only
       end
       return result_count
     end
