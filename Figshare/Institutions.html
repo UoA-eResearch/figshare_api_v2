@@ -148,7 +148,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get the institional account details.</p>
+    <span class="summary_desc"><div class='inline'><p>Get the institional account’s details (not a person’s account details).</p>
 </div></span>
   
 </li>
@@ -249,7 +249,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#accounts-instance_method" title="#accounts (instance method)">#<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Array| ... } &#x21d2; Object </a>
+      <a href="#accounts-instance_method" title="#accounts (instance method)">#<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil, cursor_pagination: true) {|Array| ... } &#x21d2; Object </a>
     
 
     
@@ -697,7 +697,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the institional account details</p>
+    <p>Get the institional account’s details (not a person’s account details)</p>
 
 
   </div>
@@ -713,6 +713,10 @@
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>name: “institute”</p>
+</div>
       
     </li>
   
@@ -872,30 +876,30 @@
       <pre class="lines">
 
 
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205</pre>
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_account_create'>account_create</span><span class='lparen'>(</span> <span class='label'>email:</span><span class='comma'>,</span>
                     <span class='label'>first_name:</span><span class='comma'>,</span>
@@ -1137,30 +1141,30 @@
       <pre class="lines">
 
 
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297</pre>
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 277</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_account_search'>account_search</span><span class='lparen'>(</span> <span class='label'>search_for:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                     <span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1344,31 +1348,31 @@
       <pre class="lines">
 
 
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239</pre>
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_account_update'>account_update</span><span class='lparen'>(</span> <span class='label'>account_id:</span><span class='comma'>,</span>
                     <span class='label'>email:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1400,7 +1404,7 @@
       <div class="method_details ">
   <h3 class="signature " id="accounts-instance_method">
   
-    #<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil) {|Array| ... } &#x21d2; <tt>Object</tt> 
+    #<strong>accounts</strong>(is_active: nil, institution_user_id: nil, email: nil, id_lte: nil, id_gte: nil, page: nil, page_size: nil, offset: nil, limit: nil, cursor_pagination: true) {|Array| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1408,7 +1412,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get the accounts for which the account has administrative privileges (assigned and inherited).</p>
+    <p>Get the accounts for which the account has administrative privileges (assigned and inherited).
+Accounts are returned in account id order, and there is a 9000 user upper limit. See id_gte.</p>
 
 
   </div>
@@ -1480,7 +1485,7 @@
       
       
         &mdash;
-        <div class='inline'><p>ID is &lt;=</p>
+        <div class='inline'><p>ID is &lt;= Introduced to get around the buffer limit of 9000 users</p>
 </div>
       
     </li>
@@ -1497,7 +1502,7 @@
       
       
         &mdash;
-        <div class='inline'><p>ID is &gt;=</p>
+        <div class='inline'><p>ID is &gt;= Introduced to get around the buffer limit of 9000 users</p>
 </div>
       
     </li>
@@ -1588,7 +1593,6 @@
       <pre class="lines">
 
 
-151
 152
 153
 154
@@ -1610,10 +1614,31 @@
 170
 171
 172
-173</pre>
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_accounts'>accounts</span><span class='lparen'>(</span> <span class='label'>is_active:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>institution_user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1624,6 +1649,7 @@
               <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>cursor_pagination:</span> <span class='kw'>true</span><span class='comma'>,</span>
               <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
             <span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1636,7 +1662,26 @@
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_page_size'>page_size</span> <span class='kw'>unless</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>offset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span> <span class='kw'>unless</span> <span class='id identifier rubyid_offset'>offset</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>limit</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span> <span class='kw'>unless</span> <span class='id identifier rubyid_limit'>limit</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_cursor_pagination'>cursor_pagination</span>
+    <span class='id identifier rubyid_highest_id_gte'>highest_id_gte</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id_lte</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page_size</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>100</span>
+    <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_count'>count</span> <span class='op'>=</span> <span class='int'>0</span>
+      <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>page</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_args'>args</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id_gte</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_highest_id_gte'>highest_id_gte</span> <span class='op'>+</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>once_only:</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_account'>account</span><span class='op'>|</span>
+        <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_account'>account</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_account'>account</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+        <span class='id identifier rubyid_count'>count</span> <span class='op'>+=</span> <span class='int'>1</span>
+        <span class='id identifier rubyid_highest_id_gte'>highest_id_gte</span> <span class='op'>=</span> <span class='id identifier rubyid_account'>account</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='kw'>if</span> <span class='id identifier rubyid_highest_id_gte'>highest_id_gte</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_account'>account</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+        <span class='kw'>yield</span> <span class='id identifier rubyid_account'>account</span>
+      <span class='kw'>end</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_count'>count</span> <span class='op'>&lt;</span> <span class='int'>100</span> <span class='comment'># Didn&#39;t reach the page_size limit.
+</span>    <span class='kw'>end</span>
+  <span class='kw'>else</span> <span class='comment'># Do it the old broken way (Pagination only works for the first 9000 entries)
+</span>    <span class='id identifier rubyid_get_paginate'>get_paginate</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account/institution/accounts</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1929,25 +1974,25 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330</pre>
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 336</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review'>curation_review</span><span class='lparen'>(</span>  <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                       <span class='label'>article_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2061,16 +2106,16 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-346
-347
-348
-349
-350
-351
-352</pre>
+367
+368
+369
+370
+371
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 367</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review_comments'>curation_review_comments</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='label'>offset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='comment'># Odd one, as has offset,limit not page,page_size.
@@ -2143,12 +2188,12 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-358
-359
-360</pre>
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 358</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review_comments_update'>curation_review_comments_update</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='label'>comment:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/review/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>text</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_comment'>comment</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2219,12 +2264,12 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-336
-337
-338</pre>
+357
+358
+359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 336</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_curation_review_detail'>curation_review_detail</span><span class='lparen'>(</span><span class='label'>curation_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/review/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_curation_id'>curation_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>  <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2462,13 +2507,13 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-262
-263
-264
-265</pre>
+283
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 262</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 283</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_role_delete'>group_role_delete</span><span class='lparen'>(</span> <span class='label'>account_id:</span><span class='comma'>,</span> <span class='label'>role_id:</span><span class='comma'>,</span> <span class='label'>group_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_args'>args</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -2540,12 +2585,12 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-245
-246
-247</pre>
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 266</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_roles'>group_roles</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2614,12 +2659,12 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-253
-254
-255</pre>
+274
+275
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 274</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_roles_add'>group_roles_add</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='label'>body:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_post'>post</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>args:</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -3276,12 +3321,12 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
       <pre class="lines">
 
 
-303
-304
-305</pre>
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/institutions.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user'>user</span><span class='lparen'>(</span><span class='label'>account_id:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='label'>api_query:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account/institution/users/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_account_id'>account_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -3296,7 +3341,7 @@ url_private_api, published_date, timeline {…, thumb, defined_type, defined_nam
 </div>
 
       <div id="footer">
-  Generated on Tue May 10 14:10:15 2022 by
+  Generated on Fri May 13 08:40:33 2022 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.27 (ruby-3.0.2).
 </div>
