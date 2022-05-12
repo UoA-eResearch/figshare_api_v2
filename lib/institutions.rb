@@ -183,7 +183,7 @@ module Figshare
             next if account.nil? || account['id'].nil?
 
             count += 1
-            highest_id_gte = account['id'].to_i
+            highest_id_gte = account['id'].to_i if highest_id_gte < account['id'].to_i
             yield account
           end
           break if count < 100 # Didn't reach the page_size limit.
