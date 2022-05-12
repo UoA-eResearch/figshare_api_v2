@@ -158,6 +158,7 @@ module Figshare
                   page_size: nil,
                   offset: nil,
                   limit: nil,
+                  cursor_pagination: true,
                   &block
                 )
       args = {}
@@ -170,7 +171,26 @@ module Figshare
       args['page_size'] = page_size unless page_size.nil?
       args['offset'] = offset unless offset.nil?
       args['limit'] = limit unless limit.nil?
-      get_paginate(api_query: 'account/institution/accounts', args: args, &block)
+      if cursor_pagination
+        highest_id_gte = 0
+        args['id_lte'] = nil
+        args['page_size'] = 100
+        loop do
+          count = 0
+          args['page'] = 1
+          args['id_gte'] = highest_id_gte + 1
+          get_paginate(api_query: 'account/institution/accounts', args: args, once_only: true) do |account|
+            next if account.nil? || account['id'].nil?
+
+            count += 1
+            highest_id_gte = account['id'].to_i
+            yield account
+          end
+          break if count < 100 # Didn't reach the page_size limit.
+        end
+      else # Do it the old broken way (Pagination only works for the first 9000 entries)
+        get_paginate(api_query: 'account/institution/accounts', args: args, &block)
+      end
     end
 
     # Create new Institution Account
