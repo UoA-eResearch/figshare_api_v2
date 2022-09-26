@@ -70,7 +70,7 @@ module Figshare
               )
       args = { 'search_for' => search_for }
       args['impersonate'] = impersonate unless impersonate.nil?
-      args['institution'] = @institute_id unless institute.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group'] = group_id unless group_id.nil?
       args['resource_id'] = resource_id unless resource_id.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?

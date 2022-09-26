@@ -31,7 +31,7 @@ module Figshare
                 &block
               )
       args = { 'search_for' => search_for }
-      args['institution'] = @institute_id unless institute.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group_id'] = group_id unless group_id.nil?
       args['is_active'] = is_active unless is_active.nil?
       args['is_public'] = is_public unless is_public.nil?

@@ -67,7 +67,7 @@ module Figshare
               )
       args = { 'search_for' => search_for }
       args['impersonate'] = impersonate unless impersonate.nil?
-      args['institution'] = @institute_id unless institute.nil? # Inconsistent use. Other calls use institute_id
+      args['institution'] = @institute_id.to_i if institute # Inconsistent use. Other calls use institute_id
       args['group'] = group_id unless group_id.nil? # Not sure if this changed from group_id to group
       args['item_type'] = item_type unless item_type.nil?
       args['resource_id'] = resource_id unless resource_id.nil?

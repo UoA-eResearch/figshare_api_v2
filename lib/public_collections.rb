@@ -34,7 +34,7 @@ module Figshare
               &block
             )
       args = {}
-      args['institution'] = @institute_id unless institution.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group'] = group_id unless group_id.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?
       args['doi'] = doi unless doi.nil?
@@ -76,7 +76,7 @@ module Figshare
                 &block
               )
       args = { 'search_for' => search_for }
-      args['institution'] = @institute_id unless institute.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group_id'] = group_id unless group_id.nil?
       args['item_type'] = item_type unless item_type.nil?
       args['resource_doi'] = resource_doi unless resource_doi.nil?

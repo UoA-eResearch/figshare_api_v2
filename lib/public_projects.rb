@@ -26,7 +26,7 @@ module Figshare
               &block
             )
       args = {}
-      args['institution'] = @institute_id unless institute.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group'] = group_id unless group_id.nil?
       args['published_since'] = published_since unless published_since.nil?
       args['order'] = order unless order.nil?
@@ -57,7 +57,7 @@ module Figshare
                 &block
               )
       args = { 'search_for' => search_for }
-      args['institution'] = @institute_id unless institute.nil?
+      args['institution'] = @institute_id.to_i if institute
       args['group'] = group_id unless group_id.nil?
       args['published_since'] = published_since unless published_since.nil?
       args['modified_since'] = modified_since unless modified_since.nil?
