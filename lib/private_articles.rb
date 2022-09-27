@@ -138,7 +138,17 @@ module Figshare
       body_['references'] = references unless references.nil?
       body_['categories'] = categories unless categories.nil?
       body_['categories_by_source_id'] = categories_by_source_id unless categories_by_source_id.nil?
-      body_['authors'] = authors unless authors.nil?
+      authors_array = []
+      if authors.instance_of?(Array)
+        authors.each do |author|
+          authors_array << if author.instance_of?(Hash)
+                             author
+                           else
+                             { 'name' => author }
+                           end
+        end
+      end
+      body_['authors'] = authors_array
       body_['custom_fields'] = custom_fields unless custom_fields.nil?
       body_['custom_fields_list'] = custom_fields_list unless custom_fields_list.nil?
       body_['defined_type'] = defined_type unless defined_type.nil?
