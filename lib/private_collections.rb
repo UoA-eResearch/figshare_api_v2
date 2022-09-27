@@ -87,6 +87,89 @@ module Figshare
       post_paginate(api_query: 'account/collections/search', args: args, &block)
     end
 
+    # Create a body for use with create and update methods
+    #
+    # @param title [String] Required
+    # @param description [String] The article description. In a publisher case, usually this is the remote article description
+    # @param tags [Array] List of tags (strings) to be associated with the article. Tags can be used instead
+    # @param keywords [Array] List of tags (strings) to be associated with the article. Tags can be used instead
+    # @param references [Array] List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
+    # @param categories [Array] List of category ids to be associated with the article(e.g [1, 23, 33, 66])
+    # @param categories_by_source_id [Array] List of category ids to be associated with the article(e.g ["300204", "400207"])
+    # @param authors [Array] List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint. e.g. { "name" => "Joe X"} and or { "id" => 123 }
+    # @param custom_fields [Hash] List of key, values pairs to be associated with the article. eg. { "key" => "value"}
+    # @param custom_fields_list [Array] List of key, values pairs to be associated with the article. eg. [{ "key" => "value"}]
+    # @param defined_type [String] one of "figshare","media","dataset","poster","journal contribution", "presentation", "thesis", "software", "online resource", "preprint", "book", "conference contribution", "chapter", "peer review", "educational resource", "report", "standard", "composition", "funding", "physical object", "data management plan", "workflow", "monograph", "performance", "event", "service", "model", "registration"
+    # @param funding [String] Grant number or funding authority
+    # @param funding_list [Array] Funding creation / update items. eg {"id" => 0, "title" => "string"}
+    # @param license [Integer] License id for this article.
+    # @param doi [String] Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+    # @param handle [String] Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+    # @param resource_doi [String] Not applicable to regular users. In a publisher case, this is the publisher article DOI.
+    # @param resource_title [String] Not applicable to regular users. In a publisher case, this is the publisher article title.
+    # @param timeline [Hash] Various timeline dates ie. { "firstOnline" => "date_string", "publisherPublication" => "date_string", "publisherAcceptance" => "date_string"},
+    # @param group_id [Integer] Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+    def body( title:,
+              description: nil,
+              is_metadata_record: nil,
+              metadata_reason: nil,
+              tags: nil,
+              keywords: nil,
+              references: nil,
+              categories: nil,
+              categories_by_source_id: nil,
+              authors: nil,
+              custom_fields: nil,
+              custom_fields_list: nil,
+              defined_type: nil,
+              funding: nil,
+              funding_list: nil,
+              license: nil,
+              doi: nil,
+              handle: nil,
+              resource_doi: nil,
+              resource_title: nil,
+              timeline: nil,
+              group_id: nil
+            )
+      body_ = {
+        'title' => title
+      }
+      body_['description'] = description unless description.nil?
+      body_['is_metadata_record'] = is_metadata_record unless is_metadata_record.nil?
+      body_['metadata_reason'] = metadata_reason unless metadata_reason.nil?
+      body_['tags'] = tags unless tags.nil?
+      body_['keywords'] = keywords unless keywords.nil?
+      body_['references'] = references unless references.nil?
+      body_['categories'] = categories unless categories.nil?
+      body_['categories_by_source_id'] = categories_by_source_id unless categories_by_source_id.nil?
+      authors_array = []
+      if authors.instance_of?(Array)
+        authors.each do |author|
+          authors_array << if author.instance_of?(Hash)
+                             author
+                           else
+                             { 'name' => author }
+                           end
+        end
+      end
+      body_['authors'] = authors_array
+      body_['custom_fields'] = custom_fields unless custom_fields.nil?
+      body_['custom_fields_list'] = custom_fields_list unless custom_fields_list.nil?
+      body_['defined_type'] = defined_type unless defined_type.nil?
+      body_['funding'] = funding unless funding.nil?
+      body_['funding_list'] = funding_list unless funding_list.nil?
+      body_['license'] = license unless license.nil?
+      body_['doi'] = doi unless doi.nil?
+      body_['handle'] = handle unless handle.nil?
+      body_['resource_doi'] = resource_doi unless resource_doi.nil?
+      body_['resource_title'] = resource_title unless resource_title.nil?
+      body_['timeline'] = timeline unless timeline.nil?
+      body_['group_id'] = group_id unless group_id.nil?
+
+      return body_
+    end
+
     # Create a new private Collection by sending collection information
     #
     # @param body [Hash] See Figshare API docs
@@ -133,7 +216,7 @@ module Figshare
     #
     # @param collection_id [Integer] Figshare id of the collection
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
-    # @yield [Hash] { doi }
+    # @yield [Hash] { "doi" => "the_doi" }
     def reserve_doi(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
