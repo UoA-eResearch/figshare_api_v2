@@ -1,7 +1,7 @@
 module Figshare # :nodoc:
   # Figshare module initialization
   #
-  VERSION = '0.9.11'
+  VERSION = '0.9.12'
 
   require 'wikk_webbrowser'
   require 'wikk_json'
