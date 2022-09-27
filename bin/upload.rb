@@ -1,7 +1,7 @@
 #!/usr/local/bin/ruby
 require 'figshare_api_v2'
 
-# Find any existing articles, and set the article IDs
+# Find any existing articles, and set the article IDs on our end
 # This is useful, if we run this script a second time, to ensure all files have been copied.
 def set_article_id
   # Create hash index, so we can look up by title
@@ -28,22 +28,11 @@ def create_new_articles
   @article_list.each do |a|
     next unless a['article_id'] == 0 # Don't create, if it already has an article_id
 
-    authors = []
-    if a['authors'].instance_of?(Array)
-      a['authors'].each do |author|
-        authors << if author.instance_of?(Hash)
-                     author
-                   else
-                     { 'name' => author }
-                   end
-      end
-    end
-
     body = @figshare.private_articles.body(
       title: a['title'],
       description: a['description'],
       defined_type: 'dataset',
-      authors: authors.length == 0 ? nil : authors,
+      authors: a['authors'].length == 0 ? nil : a['authors'],
       keywords: a['keywords'],
       categories: a['categories'],
       custom_fields: a['custom_fields']
@@ -92,6 +81,54 @@ def upload_files(base_dir: )
   end
 end
 
+# Find any existing collection, and set the collection IDs on our end
+# This is useful, if we run this script a second time, to ensure all files have been copied.
+# @param impersonate [Integer] Figshare user ID
+# @param collection [Hash] Details of the collection being created
+def set_collection_id(impersonate:, collection:)
+  # List all the users collections, and see if the ones in the conf file already exist.
+  @figshare.private_collections.search(impersonate: impersonate, search_for: collection['title']) do |a|
+    # Double check we have gotten a close match
+    collection['collection_id'] = a['id'].to_i if collection['title'] == a['title']
+  end
+end
+
+# Creates a new collection, and reserves a DOI
+# @param impersonate [Integer] Figshare user ID
+# @param collection [Hash] Details of the collection being created
+def create_new_collection(impersonate:, collection:)
+  set_collection_id(impersonate: impersonate, collection: collection)
+  return if collection['collection_id'] != 0
+
+  # Will do the job for a collection too. Should create a collection specific one
+  body = @figshare.private_collections.body(
+    title: collection['title'],
+    description: collection['description'],
+    authors: collection['authors'].length == 0 ? nil : collection['authors'],
+    keywords: collection['keywords'],
+    categories: collection['categories']
+  )
+  @figshare.private_collections.create(body: body, impersonate: impersonate) do |c|
+    collection['collection_id'] = c['entity_id']
+    @figshare.private_collections.reserve_doi(collection_id: collection['collection_id'], impersonate: impersonate) do |r|
+      collection['doi'] = r['doi']
+    end
+    puts "Created Collection #{collection['collection_id']}: #{collection['title']}}"
+  end
+end
+
+# Adds the articles in article_list to the private collection
+# @param impersonate [Integer] Figshare user ID
+# @param collection [Hash] Details of the collection we want to add the articles to (only collection_id being important)
+# @param article_list [Hash] Details of the articles being added (only article_id being important)
+def add_articles_to_collection(impersonate:, collection:, article_list:)
+  articles = []
+  article_list.each do |article|
+    articles << article['article_id']
+  end
+  @figshare.private_collections.articles_add(collection_id: collection['collection_id'], articles: articles, impersonate: impersonate)
+end
+
 if ARGV.length != 1
   warn 'Usage: upload upload_config_file'
   exit(-1)
@@ -100,16 +137,24 @@ end
 article_conf = JSON.parse(File.read(ARGV[0]))
 @figshare = Figshare::Init.new(figshare_user: article_conf['figshare_user'], conf_dir: File.dirname(ARGV[0]) )
 @user = { 'id' => article_conf['impersonate'] }
+@collection = article_conf['collection']
 
 @article_list = article_conf['article_list']
 puts '******************* Check for Existing Articles *******************************'
 set_article_id
 
-puts '******************* Reserving DOIs *******************************'
-reserve_doi
-
 puts '******************* Create Articles             *******************************'
 create_new_articles
 
+puts '******************* Reserving Article DOIs      *******************************'
+reserve_doi
+
 puts '******************* Upload Articles             *******************************'
 upload_files(base_dir: article_conf['base_dir'])
+
+if ! @collection.nil?
+  puts '******************* Create Collection             *******************************'
+  create_new_collection(impersonate: @user['id'], collection: @collection)
+  puts '******************* Add Articles to Collection    *******************************'
+  add_articles_to_collection(impersonate: @user['id'], collection: @collection, article_list: @article_list)
+end
