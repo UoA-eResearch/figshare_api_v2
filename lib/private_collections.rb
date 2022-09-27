@@ -369,7 +369,9 @@ module Figshare
     def articles(collection_id:, impersonate: nil, &block)
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      get(api_query: "account/collections/#{collection_id}/articles", args: args, &block)
+      args['offset'] = 0
+      args['limit'] = 100 # Looks to respect this. The default is 10!
+      get_paginate(api_query: "account/collections/#{collection_id}/articles", args: args, &block)
     end
 
     # Get a private article's details (Not a figshare API call. Duplicates PrivateArticles:article_detail)
