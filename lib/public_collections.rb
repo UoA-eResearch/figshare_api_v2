@@ -4,7 +4,7 @@ module Figshare
   class PublicCollections < Base
     # Requests a list of public collections
     #
-    # @param institution [Boolean] Just our institution
+    # @param institute [Boolean] Just our institution
     # @param group_id [Integer] Only return this group's collections
     # @param published_since [Time] Return results if published after this time
     # @param modified_since [Time] Return results if modified after this time
@@ -18,7 +18,7 @@ module Figshare
     # @param offset [Numeric] offset is 0 based.  Offset and Limit go together
     # @param limit [Numeric]
     # @yield [Hash] {id, title, doi, handle, url, published_date}
-    def list( institution: false,
+    def list( institute: false,
               group_id: nil,
               published_since: nil,
               modified_since: nil,
