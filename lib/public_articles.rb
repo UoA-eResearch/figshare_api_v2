@@ -130,7 +130,7 @@ module Figshare
     #
     # @param article_id [Integer] Figshare id of the article
     # @yield [Hash] {id, title, doi, handle, url, published_date}
-    def files(article_id:)
+    def files(article_id:, &block)
       get(api_query: "articles/#{article_id}/files", &block)
     end
 
