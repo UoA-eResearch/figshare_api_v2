@@ -30,7 +30,8 @@ module Figshare
     # Get public categories
     #
     # @yield [Array] [{parent_id:, id:, title:, path:, source_id:, taxonomy_id:}]
-    def public_categories
+    def public_categories(&block)
+      args = {}
       get(api_query: 'categories', &block)
     end
 
