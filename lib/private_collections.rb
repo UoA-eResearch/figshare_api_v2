@@ -391,9 +391,20 @@ module Figshare
     # @param impersonate [Integer] Figshare account_id of the user we are making this call on behalf of
     # @yield [Hash] { location }
     def articles_add(collection_id:, articles:, impersonate: nil, &block)
+      # Adding articles that are already in the collection causes an error, so we remove the duplicates
+      existing_articles = []
+      self.articles(collection_id: collection_id, impersonate: impersonate) { |a| existing_articles << a['id'] }
+      insert_list = []
+      articles.each { |article| insert_list << article unless existing_articles.include?(article) }
+
       args = {}
       args['impersonate'] = impersonate unless impersonate.nil?
-      post( api_query: "account/collections/#{collection_id}/articles", args: args, data: { articles: articles }, &block)
+      # There is a 10 article limit, for one add. No idea why
+      (0...insert_list.length).step(10) do |offset|
+        eor = offset + 10  # end of range
+        eor = articles.length if eor > articles.length # Truncate range, if beyond end of the array
+        post( api_query: "account/collections/#{collection_id}/articles", args: args, data: { articles: insert_list[offset...eor] }, &block)
+      end
     end
 
     # Get a private article's details (Not a figshare API call. Duplicates PrivateArticles:article_detail)
