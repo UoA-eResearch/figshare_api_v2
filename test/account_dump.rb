@@ -81,17 +81,17 @@ def account_info(impersonate: nil)
   end
 end
 
-def fetch_all_accounts
+def fetch_all_accounts(active: 1)
   begin_time = Time.now
-  institute_accounts(active: 1) # active 1, 0 or nil
+  institute_accounts(active: active) # active 1, 0 or nil
   end_time = Time.now
   puts "Runtime: #{end_time - begin_time}"
   puts "Active: #{@active_users.length} Inactive: #{@inactive_users.length} Total #{@all_users.length}"
 end
 
-def fetch_all_accounts_9000
+def fetch_all_accounts_9000(active: 1)
   begin_time = Time.now
-  institute_accounts_by_9000(active: 1) # active 1, 0 or nil
+  institute_accounts_by_9000(active: active) # active 1, 0 or nil
   end_time = Time.now
   puts "Runtime: #{end_time - begin_time}"
   puts "Active: #{@active_users.length} Inactive: #{@inactive_users.length} Total #{@all_users.length}"
@@ -100,5 +100,5 @@ end
 by_upi(upi: 'rbur004') # Just me
 # user_info(account_id: 1171794)
 # account_info(impersonate: 1813331 )
-# fetch_all_accounts
-# fetch_all_accounts_9000
+# fetch_all_accounts(active: nil)
+# fetch_all_accounts_9000(active: nil)
