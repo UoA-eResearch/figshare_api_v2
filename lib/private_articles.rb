@@ -329,7 +329,7 @@ module Figshare
       post(api_query: "account/articles/#{article_id}/reserve_handle", args: args, &block)
     end
 
-    # Update Article Version
+    # Get or Update Article Versions
     #
     # @param article_id [Integer]
     # @param version_id [Interger]
