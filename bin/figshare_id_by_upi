@@ -1,0 +1,68 @@
+#!/usr/local/bin/ruby
+# require_relative '../lib/figshare_api_v2'
+require 'figshare_api_v2'
+require 'optparse'
+require 'optparse/time'
+
+VERSION = '1.0.0'
+
+def parse_args(argv: ARGV)
+  options = {}
+  begin
+    @opt_parser = OptionParser.new(ARGV) do |opts|
+      opts.banner = "Usage: #{$PROGRAM_NAME} [options]"
+
+      opts.on('--conf=CONF', String, 'Directory for Figshare keys and connection configs') do |conf|
+        options[:conf_dir] = conf
+      end
+
+      # No argument, shows at tail.  This will print an options summary.
+      opts.on_tail('-h', '--help', 'Show this message') do
+        puts opts
+        exit
+      end
+
+      # Another typical switch to print the version.
+      opts.on_tail('-v', '--version', 'Show version') do
+        puts VERSION
+        exit
+      end
+    end
+
+    @opt_parser.parse! argv
+
+    if options[:conf_dir].nil?
+      usage
+      exit(-1)
+    end
+  rescue OptionParser::InvalidArgument => e
+    puts e
+    usage
+    exit(-1)
+  end
+
+  options[:argv] = argv # Any trailing arguments
+  return options
+end
+
+def usage
+  warn @opt_parser.to_s
+end
+
+def by_upi(upi:)
+  @figshare.institutions.accounts( institution_user_id: "#{upi}@auckland.ac.nz") do |a|
+    p a
+  end
+end
+
+args = parse_args(argv: ARGV) # default to ARGV
+if args[:argv].empty?
+  usage
+  exit(-1)
+end
+
+@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: args[:conf_dir] )
+
+args[:argv].each do |upi|
+  by_upi( upi: upi )
+end
