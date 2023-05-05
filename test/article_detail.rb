@@ -37,7 +37,7 @@ set_article_id
 
 @article_list.each do |a|
   @figshare.private_articles.detail(article_id: a['article_id'], impersonate: article_conf['impersonate']) do |r|
-    #p r
+    # p r
     p "title: #{r['title']}, doi: #{r['doi']} #{r['categories']}"
   end
 end
