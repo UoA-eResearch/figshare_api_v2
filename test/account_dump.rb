@@ -53,11 +53,18 @@ end
 
 def institute_accounts(active: 1)
   # Globals.
-  @all_users = {}
-  @active_users = {}
-  @inactive_users = {}
-  @email = {}
-  @institute_id = {}
+  # records of the form { "id"=>1171785, "first_name"=>"xx", "last_name"=>"xxxx", "email"=>"xxxx@auckland.ac.nz", "active"=>1,
+  #                       "institution_id"=>12, "institution_user_id"=>"xxx001@auckland.ac.nz", "symplectic_user_id"=>"4488541",
+  #                       "quota"=>10737418240, "used_quota"=>122072396, "user_id"=>1171779
+  #                     }
+
+  @all_users = {}       # Index is Figshare User ID
+  @active_users = {}    # Index is Figshare User ID
+  @inactive_users = {}  # Index is Figshare User ID
+  @email = {}           # UoA email address. System account has "aucklandadmin@figshare.com"
+  @institute_id = {}    # Index is upi@auckland.ac.nz. System accounts will have ''
+  @used_quota_active = {}      # Index by Figshare User ID
+  @used_quota_inactive = {}    # Index by Figshare User ID
 
   @figshare.institutions.accounts(is_active: active) do |a|
     puts "Duplicate #{a['id']}" unless @all_users[a['id']].nil?
@@ -65,6 +72,8 @@ def institute_accounts(active: 1)
     @all_users[a['id']] = a
     @email[a['email']] = a
     @institute_id[a['institution_user_id']] = a
+    @used_quota_active[a['id']] = a if a['used_quota'] > 0 && a['active'] == 1
+    @used_quota_inactive[a['id']] = a if a['used_quota'] > 0 && a['active'] == 0
     if a['active'] == 1
       @active_users[a['id']] = a
     elsif a['active'] == 0
@@ -97,8 +106,10 @@ def fetch_all_accounts_9000(active: 1)
   puts "Active: #{@active_users.length} Inactive: #{@inactive_users.length} Total #{@all_users.length}"
 end
 
-by_upi(upi: 'rbur004') # Just me
+# by_upi(upi: 'rbur004') # Just me
 # user_info(account_id: 1171794)
 # account_info(impersonate: 1813331 )
-# fetch_all_accounts(active: nil)
+fetch_all_accounts(active: nil)
+puts @used_quota_active.length
+puts @used_quota_inactive.length
 # fetch_all_accounts_9000(active: nil)
