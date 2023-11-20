@@ -198,7 +198,7 @@ module Figshare
     # @param email [String]
     # @param first_name [String]
     # @param last_name [String]
-    # @param group_id [Integer] Figshare group ID
+    # @param group_id [Integer] Figshare group ID (Looks to be a required field)
     # @param institution_user_id [string]
     # @param symplectic_user_id [string]
     # @param quota [Integer] Figshare user quota
@@ -228,33 +228,15 @@ module Figshare
     # Update Institution Account
     #
     # @param account_id [Integer] Whose account
-    # @param email [String]
-    # @param first_name [String]
-    # @param last_name [String]
-    # @param group_id [Integer] Figshare group ID
-    # @param institution_user_id [string]
-    # @param symplectic_user_id [string]
-    # @param quota [Integer] Figshare user quota
-    # @param is_active [Boolean]
+    # @param group_id [Integer] Figshare group ID (Required Field)
+    # @param is_active [Boolean]  (Required Field)
     def account_update( account_id:,
-                        email: nil,
-                        first_name: nil,
-                        last_name: nil,
                         group_id: nil,
-                        institution_user_id: nil,
-                        symplectic_user_id: nil,
-                        quota: nil,
                         is_active: true,
                         &block
                       )
       args = {}
-      args['email'] = email unless email.nil?
-      args['first_name'] = first_name unless first_name.nil?
-      args['last_name'] = last_name unless last_name.nil?
       args['group_id'] = group_id unless group_id.nil?
-      args['institution_user_id'] = institution_user_id unless institution_user_id.nil?
-      args['symplectic_user_id'] = symplectic_user_id unless symplectic_user_id.nil?
-      args['quota'] = quota unless quota.nil?
       args['is_active'] = is_active unless is_active.nil?
       put(api_query: "account/institution/accounts/#{account_id}", args: args, &block)
     end
