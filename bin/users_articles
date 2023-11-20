@@ -73,7 +73,7 @@ id = by_upi( upi: args[:argv][0] )
 end
 
 puts
-puts "Collections"
+puts 'Collections'
 puts
 @figshare.private_collections.list(impersonate: id) do |a|
   p a
@@ -88,14 +88,4 @@ puts
     end
   end
   puts
-end
-
-puts
-puts "PUBLIC ARTICLES"
-
-@figshare = Figshare::Init.new(figshare_user: 'figshare_admin', conf_dir: args[:conf_dir] )
-id = by_upi( upi: args[:argv][0] )
-
-@figshare.public_articles.list() do |a|
-  puts "#{a['id']} #{a['title']} DOI: #{a['doi']}"
 end
